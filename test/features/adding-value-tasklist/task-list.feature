@@ -2,9 +2,9 @@ Feature: Task Lists
 
     Background:
         # tasklist
-        Given the user navigates to "adding-value-tasklist/tasklist"
+        Given the user navigates to "example-tasklist/tasklist"
         Then the user should be at URL "tasklist"
-        Then the user should see heading "Adding Value grant"
+        Then the user should see heading "Apply for example grant"
         And should see the following task list
             | 1. Check before you start |                  |
             | Business status           | Not yet started  |
@@ -67,8 +67,8 @@ Feature: Task Lists
         When the user confirms and continues
 
         # tasklist
-        Then the user should be at URL "adding-value-tasklist"
-        Then the user should see heading "Adding Value grant"
+        Then the user should be at URL "tasklist"
+        And should see heading "Apply for example grant"
         And should see the following task list
             | 1. Check before you start |                  |
             | Business status           | Completed        |
@@ -113,9 +113,9 @@ Feature: Task Lists
         When the user confirms and continues
 
         # tasklist
-        Given the user navigates to "/adding-value-tasklist/tasklist"
+        Given the user navigates to "/example-tasklist/tasklist"
         Then the user should be at URL "tasklist"
-        Then the user should see heading "Adding Value grant"
+        Then the user should see heading "Apply for example grant"
         And should see the following task list
             | 1. Check before you start |                  |
             | Business status           | Not yet started  |
@@ -169,8 +169,8 @@ Feature: Task Lists
         When the user navigates backward
 
         # tasklist
-        Then the user should be at URL "adding-value-tasklist"
-        Then the user should see heading "Adding Value grant"
+        Then the user should be at URL "tasklist"
+        Then the user should see heading "Apply for example grant"
         And should see the following task list
             | 1. Check before you start |                  |
             | Business status           | In progress      |
@@ -222,8 +222,8 @@ Feature: Task Lists
         When the user confirms and continues
 
         # tasklist
-        Then the user should be at URL "adding-value-tasklist"
-        Then the user should see heading "Adding Value grant"
+        Then the user should be at URL "tasklist"
+        Then the user should see heading "Apply for example grant"
         And should see the following task list
             | 1. Check before you start |                  |
             | Business status           | Completed        |
