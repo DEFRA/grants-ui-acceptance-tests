@@ -1,6 +1,7 @@
 import { When } from '@wdio/cucumber-framework'
 import ScoreResultsPage from '../page-objects/score-results.page'
 import TaskListPage from '../page-objects/task-list.page'
+import TaskSummaryPage from '../page-objects/task-summary.page'
 
 When('(the user )clicks on {string}', async (text) => {
   await $(`//*[contains(text(),'${text}')]`).click()
@@ -64,4 +65,7 @@ When('(the user )confirms and sends', async () => {
 
 When('(the user )selects task {string}', async (taskName) => {
   await TaskListPage.selectTask(taskName)
+})
+When('(the user )chooses to change their answer for {string}', async (question) => {
+  await TaskSummaryPage.changeAnswerFor(question)
 })

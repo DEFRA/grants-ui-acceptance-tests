@@ -12,6 +12,10 @@ class TaskSummaryPage {
       })
     )
   }
+
+  async changeAnswerFor(question) {
+    await $(`//dt[contains(text(),'${question}')]/following-sibling::dd[2]/a`).click()
+  }
 }
 
 export default new TaskSummaryPage()
