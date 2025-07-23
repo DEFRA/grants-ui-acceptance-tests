@@ -147,7 +147,7 @@ Feature: Adding Value Scoring
             |                      |                                        |       | Encourage collaboration and partnerships                                                      |
 
         # improve score to average
-        When the user chooses to change their "Produce processed" answer
+        When the user chooses to change their "Produce processed" scoring answer
 
         # produce-processed
         Then the user should be at URL "produce-processed"
@@ -191,7 +191,7 @@ Feature: Adding Value Scoring
             |                      |                                        |        | Encourage collaboration and partnerships                                                      |
 
         # improve score to average
-        When the user chooses to change their "Project impact" answer
+        When the user chooses to change their "Project impact" scoring answer
 
         # project-impact
         Then the user should be at URL "project-impact"

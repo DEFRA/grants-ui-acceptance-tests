@@ -277,7 +277,7 @@ Feature: Task Lists
             | What is your business?                    | A grower or producer of agricultural or horticultural produce |
             | What is the legal status of the business? | Sole trader                                                   |
             | Is the planned project in England?        | Yes                                                           |
-        When the user chooses to change their answer for "What is your business?"
+        When the user chooses to change their sub-task answer to question "What is your business?"
 
         # nature-of-business
         Then the user should be at URL "nature-of-business"

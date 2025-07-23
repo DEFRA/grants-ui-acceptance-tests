@@ -1,6 +1,6 @@
 export default class SummaryAnswer {
-  constructor(question, answer) {
+  constructor(question) {
     this.question = question
-    this.answer = answer
+    this.answers = []
   }
 }

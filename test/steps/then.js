@@ -37,9 +37,22 @@ Then('(the user )should be at URL {string}', async (expectedPath) => {
 
 Then('(the user )should see the following answers', async (dataTable) => {
   const expectedAnswers = []
+  let summaryAnswer = {}
+
   for (const row of dataTable.hashes()) {
-    expectedAnswers.push(new SummaryAnswer(row.QUESTION, row.ANSWER))
+    const question = row.QUESTION
+    const answer = row.ANSWER
+
+    if (question) {
+      summaryAnswer = new SummaryAnswer(question)
+      expectedAnswers.push(summaryAnswer)
+    }
+
+    if (answer) {
+      summaryAnswer.answers.push(answer)
+    }
   }
+
   const actualAnswers = await SummaryPage.answers()
   await expect(actualAnswers).toEqual(expectedAnswers)
 })

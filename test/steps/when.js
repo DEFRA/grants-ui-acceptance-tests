@@ -1,7 +1,11 @@
 import { When } from '@wdio/cucumber-framework'
 import ScoreResultsPage from '../page-objects/score-results.page'
+import SummaryPage from '../page-objects/summary.page'
 import TaskListPage from '../page-objects/task-list.page'
 import TaskSummaryPage from '../page-objects/task-summary.page'
+import AutocompleteField from '../page-objects/auto-complete.field'
+import DatePartsField from '../page-objects/date-parts.field'
+import MonthYearField from '../page-objects/month-year.field'
 
 When('(the user )clicks on {string}', async (text) => {
   await $(`//*[contains(text(),'${text}')]`).click()
@@ -12,6 +16,10 @@ When('the user selects {string}', async (text) => {
   if (!(await element.isSelected())) {
     await element.click()
   }
+})
+
+When('the user selects {string} for {string}', async (text, label) => {
+  await $(`//label[contains(text(),'${label}')]/following::select`).selectByVisibleText(text)
 })
 
 When('(the user )selects the following', async (dataTable) => {
@@ -39,12 +47,12 @@ When('(the user )navigates backward', async () => {
   await $(`//a[@class='govuk-back-link']`).click()
 })
 
-When('(the user )chooses to change their {string} answer', async (topic) => {
-  await ScoreResultsPage.changeAnswerFor(topic)
-})
-
 When('(the user )enters {string} for {string}', async (text, label) => {
   await $(`//label[contains(text(),'${label}')]/following::input[@type='text']`).setValue(text)
+})
+
+When('(the user )enters {string} for MultilineTextField {string}', async (text, label) => {
+  await $(`//label[contains(text(),'${label}')]/following::textarea`).setValue(text)
 })
 
 When('the user enters the following', async (dataTable) => {
@@ -66,6 +74,37 @@ When('(the user )confirms and sends', async () => {
 When('(the user )selects task {string}', async (taskName) => {
   await TaskListPage.selectTask(taskName)
 })
-When('(the user )chooses to change their answer for {string}', async (question) => {
+
+When('(the user )chooses to change their {string} scoring answer', async (topic) => {
+  await ScoreResultsPage.changeAnswerFor(topic)
+})
+
+When('(the user )chooses to change their sub-task answer to question {string}', async (question) => {
   await TaskSummaryPage.changeAnswerFor(question)
+})
+
+When('(the user )chooses to change their summary answer to question {string}', async (question) => {
+  await SummaryPage.changeAnswerFor(question)
+})
+
+When('(the user )selects {string} for AutocompleteField {string}', async (value, label) => {
+  const autocompleteField = new AutocompleteField(label)
+  await autocompleteField.clear()
+  await autocompleteField.select(value)
+})
+
+When('(the user )enters the date in a week for DatePartsField {string}', async (id) => {
+  const date = new Date()
+  date.setDate(date.getDate() + 7)
+  const datePartsField = new DatePartsField(id)
+  await datePartsField.setDateUTC(date)
+})
+
+When('(the user )enters month {string} and year {string} for MonthYearField {string}', async (month, year, id) => {
+  const monthYearField = new MonthYearField(id)
+  await monthYearField.set(month, year)
+})
+
+When('(the user )waits for {int} seconds', async (waitSeconds) => {
+  await new Promise((resolve) => setTimeout(resolve, waitSeconds * 1000))
 })
