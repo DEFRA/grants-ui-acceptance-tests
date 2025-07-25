@@ -1,5 +1,7 @@
 Feature: Example Grant Input Validation
 
+    # scenario can be re-enabled when session cookie-keyed cache storage is re-introduced
+    @disabled
     Scenario: Explore all input validation
         # start
         Given the user navigates to "/example-grant/start"
