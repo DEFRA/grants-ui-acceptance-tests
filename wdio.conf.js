@@ -5,7 +5,7 @@ export const config = {
   hostname: process.env.CHROMEDRIVER_URL || '127.0.0.1',
   port: process.env.CHROMEDRIVER_PORT || 4444,
   baseUrl: `https://grants-ui.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
-  maxInstances: 3,
+  maxInstances: 1,
   capabilities: [
     {
       browserName: 'chrome',
@@ -70,7 +70,7 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: 'not @wip',
+    tagExpression: 'not @disabled',
     timeout: 180000,
     ignoreUndefinedDefinitions: false
   },

@@ -1,5 +1,6 @@
 import { Then } from '@wdio/cucumber-framework'
 import { pollForSuccess } from '../services/polling'
+import { transformStepArgument } from '../services/step-argument-transformation'
 import ScoreResult from '../dto/score-result'
 import ScoreResultsPage from '../page-objects/score-results.page'
 import SummaryAnswer from '../dto/summary-answer'
@@ -41,7 +42,7 @@ Then('(the user )should see the following answers', async (dataTable) => {
 
   for (const row of dataTable.hashes()) {
     const question = row.QUESTION
-    const answer = row.ANSWER
+    const answer = transformStepArgument(row.ANSWER)
 
     if (question) {
       summaryAnswer = new SummaryAnswer(question)

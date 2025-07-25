@@ -3,7 +3,7 @@ import { browser } from '@wdio/globals'
 
 export const config = {
   baseUrl: `https://grants-ui.test.cdp-int.defra.cloud`,
-  maxInstances: 10,
+  maxInstances: 1,
   capabilities: [
     {
       maxInstances: 1,
@@ -46,7 +46,7 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: '',
+    tagExpression: 'not @disabled',
     timeout: 180000,
     ignoreUndefinedDefinitions: false
   },

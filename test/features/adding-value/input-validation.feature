@@ -1,5 +1,7 @@
 Feature: Adding Value Input Validation
 
+    # scenario can be re-enabled when session cookie-keyed cache storage is re-introduced
+    @disabled
     Scenario: Explore all input validation at the highest page level
         # start
         Given the user navigates to "/adding-value/start"

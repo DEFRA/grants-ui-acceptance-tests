@@ -90,14 +90,14 @@ Feature: Reusable grants-ui components
             | Checkbox options | Option two                                         |
             |                  | Option three                                       |
             | Enter amount     | 100000                                             |
-            | Date             | 30 July 2025                                       |
+            | Date             | {DATE IN A WEEK}                                   |
             | Month and year   | August 2025                                        |
             | Select option    | Option three                                       |
             | Description      | Lorem ipsum                                        |
             | Name             | James Test-Farmer                                  |
             | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
             | Mobile number    | 07777 123456	                                    |
-            |Address           | Test Farm                                          |
+            | Address          | Test Farm                                          |
             |                  | Cogenhoe                                           |
             |                  | Northampton                                        |
             |                  | Northamptonshire                                   |
@@ -119,14 +119,14 @@ Feature: Reusable grants-ui components
             | Checkbox options | Option two                                         |
             |                  | Option three                                       |
             | Enter amount     | 100000                                             |
-            | Date             | 30 July 2025                                       |
+            | Date             | {DATE IN A WEEK}                                   |
             | Month and year   | August 2025                                        |
             | Select option    | Option three                                       |
             | Description      | Lorem ipsum                                        |
             | Name             | James Test-Farmer                                  |
             | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
             | Mobile number    | 07777 123456	                                    |
-            |Address           | Test Farm                                          |
+            | Address          | Test Farm                                          |
             |                  | Cogenhoe                                           |
             |                  | Northampton                                        |
             |                  | Northamptonshire                                   |
