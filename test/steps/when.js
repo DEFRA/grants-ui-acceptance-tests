@@ -23,11 +23,9 @@ When('the user selects {string} for {string}', async (text, label) => {
 })
 
 When('(the user )selects the following', async (dataTable) => {
+  await Promise.all(await $$(`//input[@type='checkbox' and @checked]`).map(async (e) => await e.click()))
   for (const row of dataTable.raw()) {
-    const element = await $(`aria/${row[0]}`)
-    if (!(await element.isSelected())) {
-      await element.click()
-    }
+    await $(`aria/${row[0]}`).click()
   }
 })
 
