@@ -70,7 +70,7 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: 'not @disabled',
+    tagExpression: '@runme',
     timeout: 180000,
     ignoreUndefinedDefinitions: false
   },
