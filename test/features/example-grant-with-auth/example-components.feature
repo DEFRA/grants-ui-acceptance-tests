@@ -1,5 +1,5 @@
 Feature: Reusable grants-ui components
-@runme
+
     Scenario: Use all available components in example journey
         # start
         Given the user navigates to "/example-grant-with-auth/start"
