@@ -11,7 +11,6 @@ Feature: Adding Value Top Fruit Journey
 
         # start
         Given the user navigates to "/adding-value/start"
-        And completes any login process
         Then the user should see heading "Check if you can apply for a Farming Transformation Fund Adding Value Grant"
         When the user clicks on "Start now"
 

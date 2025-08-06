@@ -5,7 +5,6 @@ Feature: Adding Value Input Validation
     Scenario: Explore all input validation at the highest page level
         # start
         Given the user navigates to "/adding-value/start"
-        And completes any login process
         Then the user should see heading "Check if you can apply for a Farming Transformation Fund Adding Value Grant"
         When the user clicks on "Start now"
 
