@@ -31,6 +31,7 @@ Feature: Task Lists
 
     Scenario: Complete a task
         When the user selects task "Business status"
+        And completes any login process
 
         # nature-of-business
         Then the user should be at URL "nature-of-business"
@@ -95,6 +96,7 @@ Feature: Task Lists
 
     Scenario: Enable a hidden task
         When the user selects task "Who is applying?"
+        And completes any login process
 
         # applying
         Then the user should be at URL "applying"
@@ -143,6 +145,7 @@ Feature: Task Lists
 
     Scenario: Resume a task
         When the user selects task "Business status"
+        And completes any login process
 
         # nature-of-business
         Then the user should be at URL "nature-of-business"
@@ -250,6 +253,7 @@ Feature: Task Lists
 
     Scenario: Change answers for a task
         When the user selects task "Business status"
+        And completes any login process
 
         # nature-of-business
         Then the user should be at URL "nature-of-business"

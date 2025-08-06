@@ -3,6 +3,7 @@ Feature: Example Grant Journey
     Scenario: Apply for a grant
         # start
         Given the user navigates to "/example-grant/start"
+        And completes any login process
         Then the user should be at URL "start"
         And should see heading "Start page"
         When the user clicks on "Start now"
