@@ -3,6 +3,7 @@ Feature: Adding Value Scoring
     Scenario: Generate a Weak score, improve it to an Average score using 'Change' links and then improve it to a Strong score
         # start
         Given the user navigates to "/adding-value/start"
+        And completes any login process as CRN "1100949763"
         Then the user should see heading "Check if you can apply for a Farming Transformation Fund Adding Value Grant"
         When the user clicks on "Start now"
 

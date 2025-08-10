@@ -5,6 +5,7 @@ Feature: Example Grant Input Validation
     Scenario: Explore all input validation
         # start
         Given the user navigates to "/example-grant/start"
+        And completes any login process as CRN "1100954058"
         Then the user should be at URL "start"
         When the user clicks on "Start now"
 

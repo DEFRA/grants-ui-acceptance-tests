@@ -3,6 +3,7 @@ Feature: Example Grant Elimination
     Scenario: Explore all elimination routes
         # start
         Given the user navigates to "/example-grant/start"
+        And completes any login process as CRN "1100953760"
         When the user clicks on "Start now"
 
         # are-you-in-england

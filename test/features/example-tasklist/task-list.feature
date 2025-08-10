@@ -3,6 +3,7 @@ Feature: Task Lists
     Background:
         # tasklist
         Given the user navigates to "example-tasklist/tasklist"
+        And completes any login process as CRN "1100957579"
         Then the user should be at URL "tasklist"
         Then the user should see heading "Apply for example grant"
         And should see the following task list

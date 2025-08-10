@@ -3,6 +3,7 @@ Feature: Reusable grants-ui components
     Scenario: Use all available components in example journey
         # start
         Given the user navigates to "/example-grant-with-auth/start"
+        And completes any login process as CRN "1100957269"
         Then the user should see heading "Example Grant"
         When the user clicks on "Start now"
 
