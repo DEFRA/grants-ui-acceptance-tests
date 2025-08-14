@@ -41,6 +41,10 @@ When('(the user )submits their form', async () => {
   await $(`aria/Send`).click()
 })
 
+When('(the user )decides to save and return to their application later', async () => {
+  await $(`aria/Save and return`).click()
+})
+
 When('(the user )navigates backward', async () => {
   await $(`//a[@class='govuk-back-link']`).click()
 })

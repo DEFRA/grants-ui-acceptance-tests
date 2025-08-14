@@ -3,6 +3,7 @@ import { browser } from '@wdio/globals'
 
 export const config = {
   baseUrl: `https://grants-ui.test.cdp-int.defra.cloud`,
+  baseBackendUrl: `https://grants-ui-backend.test.cdp-int.defra.cloud`,
   maxInstances: 10,
   capabilities: [
     {

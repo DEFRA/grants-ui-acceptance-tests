@@ -17,3 +17,11 @@ Given('(the user )completes any login process as CRN {string}', async (crn) => {
     await $(`//button[@type='submit']`).click()
   }
 })
+
+Given('there is no Save and Return data stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grant) => {
+  const response = await fetch(`${browser.options.baseBackendUrl}/state?businessId=${sbi}&userId=${crn}&grantId=${grant}`, {
+    method: 'DELETE'
+  })
+
+  await expect(response.status === 200 || response.status === 404).toBe(true)
+})
