@@ -6,7 +6,6 @@ export const config = {
   maxInstances: 10,
   capabilities: [
     {
-      maxInstances: 1,
       browserName: 'chrome',
       'goog:chromeOptions': {
         args: ['--no-sandbox', '--disable-infobars', '--disable-gpu', '--window-size=1920,1080']
@@ -20,7 +19,7 @@ export const config = {
   logLevels: {
     webdriver: 'error'
   },
-  bail: 1,
+  bail: 0,
   waitforTimeout: 10000,
   waitforInterval: 200,
   connectionRetryTimeout: 120000,
