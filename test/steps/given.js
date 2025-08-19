@@ -1,6 +1,7 @@
 import { Given } from '@wdio/cucumber-framework'
 import { browser } from '@wdio/globals'
 import { pollForSuccess } from '../services/polling'
+import { getGrantsUiBackendAuthorizationToken } from '../services/backend-auth-helper'
 
 Given('the user navigates to {string}', async (page) => {
   await browser.url(page)
@@ -20,7 +21,10 @@ Given('(the user )completes any login process as CRN {string}', async (crn) => {
 
 Given('there is no Save and Return data stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grant) => {
   const response = await fetch(`${browser.options.baseBackendUrl}/state?businessId=${sbi}&userId=${crn}&grantId=${grant}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      Authorization: `Basic ${getGrantsUiBackendAuthorizationToken()}`
+    }
   })
 
   await expect(response.status === 200 || response.status === 404).toBe(true)

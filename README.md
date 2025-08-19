@@ -13,8 +13,13 @@ There are 2 WebdriverIO config files:
 wdio.local.conf.js
 ------------------
 # used to run tests locally using a local instance of Chrome
-# you must provide the DEFRA_ID_USER_PASSWORD environment variable in the command or in the environment
-DEFRA_ID_USER_PASSWORD=valid-password npm run test:local
+
+# you must provide the following environment variables in the command or in your environment, e.g. in an .env file
+# DEFRA_ID_USER_PASSWORD
+# GRANTS_UI_BACKEND_AUTH_TOKEN
+# GRANTS_UI_BACKEND_ENCRYPTION_KEY
+
+npm run test:local
 ```
 
 ```bash
