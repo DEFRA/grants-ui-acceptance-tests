@@ -6,7 +6,8 @@ export const config = {
   port: process.env.CHROMEDRIVER_PORT || 4444,
   baseUrl: `https://grants-ui.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
   baseBackendUrl: `https://grants-ui-backend.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
-  maxInstances: 3,
+  // cannot support concurrency in Dev until Defra ID is enabled
+  maxInstances: process.env.ENVIRONMENT === 'dev' ? 1 : 3,
   capabilities: [
     {
       browserName: 'chrome',
