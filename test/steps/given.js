@@ -17,6 +17,9 @@ Given('(the user )completes any login process as CRN {string}', async (crn) => {
     await $(`//input[@id='password']`).setValue(process.env.DEFRA_ID_USER_PASSWORD)
     await $(`//button[@type='submit']`).click()
   }
+
+  // allow extra time for Defra ID login to succeed
+  await expect(browser).not.toHaveUrl(expect.stringContaining('b2clogin.com'), { wait: 20000 })
 })
 
 Given('there is no Save and Return data stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grant) => {
