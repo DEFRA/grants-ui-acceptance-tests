@@ -227,9 +227,9 @@ Feature: Adding Value Project Items-Only Journey
             | Project postcode          | NN7 2NN                                            |
         And continues
 
-        # check-details
-        Then the user should be at URL "check-details"
-        And should see heading "Check your details"
+        # summary
+        Then the user should be at URL "summary"
+        And should see heading "Check your answers"
         And continues
 
         # declaration

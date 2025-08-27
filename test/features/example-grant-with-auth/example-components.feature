@@ -132,8 +132,13 @@ Feature: Reusable grants-ui components
             |                  | Northampton                                        |
             |                  | Northamptonshire                                   |
             |                  | NN7 1NN                                            |
-        When the user submits their form
+        When the user continues
+
+        # declaration
+        Then the user should be at URL "declaration"
+        When the user confirms and sends
         
-        # status
-        Then the user should be at URL "status"
-        And should see heading "Form submitted"
+        # confirmation
+        Then the user should be at URL "confirmation"
+        And should see heading "Details submitted"
+        And should see an "EGWA" reference number for their application
