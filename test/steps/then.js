@@ -1,5 +1,4 @@
 import { Then } from '@wdio/cucumber-framework'
-import { pollForSuccess } from '../services/polling'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import ScoreResult from '../dto/score-result'
 import ScoreResultsPage from '../page-objects/score-results.page'
@@ -66,11 +65,14 @@ Then('(the user )should see the following errors', async (dataTable) => {
   const expectedErrors = dataTable.raw().map((row) => row[0])
   let actualErrors = []
 
-  await pollForSuccess(async () => {
-    // allow time for page to reload and render
-    actualErrors = await Promise.all(await $$('//div[@class="govuk-error-summary"]//a').map(async (e) => await e.getText()))
-    return actualErrors.length === expectedErrors.length
-  })
+  await browser.waitUntil(
+    async () => {
+      // allow time for page to reload and render
+      actualErrors = await Promise.all(await $$('//div[@class="govuk-error-summary"]//a').map(async (e) => await e.getText()))
+      return actualErrors.length === expectedErrors.length
+    },
+    { timeout: 10000 }
+  )
 
   await expect(actualErrors).toEqual(expectedErrors)
 })
