@@ -1,5 +1,5 @@
 import { Given } from '@wdio/cucumber-framework'
-import { browser } from '@wdio/globals'
+import { pollForSuccess } from '../services/polling'
 import { getGrantsUiBackendAuthorizationToken } from '../services/backend-auth-helper'
 
 Given('the user navigates to {string}', async (page) => {
@@ -7,12 +7,7 @@ Given('the user navigates to {string}', async (page) => {
 })
 
 Given('(the user )completes any login process as CRN {string}', async (crn) => {
-  const isLoginRequired = await browser.waitUntil(
-    async () => {
-      return await $(`//h1/span[contains(text(), 'Sign in')]`).isExisting()
-    },
-    { timeout: 10000 }
-  )
+  const isLoginRequired = await pollForSuccess(async () => await $(`//h1/span[contains(text(), 'Sign in')]`).isExisting(), 5)
 
   if (isLoginRequired) {
     await $(`//input[@id='crn']`).setValue(crn)
