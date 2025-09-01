@@ -2,9 +2,10 @@ import allure from 'allure-commandline'
 import { browser } from '@wdio/globals'
 
 export const config = {
-  baseUrl: `https://grants-ui.test.cdp-int.defra.cloud`,
-  baseBackendUrl: `https://grants-ui-backend.test.cdp-int.defra.cloud`,
-  maxInstances: 10,
+  baseUrl: `https://grants-ui.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
+  baseBackendUrl: `https://grants-ui-backend.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
+  // cannot support concurrency in Dev until Defra ID is enabled
+  maxInstances: process.env.ENVIRONMENT === 'dev' ? 1 : 10,
   capabilities: [
     {
       browserName: 'chrome',

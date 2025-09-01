@@ -1,6 +1,8 @@
 Feature: Reusable grants-ui components
 
     Scenario: Use all available components in example journey
+        Given there is no application state stored for CRN "1100957269" and SBI "107593059" and grant "example-grant-with-auth"
+
         # start
         Given the user navigates to "/example-grant-with-auth/start"
         And completes any login process as CRN "1100957269"

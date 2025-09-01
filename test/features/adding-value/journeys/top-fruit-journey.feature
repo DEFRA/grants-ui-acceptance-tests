@@ -9,6 +9,8 @@ Feature: Adding Value Top Fruit Journey
         - receiving an average score
         - as an agent
 
+        Given there is no application state stored for CRN "1100946543" and SBI "106592443" and grant "adding-value"
+
         # start
         Given the user navigates to "/adding-value/start"
         And completes any login process as CRN "1100946543"

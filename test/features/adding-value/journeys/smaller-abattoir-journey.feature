@@ -6,6 +6,8 @@ Feature: Adding Value Smaller Abattoir Journey
         - receiving a strong score
         - as the applicant
 
+        Given there is no application state stored for CRN "1100946268" and SBI "106498131" and grant "adding-value"
+
         # start
         Given the user navigates to "/adding-value/start"
         And completes any login process as CRN "1100946268"

@@ -1,6 +1,8 @@
 Feature: Adding Value Common Eligibility and Elimination
 
     Scenario: Explore all common eligibility questions and elimination routes
+        Given there is no application state stored for CRN "1100943838" and SBI "107173507" and grant "adding-value"
+
         # start
         Given the user navigates to "/adding-value/start"
         And completes any login process as CRN "1100943838"

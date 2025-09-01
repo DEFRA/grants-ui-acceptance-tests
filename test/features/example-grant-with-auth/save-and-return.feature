@@ -1,7 +1,7 @@
 Feature: Reusable grants-ui components
 
     Scenario: Use the Save and Return feature
-        Given there is no Save and Return data stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"
+        Given there is no application state stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"
 
         # start
         Given the user navigates to "/example-grant-with-auth/start"

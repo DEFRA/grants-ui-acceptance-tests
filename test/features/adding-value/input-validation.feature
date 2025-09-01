@@ -3,6 +3,8 @@ Feature: Adding Value Input Validation
     # scenario can be re-enabled when session cookie-keyed cache storage is re-introduced
     @disabled
     Scenario: Explore all input validation at the highest page level
+        Given there is no application state stored for CRN "1100947604" and SBI "106206183" and grant "adding-value"
+
         # start
         Given the user navigates to "/adding-value/start"
         And completes any login process as CRN "1100947604"

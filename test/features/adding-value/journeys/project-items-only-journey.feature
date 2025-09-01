@@ -7,6 +7,8 @@ Feature: Adding Value Project Items-Only Journey
         - receiving an average score
         - as the applicant
 
+        Given there is no application state stored for CRN "1100946179" and SBI "115371673" and grant "adding-value"
+
         # start
         Given the user navigates to "/adding-value/start"
         And completes any login process as CRN "1100946179"
