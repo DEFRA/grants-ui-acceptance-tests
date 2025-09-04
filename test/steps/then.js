@@ -1,6 +1,7 @@
 import { Then } from '@wdio/cucumber-framework'
 import { pollForSuccess } from '../services/polling'
 import { transformStepArgument } from '../services/step-argument-transformation'
+import AutocompleteField from '../page-objects/auto-complete.field'
 import ScoreResult from '../dto/score-result'
 import ScoreResultsPage from '../page-objects/score-results.page'
 import SummaryAnswer from '../dto/summary-answer'
@@ -154,4 +155,14 @@ Then('(the user )should see the following task summary', async (dataTable) => {
     })
   )
   await expect(expectedAnswers).toEqual(await TaskSummaryPage.answers())
+})
+
+Then('(the user )should see {string} as the selected radio option', async (option) => {
+  await expect($(`//label[contains(text(),'${option}')]/preceding-sibling::input[@type='radio']`)).toBeSelected()
+})
+
+Then('(the user )should see {string} selected for AutocompleteField {string}', async (expectedOption, label) => {
+  const autocompleteField = new AutocompleteField(label)
+  const actualOption = await autocompleteField.getSelectedOption()
+  await expect(actualOption).toEqual(expectedOption)
 })

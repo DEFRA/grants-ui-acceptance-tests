@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui components
+Feature: Reusable grants-ui functionality
 
     Scenario: Use all available components in example journey
         Given there is no application state stored for CRN "1100957269" and SBI "107593059" and grant "example-grant-with-auth"

@@ -14,6 +14,10 @@ export default class AutocompleteField {
     await this.#optionSelectorFor(value).click()
   }
 
+  async getSelectedOption() {
+    return await this.#inputSelector().getValue()
+  }
+
   #inputSelector() {
     return $(`//label[contains(text(),'${this.label}')]/following::input[@type='text']`)
   }
