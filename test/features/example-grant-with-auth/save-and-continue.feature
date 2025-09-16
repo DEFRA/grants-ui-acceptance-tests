@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    Scenario: Use the Save and Return feature
+    Scenario: Use the Save and Continue feature
         # clear Mongo state storage
         Given there is no application state stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"
 
@@ -18,11 +18,7 @@ Feature: Reusable grants-ui functionality
         # autocomplete-field
         Then the user should be at URL "autocomplete-field"
         When the user selects "Wales" for AutocompleteField "Country"
-        And decides to save and return to their application later
-
-        # exit
-        Then the user should be at URL "exit"
-        And should see heading "Your progress has been saved"
+        And continues
 
         # validate Mongo state storage
         Then there should be application state stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"

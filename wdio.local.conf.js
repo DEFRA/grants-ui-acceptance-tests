@@ -4,8 +4,7 @@ import { browser } from '@wdio/globals'
 export const config = {
   baseUrl: `https://grants-ui.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
   baseBackendUrl: `https://grants-ui-backend.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
-  // cannot support concurrency in Dev until Defra ID is enabled
-  maxInstances: process.env.ENVIRONMENT === 'dev' ? 1 : 10,
+  maxInstances: 10,
   capabilities: [
     {
       browserName: 'chrome',
