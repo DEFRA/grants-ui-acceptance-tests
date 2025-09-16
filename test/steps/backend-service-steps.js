@@ -2,11 +2,6 @@ import { Given, Then } from '@wdio/cucumber-framework'
 import { getGrantsUiBackendAuthorizationToken } from '../services/backend-auth-helper'
 
 Given('there is no application state stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grant) => {
-  if (process.env.ENVIRONMENT.toLowerCase() === 'dev') {
-    crn = 'anonymous-user'
-    sbi = 'default-business'
-  }
-
   const response = await fetch(`${browser.options.baseBackendUrl}/state?businessId=${sbi}&userId=${crn}&grantId=${grant}`, {
     method: 'DELETE',
     headers: {
@@ -18,11 +13,6 @@ Given('there is no application state stored for CRN {string} and SBI {string} an
 })
 
 Then('there should be application state stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grant) => {
-  if (process.env.ENVIRONMENT.toLowerCase() === 'dev') {
-    crn = 'anonymous-user'
-    sbi = 'default-business'
-  }
-
   const response = await fetch(`${browser.options.baseBackendUrl}/state?businessId=${sbi}&userId=${crn}&grantId=${grant}`, {
     method: 'GET',
     headers: {
