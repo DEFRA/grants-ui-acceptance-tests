@@ -1,4 +1,4 @@
-Feature: Adding Value Input Validation
+Feature: Adding Value Validation
 
     # scenario can be re-enabled redis caching is re-moved
     @disabled

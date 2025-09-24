@@ -1,4 +1,4 @@
-Feature: Adding Value Smaller Abattoir Journey
+Feature: Adding Value Journeys
 
     Scenario: Successfully apply for a grant on the Smaller Abattoir journey
         - with maximum potential grant funding

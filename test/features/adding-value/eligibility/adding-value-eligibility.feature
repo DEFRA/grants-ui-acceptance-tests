@@ -1,4 +1,4 @@
-Feature: Adding Value Specific Eligibility and Elimination
+Feature: Adding Value Eligibility and Elimination
 
     Background:
         Given there is no application state stored for SBI "113593357" and grant "adding-value"

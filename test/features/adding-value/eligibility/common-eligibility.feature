@@ -1,4 +1,4 @@
-Feature: Adding Value Common Eligibility and Elimination
+Feature: Adding Value Eligibility and Elimination
 
     Scenario: Explore all common eligibility questions and elimination routes
         Given there is no application state stored for SBI "107173507" and grant "adding-value"

@@ -1,4 +1,4 @@
-Feature: Whitelist
+Feature: Reusable grants-ui functionality
 
     Scenario: Attempt to access a whitelist-enabled journey with whitelisted and non-whitelisted CRNs and SBIs 
         Given there is no application state stored for SBI "108633093" and grant "example-grant-with-auth"

@@ -1,4 +1,4 @@
-Feature: Adding Value Project Costs Specific Eligibility and Elimination
+Feature: Adding Value Eligibility and Elimination
 
     Background:
         Given there is no application state stored for SBI "106842593" and grant "adding-value"

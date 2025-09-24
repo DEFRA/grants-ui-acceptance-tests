@@ -1,4 +1,4 @@
-Feature: Adding Value Project Items-Only Journey
+Feature: Adding Value Journeys
 
     Scenario: Successfully apply for a grant on the Project Items-only journey
         - checking storage facilities percentage
