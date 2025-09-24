@@ -3,7 +3,7 @@ Feature: Adding Value Input Validation
     # scenario can be re-enabled redis caching is re-moved
     @disabled
     Scenario: Explore all input validation at the highest page level
-        Given there is no application state stored for CRN "1100947604" and SBI "106206183" and grant "adding-value"
+        Given there is no application state stored for SBI "106206183" and grant "adding-value"
 
         # start
         Given the user navigates to "/adding-value/start"

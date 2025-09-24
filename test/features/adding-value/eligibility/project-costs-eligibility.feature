@@ -1,7 +1,7 @@
 Feature: Adding Value Project Costs Specific Eligibility and Elimination
 
     Background:
-        Given there is no application state stored for CRN "1100945520" and SBI "106842593" and grant "adding-value"
+        Given there is no application state stored for SBI "106842593" and grant "adding-value"
 
         # start
         Given the user navigates to "/adding-value/start"

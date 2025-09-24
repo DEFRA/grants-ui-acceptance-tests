@@ -2,7 +2,7 @@ Feature: Reusable grants-ui functionality
 
     Scenario: Use the Save and Continue feature
         # clear Mongo state storage
-        Given there is no application state stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"
+        Given there is no application state stored for SBI "115460751" and grant "example-grant-with-auth"
 
         # start
         Given the user navigates to "/example-grant-with-auth/start"
