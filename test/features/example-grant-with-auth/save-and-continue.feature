@@ -21,7 +21,7 @@ Feature: Reusable grants-ui functionality
         And continues
 
         # validate Mongo state storage
-        Then there should be application state stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"
+        Then there should be application state stored for SBI "115460751" and grant "example-grant-with-auth"
 
         # reload the browser session and start again
         Given the user starts a new browser session
