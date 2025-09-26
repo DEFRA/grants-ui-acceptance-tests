@@ -11,6 +11,7 @@
   "scripts": {
     "clean": "rm -rf allure-results && rm -rf allure-report",
     "test": "npm run clean && wdio run wdio.conf.js",
+    "test:ci": "npm run clean && wdio run wdio.ci.conf.js",
     "test:local": "npm run clean && wdio run wdio.local.conf.js",
     "test:local:debug": "DEBUG=true npm run test:local",
     "format": "prettier --write '**/*.{js,md,json,config.js}'",
