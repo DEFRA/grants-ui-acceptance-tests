@@ -18,3 +18,5 @@ COPY --chown=node:node . .
 RUN npm install
 
 ENTRYPOINT [ "./entrypoint.sh" ]
+
+CMD ["npm", "test"]
