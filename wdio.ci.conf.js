@@ -3,8 +3,8 @@ import allure from 'allure-commandline'
 export const config = {
   hostname: 'selenium-chrome',
   port: 4444,
-  baseUrl: 'https://grants-ui-proxy:4000',
-  baseBackendUrl: 'https://grants-ui-proxy:4001',
+  baseUrl: 'https://nginx:4000',
+  baseBackendUrl: 'https://nginx:4001',
   maxInstances: 1,
   capabilities: [
     {
