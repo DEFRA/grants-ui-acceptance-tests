@@ -3,14 +3,14 @@ import allure from 'allure-commandline'
 export const config = {
   hostname: 'selenium-chrome',
   port: 4444,
-  baseUrl: 'https://nginx:4000',
-  baseBackendUrl: 'https://nginx:4001',
+  baseUrl: process.env.BASE_URL,
+  baseBackendUrl: process.env.BASE_BACKEND_URL,
   maxInstances: 1,
   capabilities: [
     {
       browserName: 'chrome',
       'goog:chromeOptions': {
-        args: ['--headless', '--ignore-certificate-errors', '--allow-insecure-localhost']
+        args: ['--headless', '--ignore-certificate-errors']
       }
     }
   ],
