@@ -15,7 +15,7 @@ export const config = {
     }
   ],
   runner: 'local',
-  specs: ['./features/**/*.feature'],
+  specs: ['./test/features/**/*.feature'],
   exclude: [],
   logLevel: 'info',
   logLevels: {
