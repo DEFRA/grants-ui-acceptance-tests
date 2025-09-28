@@ -1,7 +1,5 @@
 Feature: Adding Value Validation
 
-    # scenario can be re-enabled redis caching is re-moved
-    @disabled
     Scenario: Explore all input validation at the highest page level
         Given there is no application state stored for SBI "106206183" and grant "adding-value"
 
@@ -324,6 +322,6 @@ Feature: Adding Value Validation
             | Project postcode          | NN7 2NN                                            |
         And continues
 
-        # check-details
-        Then the user should be at URL "check-details"
-        And should see heading "Check your details"
+        # summary
+        Then the user should be at URL "summary"
+        And should see heading "Check your answers"
