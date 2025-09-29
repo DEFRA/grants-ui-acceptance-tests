@@ -1,5 +1,6 @@
 Feature: Adding Value Scoring
 
+    @cdp @ci
     Scenario: Generate a Weak score, improve it to an Average score using 'Change' links and then improve it to a Strong score
         Given there is no application state stored for SBI "115384462" and grant "adding-value"
 

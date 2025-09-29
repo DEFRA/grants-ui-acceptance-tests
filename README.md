@@ -7,28 +7,32 @@ This acceptance test suite is maintained by Grants Application Enablement (GAE) 
 
 ## Running the test suite
 
-There are 2 WebdriverIO config files:
+There are 3 WebdriverIO config files:
+
+### wdio.local.conf.js
 
 ```bash
-wdio.local.conf.js
-------------------
-# used to run tests locally using a local instance of Chrome
-
-# you must provide the following environment variables in the command or in your environment, e.g. in an .env file
-# DEFRA_ID_USER_PASSWORD
-# GRANTS_UI_BACKEND_AUTH_TOKEN
-# GRANTS_UI_BACKEND_ENCRYPTION_KEY
-
 npm run test:local
 ```
 
-```bash
-wdio.conf.js
-------------
-# used to run tests in the portal aghainst the hosted Chrome instance
-```
+Used to run tests locally using a local instance of Chrome. You must provide the following environment variables in your environment, e.g. in an `.env` file:
 
-### Licence
+- ENVIRONMENT
+- DEFRA_ID_USER_PASSWORD
+- GRANTS_UI_BACKEND_AUTH_TOKEN
+- GRANTS_UI_BACKEND_ENCRYPTION_KEY
+
+See [.env.example](.env.example) for an example.
+
+### wdio.conf.js
+
+Used to run tests in the CDP portal. Only scenarios tagged `@cdp` are run.
+
+### wdio.ci.conf.js
+
+Used to run tests in the `grants-ui` CI pipeline. Only scenarios tagged `@ci` are run.
+
+## Licence
 
 THIS INFORMATION IS LICENSED UNDER THE CONDITIONS OF THE OPEN GOVERNMENT LICENCE found at:
 

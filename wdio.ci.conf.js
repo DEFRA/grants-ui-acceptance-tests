@@ -56,7 +56,7 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: '',
+    tagExpression: '@ci',
     timeout: 180000,
     ignoreUndefinedDefinitions: false
   },

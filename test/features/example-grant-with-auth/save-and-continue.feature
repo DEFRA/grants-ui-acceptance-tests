@@ -1,5 +1,6 @@
 Feature: Reusable grants-ui functionality
 
+    @cdp @ci
     Scenario: Use the Save and Continue feature
         # clear Mongo state storage
         Given there is no application state stored for SBI "115460751" and grant "example-grant-with-auth"

@@ -57,6 +57,7 @@ Feature: Adding Value Eligibility and Elimination
         When the user selects "Yes"
         And continues
 
+    @cdp @ci
     Scenario: Explore project costs eligibility questions and elimination by project cost under minimum grant threshold
         # project cost elimination
         Then the user should be at URL "project-cost"
@@ -69,6 +70,7 @@ Feature: Adding Value Eligibility and Elimination
         And should see heading "You cannot apply for a grant from this scheme"
         And should see body "The minimum grant you can apply for is £25,000 (40% of £62,500)."
 
+    @cdp @ci
     Scenario: Explore project costs eligibility questions and elimination by remaining costs not being met
         # project cost
         Then the user should be at URL "project-cost"

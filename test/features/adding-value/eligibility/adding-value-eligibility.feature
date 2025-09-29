@@ -45,6 +45,7 @@ Feature: Adding Value Eligibility and Elimination
         When the user selects "Yes"
         And continues
 
+    @cdp @ci
     Scenario: Explore Smaller Abattoir eligibility questions and elimination
         # smaller-abattoir
         Then the user should be at URL "smaller-abattoir"
@@ -62,6 +63,7 @@ Feature: Adding Value Eligibility and Elimination
         Then the user should be at URL "cannot-apply-other-farmers"
         And should see heading "You cannot apply for a grant from this scheme"
 
+    @cdp @ci
     Scenario: Explore Project Items-only eligibility questions and elimination
         # smaller-abattoir
         Then the user should be at URL "smaller-abattoir"

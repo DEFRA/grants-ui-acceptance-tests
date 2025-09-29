@@ -32,6 +32,7 @@ Feature: Task Lists
             | Check your details        | Cannot start yet |
             | Confirm and send          | Cannot start yet |
 
+    @cdp @ci
     Scenario: Complete a task
         When the user selects task "Business status"
 
@@ -96,6 +97,7 @@ Feature: Task Lists
             | Check your details        | Cannot start yet |
             | Confirm and send          | Cannot start yet |
 
+    @cdp @ci
     Scenario: Enable a hidden task
         When the user selects task "Who is applying?"
 
@@ -144,6 +146,7 @@ Feature: Task Lists
             | Check your details        | Cannot start yet |
             | Confirm and send          | Cannot start yet |
 
+    @cdp @ci
     Scenario: Resume a task
         When the user selects task "Business status"
 
@@ -251,6 +254,7 @@ Feature: Task Lists
             | Check your details        | Cannot start yet |
             | Confirm and send          | Cannot start yet |
 
+    @cdp @ci
     Scenario: Change answers for a task
         When the user selects task "Business status"
 
