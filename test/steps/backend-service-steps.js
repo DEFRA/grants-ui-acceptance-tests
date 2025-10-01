@@ -5,7 +5,7 @@ Given('there is no application state stored for SBI {string} and grant {string}'
   const response = await fetch(`${browser.options.baseBackendUrl}/state?sbi=${sbi}&grantCode=${grantCode}`, {
     method: 'DELETE',
     headers: {
-      Authorization: `Basic ${getGrantsUiBackendAuthorizationToken()}`
+      Authorization: `Bearer ${getGrantsUiBackendAuthorizationToken()}`
     }
   })
 
@@ -16,7 +16,7 @@ Then('there should be application state stored for SBI {string} and grant {strin
   const response = await fetch(`${browser.options.baseBackendUrl}/state?sbi=${sbi}&grantCode=${grantCode}`, {
     method: 'GET',
     headers: {
-      Authorization: `Basic ${getGrantsUiBackendAuthorizationToken()}`
+      Authorization: `Bearer ${getGrantsUiBackendAuthorizationToken()}`
     }
   })
 
