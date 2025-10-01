@@ -2,9 +2,9 @@ import allure from 'allure-commandline'
 import { browser } from '@wdio/globals'
 
 export const config = {
-  baseUrl: `https://grants-ui.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
-  baseBackendUrl: `https://grants-ui-backend.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
-  maxInstances: 10,
+  baseUrl: `http://localhost:3000`,
+  baseBackendUrl: `http://localhost:3001`,
+  maxInstances: 1,
   capabilities: [
     {
       browserName: 'chrome',
@@ -46,7 +46,7 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: '',
+    tagExpression: '@runme',
     timeout: 180000,
     ignoreUndefinedDefinitions: false
   },
