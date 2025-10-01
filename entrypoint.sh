@@ -2,7 +2,7 @@
 
 echo "run_id: $RUN_ID"
 echo  "Executing: $@"
-exec "$@"
+"$@"
 
 npm run report:publish
 publish_exit_code=$?
