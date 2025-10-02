@@ -17,6 +17,10 @@ Given('(the user )completes any login process as CRN {string}', async (crn) => {
   }
 })
 
+Given('(the user )selects SBI {string}', async (sbi) => {
+  await $(`//div[contains(text(),'SBI: ${sbi}')]/preceding-sibling::input[@type='radio']`).click()
+})
+
 Given('(the user )starts a new browser session', async () => {
   await browser.reloadSession()
 })
