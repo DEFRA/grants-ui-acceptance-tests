@@ -1,6 +1,6 @@
 Feature: Adding Value Journeys
 
-    @cdp @ci
+    @ci
     Scenario: Successfully apply for a grant on the Top Fruit journey
         - while awaiting planning permission
         - as a tenant farmer with a short tenancy

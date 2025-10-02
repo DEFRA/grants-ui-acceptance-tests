@@ -1,6 +1,6 @@
 Feature: Adding Value Journeys
 
-    @cdp @ci
+    @ci
     Scenario: Successfully apply for a grant on the Smaller Abattoir journey
         - with maximum potential grant funding
         - using mechanisation

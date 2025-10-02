@@ -1,6 +1,6 @@
 Feature: Adding Value Journeys
 
-    @cdp @ci
+    @ci
     Scenario: Successfully apply for a grant on the Project Items-only journey
         - checking storage facilities percentage
         - with storage facilities

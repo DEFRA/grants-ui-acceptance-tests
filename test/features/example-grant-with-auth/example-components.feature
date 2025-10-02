@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @cdp @ci
+    @ci
     Scenario: Use all available components in example journey
         Given there is no application state stored for SBI "107593059" and grant "example-grant-with-auth"
 
