@@ -20,7 +20,7 @@ Given('(the user )completes any login process as CRN {string}', async (crn) => {
 
 Given('(the user )signs out of Defra ID', async () => {
   await DefraAccountBar.signOut()
-    // allow extra time for Defra ID sign out to succeed
+  // allow extra time for Defra ID sign out to succeed
   await expect($(`//h1[contains(text(),'Sign into your Defra account')]`)).toBeDisplayed({ wait: 20000 })
 })
 
