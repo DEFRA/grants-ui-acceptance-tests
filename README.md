@@ -15,7 +15,7 @@ There are 3 WebdriverIO config files:
 npm run test:local
 ```
 
-Used to run individual tests locally using your local install of Chrome. You must provide the following environment variables in your environment, e.g. in an `.env` file:
+Used to run any individual tests locally that are tagged `@runme`, using your local install of Chrome. You must provide the following environment variables in your environment, e.g. in an `.env` file:
 
 - DEFRA_ID_USER_PASSWORD
 - GRANTS_UI_BACKEND_AUTH_TOKEN
