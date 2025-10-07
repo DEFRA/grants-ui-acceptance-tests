@@ -1,4 +1,5 @@
 import allure from 'allure-commandline'
+import fs from 'node:fs'
 
 export const config = {
   isCI: true,
