@@ -203,3 +203,6 @@ Feature: Adding Value Journeys
         Then the user should be at URL "confirmation"
         And should see heading "Details submitted"
         And should see an "AV" reference number for their application
+
+        # GAS
+        Then the reference number should be submitted to GAS with the application

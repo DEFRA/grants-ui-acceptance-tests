@@ -15,13 +15,7 @@ There are 3 WebdriverIO config files:
 npm run test:local
 ```
 
-Used to run any individual tests locally that are tagged `@runme`, using your local install of Chrome. You must provide the following environment variables in your environment, e.g. in an `.env` file:
-
-- DEFRA_ID_USER_PASSWORD
-- GRANTS_UI_BACKEND_AUTH_TOKEN
-- GRANTS_UI_BACKEND_ENCRYPTION_KEY
-
-See [.env.example](.env.example) for an example that will work with a local instance of `grants-ui` stood up with the service [compose file](https://github.com/DEFRA/grants-ui/blob/main/compose.yml).
+Used to run individual tests locally that are tagged `@runme`, using your local installation of Chrome. You must provide a number of environment variables in your environment, e.g. in an `.env` file. See [.env.example](.env.example) for an example that will work with a local instance of `grants-ui` which has been stood up with the service [compose file](https://github.com/DEFRA/grants-ui/blob/main/compose.yml).
 
 ### wdio.conf.js
 

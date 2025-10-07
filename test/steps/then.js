@@ -3,6 +3,7 @@ import { pollForSuccess } from '../services/polling'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import AutocompleteField from '../page-objects/auto-complete.field'
 import DefraAccountBar from '../page-objects/defra-account-bar'
+import GasService from '../services/gas-service'
 import ScoreResult from '../dto/score-result'
 import ScoreResultsPage from '../page-objects/score-results.page'
 import SummaryAnswer from '../dto/summary-answer'
@@ -111,9 +112,31 @@ Then('(the user )should see the following score results', async (dataTable) => {
   await expect(actualScoreResults).toEqual(expectedScoreResults)
 })
 
+let referenceNumber
+
 Then('(the user )should see a/an {string} reference number for their application', async (prefix) => {
   const selector = $('//h1/following-sibling::div[1]/strong')
   await expect(selector).toHaveText(expect.stringContaining(prefix))
+
+  referenceNumber = await selector.getText()
+})
+
+Then('the reference number should be submitted to GAS with the application', async () => {
+  if (!browser.options.isCI) {
+    console.log('Skipping submitted Reference Number checks as not in CI')
+    return
+  }
+
+  console.log('Running submitted Reference Number checks')
+
+  if (!referenceNumber) {
+    throw new Error('referenceNumber not set by earlier step')
+  }
+
+  const request = await GasService.getRequestWithReferenceNumber(referenceNumber)
+  expect(request).not.toBeNull()
+  expect(request.body.json.metadata.clientRef).toEqual(referenceNumber.toLowerCase())
+  expect(request.body.json.answers.referenceNumber).toEqual(referenceNumber)
 })
 
 Then('(the user )should see body {string}', async (text) => {

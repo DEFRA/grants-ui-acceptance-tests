@@ -1,6 +1,7 @@
 import allure from 'allure-commandline'
 
 export const config = {
+  isCI: true,
   hostname: 'selenium-chrome',
   port: 4444,
   baseUrl: process.env.BASE_URL,

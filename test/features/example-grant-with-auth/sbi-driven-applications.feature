@@ -128,3 +128,6 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "confirmation"
         And should see heading "Details submitted"
         And should see an "EGWA" reference number for their application
+
+        # GAS
+        Then the reference number should be submitted to GAS with the application
