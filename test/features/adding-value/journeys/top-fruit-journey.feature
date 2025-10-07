@@ -205,4 +205,4 @@ Feature: Adding Value Journeys
         And should see an "AV" reference number for their application
 
         # GAS
-        Then the reference number should be submitted to GAS with the application
+        Then the reference number along with SBI "106592443" and CRN "1100946543" should be submitted to GAS

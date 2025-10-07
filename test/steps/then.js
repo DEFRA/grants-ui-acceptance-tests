@@ -121,7 +121,7 @@ Then('(the user )should see a/an {string} reference number for their application
   referenceNumber = await selector.getText()
 })
 
-Then('the reference number should be submitted to GAS with the application', async () => {
+Then('the reference number along with SBI {string} and CRN {string} should be submitted to GAS', async (sbi, crn) => {
   if (!browser.options.isCI) {
     console.log('Skipping submitted Reference Number checks as not in CI')
     return
@@ -136,6 +136,8 @@ Then('the reference number should be submitted to GAS with the application', asy
   const request = await GasService.getRequestWithReferenceNumber(referenceNumber)
   expect(request).not.toBeNull()
   expect(request.body.json.metadata.clientRef).toEqual(referenceNumber.toLowerCase())
+  expect(request.body.json.metadata.sbi).toEqual(sbi)
+  expect(request.body.json.metadata.crn).toEqual(crn)
   expect(request.body.json.answers.referenceNumber).toEqual(referenceNumber)
 })
 

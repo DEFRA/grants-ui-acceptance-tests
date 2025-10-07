@@ -228,7 +228,7 @@ Feature: Adding Value Journeys
         # summary
         Then the user should be at URL "summary"
         And should see heading "Check your answers"
-        And continues
+        When the user continues
 
         # declaration
         Then the user should be at URL "declaration"
@@ -241,4 +241,4 @@ Feature: Adding Value Journeys
         And should see an "AV" reference number for their application
 
         # GAS
-        Then the reference number should be submitted to GAS with the application
+        Then the reference number along with SBI "106498131" and CRN "1100946268" should be submitted to GAS

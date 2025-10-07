@@ -147,4 +147,4 @@ Feature: Reusable grants-ui functionality
         And should see an "EGWA" reference number for their application
 
         # GAS
-        Then the reference number should be submitted to GAS with the application
+        Then the reference number along with SBI "107593059" and CRN "1100957269" should be submitted to GAS
