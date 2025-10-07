@@ -62,6 +62,11 @@ export const config = {
     ignoreUndefinedDefinitions: false
   },
   onComplete: async function (exitCode, config, capabilities, results) {
+    // !Do Not Remove! Required to cause test suite to fail and return non-zero.
+    if (results?.failed && results.failed > 0) {
+      fs.writeFileSync('FAILED', JSON.stringify(results))
+    }
+
     const generation = allure(['generate', 'allure-results', '--clean'])
 
     return new Promise((resolve, reject) => {
