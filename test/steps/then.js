@@ -3,7 +3,7 @@ import { pollForSuccess } from '../services/polling'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import AutocompleteField from '../page-objects/auto-complete.field'
 import DefraAccountBar from '../page-objects/defra-account-bar'
-import GasService from '../services/gas-service'
+import Gas from '../services/gas'
 import ScoreResult from '../dto/score-result'
 import ScoreResultsPage from '../page-objects/score-results.page'
 import SummaryAnswer from '../dto/summary-answer'
@@ -133,7 +133,7 @@ Then('the reference number along with SBI {string} and CRN {string} should be su
     throw new Error('referenceNumber not set by earlier step')
   }
 
-  const request = await GasService.getRequestWithReferenceNumber(referenceNumber)
+  const request = await Gas.getRequestWithReferenceNumber(referenceNumber)
   expect(request).not.toBeNull()
   expect(request.body.json.metadata.clientRef).toEqual(referenceNumber.toLowerCase())
   expect(request.body.json.metadata.sbi).toEqual(sbi)

@@ -30,7 +30,7 @@ export function encryptToken(token) {
   return `${iv.toString(ENCODING.BASE64)}:${authTag.toString(ENCODING.BASE64)}:${encrypted}`
 }
 
-export function getGrantsUiBackendAuthorizationToken() {
+export function getBackendAuthorizationToken() {
   const encryptedToken = encryptToken(GRANTS_UI_BACKEND_AUTH_TOKEN)
   return Buffer.from(`${encryptedToken}`).toString(ENCODING.BASE64)
 }

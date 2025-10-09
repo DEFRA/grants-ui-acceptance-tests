@@ -1,6 +1,6 @@
 import { mockServerClient } from 'mockserver-client'
 
-class GasService {
+class Gas {
   async getRequestWithReferenceNumber(referenceNumber) {
     const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
     const requests = await client.retrieveRecordedRequests({
@@ -10,4 +10,4 @@ class GasService {
   }
 }
 
-export default new GasService()
+export default new Gas()
