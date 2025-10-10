@@ -1,4 +1,4 @@
-import { Then } from '@wdio/cucumber-framework'
+import { Then, world } from '@wdio/cucumber-framework'
 import { pollForSuccess } from '../services/polling'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import AutocompleteField from '../page-objects/auto-complete.field'
@@ -112,13 +112,11 @@ Then('(the user )should see the following score results', async (dataTable) => {
   await expect(actualScoreResults).toEqual(expectedScoreResults)
 })
 
-let referenceNumber
-
 Then('(the user )should see a/an {string} reference number for their application', async (prefix) => {
   const selector = $('//h1/following-sibling::div[1]/strong')
   await expect(selector).toHaveText(expect.stringContaining(prefix))
 
-  referenceNumber = await selector.getText()
+  world.referenceNumber = await selector.getText()
 })
 
 Then('the reference number along with SBI {string} and CRN {string} should be submitted to GAS', async (sbi, crn) => {
@@ -129,16 +127,16 @@ Then('the reference number along with SBI {string} and CRN {string} should be su
 
   console.log('Running submitted Reference Number checks')
 
-  if (!referenceNumber) {
-    throw new Error('referenceNumber not set by earlier step')
+  if (!world.referenceNumber) {
+    throw new Error('world.referenceNumber not set by earlier step')
   }
 
-  const request = await Gas.getRequestWithReferenceNumber(referenceNumber)
+  const request = await Gas.getRequestWithReferenceNumber(world.referenceNumber)
   expect(request).not.toBeNull()
-  expect(request.body.json.metadata.clientRef).toEqual(referenceNumber.toLowerCase())
+  expect(request.body.json.metadata.clientRef).toEqual(world.referenceNumber.toLowerCase())
   expect(request.body.json.metadata.sbi).toEqual(sbi)
   expect(request.body.json.metadata.crn).toEqual(crn)
-  expect(request.body.json.answers.referenceNumber).toEqual(referenceNumber)
+  expect(request.body.json.answers.referenceNumber).toEqual(world.referenceNumber)
 })
 
 Then('(the user )should see body {string}', async (text) => {

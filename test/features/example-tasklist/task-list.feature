@@ -1,7 +1,7 @@
 Feature: Task Lists
 
     Background:
-        Given there is no application state stored for SBI "106281016" and grant "example-tasklist"
+        Given there is no application state or submissions stored for SBI "106281016" and grant "example-tasklist"
 
         # tasklist
         Given the user navigates to "example-tasklist/tasklist"

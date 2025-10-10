@@ -10,7 +10,7 @@ Feature: Adding Value Journeys
         - receiving an average score
         - as an agent
 
-        Given there is no application state stored for SBI "106592443" and grant "adding-value"
+        Given there is no application state or submissions stored for SBI "106592443" and grant "adding-value"
 
         # start
         Given the user navigates to "/adding-value/start"

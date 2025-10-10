@@ -2,8 +2,8 @@ Feature: Reusable grants-ui functionality
 
     @cdp @ci
     Scenario: Attempt to access a whitelist-enabled journey with whitelisted and non-whitelisted CRNs and SBIs 
-        Given there is no application state stored for SBI "108633093" and grant "example-whitelist"
-        And there is no application state stored for SBI "115425713" and grant "example-whitelist"
+        Given there is no application state or submissions stored for SBI "108633093" and grant "example-whitelist"
+        And there is no application state or submissions stored for SBI "115425713" and grant "example-whitelist"
 
         # login
         Given the user navigates to "/example-whitelist/start"

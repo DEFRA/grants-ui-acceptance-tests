@@ -1,12 +1,12 @@
 Feature: Reusable grants-ui functionality
 
     @cdp @ci
-    Scenario: Use all available components in example journey
-        Given there is no application state or submissions stored for SBI "107593059" and grant "example-grant-with-auth"
+    Scenario: Run a grant application thru a full lifecycle
+        Given there is no application state or submissions stored for SBI "115664358" and grant "example-grant-with-auth"
 
         # start
         Given the user navigates to "/example-grant-with-auth/start"
-        And completes any login process as CRN "1100957269"
+        And completes any login process as CRN "1100995048"
         Then the user should see heading "Example Grant"
         When the user clicks on "Start now"
 
@@ -146,5 +146,21 @@ Feature: Reusable grants-ui functionality
         And should see heading "Details submitted"
         And should see an "EGWA" reference number for their application
 
+        # validate Mongo state storage
+        And the following application state should be stored for SBI "115664358" and grant "example-grant-with-auth"
+            | FIELD               | VALUE              |
+            | $$__referenceNumber | {REFERENCE NUMBER} |
+            | applicationStatus   | SUBMITTED          |
+            | submittedBy         | 1100995048         |
+            | autocompleteField   | WLS                |
+            | multilineTextField  | Lorem ipsum        |
+            | applicantName       | James Test-Farmer  |
+
+        # validate Mongo submission storage
+        And the following application submission should be stored for SBI "115664358" and grant "example-grant-with-auth"
+            | FIELD              | VALUE              |
+            | referenceNumber    | {REFERENCE NUMBER} |
+            | crn                | 1100995048         |
+
         # GAS
-        Then the reference number along with SBI "107593059" and CRN "1100957269" should be submitted to GAS
+        And the reference number along with SBI "115664358" and CRN "1100995048" should be submitted to GAS
