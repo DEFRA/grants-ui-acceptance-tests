@@ -2,9 +2,8 @@ import { Given, Then } from '@wdio/cucumber-framework'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import Backend from '../services/backend'
 
-Given('there is no application state or submissions stored for SBI {string} and grant {string}', async (sbi, grantCode) => {
+Given('there is no application state stored for SBI {string} and grant {string}', async (sbi, grantCode) => {
   await Backend.deleteState(sbi, grantCode)
-  await Backend.deleteSubmissions(sbi, grantCode)
 })
 
 Then('there should be application state stored for SBI {string} and grant {string}', async (sbi, grantCode) => {

@@ -2,7 +2,7 @@ Feature: Adding Value Validation
 
     @cdp @ci
     Scenario: Explore all input validation at the highest page level
-        Given there is no application state or submissions stored for SBI "106206183" and grant "adding-value"
+        Given there is no application state stored for SBI "106206183" and grant "adding-value"
 
         # start
         Given the user navigates to "/adding-value/start"

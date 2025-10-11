@@ -2,7 +2,7 @@ Feature: Reusable grants-ui functionality
 
     @cdp @ci
     Scenario: Run a grant application thru a full lifecycle
-        Given there is no application state or submissions stored for SBI "115664358" and grant "example-grant-with-auth"
+        Given there is no application state stored for SBI "115664358" and grant "example-grant-with-auth"
 
         # start
         Given the user navigates to "/example-grant-with-auth/start"

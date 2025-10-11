@@ -22,16 +22,6 @@ class Backend {
     return await response.json()
   }
 
-  async deleteSubmissions(sbi, grantCode) {
-    const response = await fetch(`${browser.options.baseBackendUrl}/submissions?sbi=${sbi}&grantCode=${grantCode}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${getBackendAuthorizationToken()}`
-      }
-    })
-    await expect(response.status === 200 || response.status === 404).toBe(true)
-  }
-
   async getSubmissions(sbi, grantCode) {
     const response = await fetch(`${browser.options.baseBackendUrl}/submissions?sbi=${sbi}&grantCode=${grantCode}`, {
       method: 'GET',
