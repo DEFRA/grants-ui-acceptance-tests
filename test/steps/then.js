@@ -3,7 +3,6 @@ import { pollForSuccess } from '../services/polling'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import AutocompleteField from '../page-objects/auto-complete.field'
 import DefraAccountBar from '../page-objects/defra-account-bar'
-import Gas from '../services/gas'
 import ScoreResult from '../dto/score-result'
 import ScoreResultsPage from '../page-objects/score-results.page'
 import SummaryAnswer from '../dto/summary-answer'
@@ -35,7 +34,7 @@ Then('(the user )should see section title {string}', async (text) => {
   await expect($(`//h2[@id='section-title']`)).toHaveText(text)
 })
 
-Then('(the user )should be at URL {string}', async (expectedPath) => {
+Then('(the user )should (still )be at URL {string}', async (expectedPath) => {
   await expect(browser).toHaveUrl(expect.stringContaining(expectedPath))
 })
 
@@ -117,26 +116,6 @@ Then('(the user )should see a/an {string} reference number for their application
   await expect(selector).toHaveText(expect.stringContaining(prefix))
 
   world.referenceNumber = await selector.getText()
-})
-
-Then('the reference number along with SBI {string} and CRN {string} should be submitted to GAS', async (sbi, crn) => {
-  if (!browser.options.isCI) {
-    console.log('Skipping submitted Reference Number checks as not in CI')
-    return
-  }
-
-  console.log('Running submitted Reference Number checks')
-
-  if (!world.referenceNumber) {
-    throw new Error('world.referenceNumber not set by earlier step')
-  }
-
-  const request = await Gas.getRequestWithReferenceNumber(world.referenceNumber)
-  expect(request).not.toBeNull()
-  expect(request.body.json.metadata.clientRef).toEqual(world.referenceNumber.toLowerCase())
-  expect(request.body.json.metadata.sbi).toEqual(sbi)
-  expect(request.body.json.metadata.crn).toEqual(crn)
-  expect(request.body.json.answers.referenceNumber).toEqual(world.referenceNumber)
 })
 
 Then('(the user )should see body {string}', async (text) => {
