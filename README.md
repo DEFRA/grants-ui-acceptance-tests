@@ -10,7 +10,7 @@ This test suite provides end-to-end testing coverage for:
 - Reusable `grants-ui` components maintained by GAE
 - User authentication flows via Defra ID
 - Application lifecycle management
-- Integration with backend services (GAS - Grant Application Service)
+- Stubbed integration with other backend services (e.g. [GAS - Grant Application Service](https://github.com/DEFRA/fg-gas-backend))
 
 ## Technology Stack
 
@@ -31,7 +31,7 @@ This test suite provides end-to-end testing coverage for:
 ### 1. Clone and Install
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/DEFRA/grants-ui-acceptance-tests.git
 cd grants-ui-acceptance-tests
 npm install
 ```
@@ -76,7 +76,8 @@ npm run test:local
 
 - Runs tests tagged with `@runme`
 - Uses your local Chrome browser
-- Ideal for development and debugging individual scenarios
+- Pre-configured to run against [http://localhost:3000](http://localhost:3000) as stood up by the [grants-ui compose file](https://github.com/DEFRA/grants-ui/blob/main/compose.yml) file
+- Used for local development of individual scenarios
 - Requires environment variables configured in `.env`
 
 ### CDP Portal - wdio.conf.js
@@ -97,6 +98,7 @@ npm run test:ci
 - Runs tests tagged with `@ci`
 - Used in the `grants-ui` GitHub Actions CI pipeline
 - Automated execution on creating and updating a `grants-ui` PR
+- Can also be run from the `grants-ui' repository using the [CI script](https://github.com/DEFRA/grants-ui/blob/main/tools/run-acceptance-tests.sh) locally
 
 ## Project Structure
 
@@ -114,11 +116,11 @@ grants-ui-acceptance-tests/
 │   │   ├── then.js
 │   │   ├── backend-steps.js
 │   │   └── gas-steps.js
-│   ├── page-objects/                   # Page object
+│   ├── page-objects/                   # Page objects
 │   ├── services/                       # Helper services
 │   └── dto/                            # Data transfer objects
-├── wdio.*.conf.js                      # WebdriverIO configs
-└── .env                                # Environment configuration
+├── wdio.*.conf.js                      # WebdriverIO config files
+└── .env                                # Local environment configuration
 ```
 
 ## Writing Tests
@@ -207,13 +209,16 @@ When adding new tests:
 1. Write feature files using clear, business-readable language
 2. Reuse existing step definitions where possible
 3. Add new page objects for new pages
-4. Tag appropriately for the target environment
+4. Tag appropriately for the target environments
 5. Ensure tests pass locally before committing
 6. Follow the existing code style (enforced by ESLint/Prettier)
+7. Submit a PR to the Grants Application Enablement (GAE) team
 
 ## Related Repositories
 
 - [grants-ui](https://github.com/DEFRA/grants-ui) - The main grants application UI service
+- [grants-ui-backend](https://github.com/DEFRA/grants-ui-backend) - The grants-ui backend service accessing MongoDB storage
+- [ffc-grants-scoring](https://github.com/DEFRA/ffc-grants-scoring) - The grants scoring service
 
 ## Support
 
