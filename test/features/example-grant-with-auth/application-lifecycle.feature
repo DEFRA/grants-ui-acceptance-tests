@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @cdp @ci
+    @ci
     Scenario: Run a grant application thru a full lifecycle
         Given there is no application state stored for SBI "115664358" and grant "example-grant-with-auth"
 
@@ -101,3 +101,43 @@ Feature: Reusable grants-ui functionality
 
         # GAS
         And the reference number along with SBI "115664358" and CRN "1100995048" should be submitted to GAS
+
+        ## 
+        # grants-ui status is SUBMITTED and GAS status is RECEIVED
+        ##
+        Given the application status in GAS is now "RECEIVED"
+        And the user starts a new browser session
+        And navigates to "/example-grant-with-auth/yes-no-field"
+        And completes any login process as CRN "1100995048"
+        Then the user should be at URL "confirmation"
+        And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
+
+        ## 
+        # grants-ui status is SUBMITTED and GAS status is AWAITING_AMENDMENTS
+        ##
+        Given the application status in GAS is now "AWAITING_AMENDMENTS"
+        And the user starts a new browser session
+        And navigates to "/example-grant-with-auth/yes-no-field"
+        And completes any login process as CRN "1100995048"
+        Then the user should be at URL "summary"
+        And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should be "REOPENED"
+
+        ## 
+        # grants-ui status is REOPENED and GAS status is AWAITING_AMENDMENTS
+        ##
+        Given the application status in GAS is now "AWAITING_AMENDMENTS"
+        And the user starts a new browser session
+        And navigates to "/example-grant-with-auth/yes-no-field"
+        And completes any login process as CRN "1100995048"
+        Then the user should be at URL "yes-no-field"
+        And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "REOPENED"
+
+        ## 
+        # grants-ui status is REOPENED and GAS status is APPLICATION_WITHDRAWN
+        ##
+        Given the application status in GAS is now "APPLICATION_WITHDRAWN"
+        And the user starts a new browser session
+        And navigates to "/example-grant-with-auth/yes-no-field"
+        And completes any login process as CRN "1100995048"
+        #Then the user should be at URL "start"
+        #And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should be "CLEARED"

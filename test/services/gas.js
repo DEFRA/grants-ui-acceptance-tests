@@ -1,7 +1,7 @@
 import { mockServerClient } from 'mockserver-client'
 
 class Gas {
-  async getRequestWithReferenceNumber(referenceNumber) {
+  async getApplicationSubmission(referenceNumber) {
     const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
     const requests = await client.retrieveRecordedRequests({
       path: '/grants/[^/]+/applications'
@@ -9,7 +9,7 @@ class Gas {
     return requests.find((r) => r.body.json.metadata.clientRef === referenceNumber.toLowerCase())
   }
 
-  async setOneTimeResponse(sbi, httpStatusCode, errorText) {
+  async setApplicationSubmissionResponse(sbi, httpStatusCode, errorText) {
     const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
     await client.mockAnyResponse({
       id: `applications-sbi-${sbi}-${httpStatusCode}`,
@@ -32,6 +32,31 @@ class Gas {
           type: "JSON",
           json: {
             error: errorText
+          }
+        }
+      },
+      times: {
+        remainingTimes: 1,
+        unlimited: false
+      }
+    })
+  }
+
+  async setStatusQueryResponse(referenceNumber, gasStatus) {
+    const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
+    await client.mockAnyResponse({
+      id: `applications-${referenceNumber}-status`,
+      priority: 999,
+      httpRequest: {
+        method: 'GET',
+        path: `/grants/[^/]+/applications/${referenceNumber.toLowerCase()}/status`
+      },
+      httpResponse: {
+        statusCode: 200,
+        body: {
+          type: "JSON",
+          json: {
+            status: gasStatus
           }
         }
       },

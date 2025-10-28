@@ -2,7 +2,15 @@ import { Given, Then, world } from '@wdio/cucumber-framework'
 import Gas from '../services/gas'
 
 Given('the next application submitted to GAS for SBI {string} will return HTTP {int} {string}', async (sbi, httpStatusCode, errorText) => {
-    await Gas.setOneTimeResponse(sbi, httpStatusCode, errorText)
+  await Gas.setApplicationSubmissionResponse(sbi, httpStatusCode, errorText)
+})
+
+Given('the application status in GAS is now {string}', async (gasStatus) => {
+  if (!world.referenceNumber) {
+    throw new Error('world.referenceNumber not set by earlier step')
+  }
+
+  await Gas.setStatusQueryResponse(world.referenceNumber, gasStatus)
 })
 
 Then('the reference number along with SBI {string} and CRN {string} should be submitted to GAS', async (sbi, crn) => {
@@ -17,7 +25,7 @@ Then('the reference number along with SBI {string} and CRN {string} should be su
     throw new Error('world.referenceNumber not set by earlier step')
   }
 
-  const request = await Gas.getRequestWithReferenceNumber(world.referenceNumber)
+  const request = await Gas.getApplicationSubmission(world.referenceNumber)
   expect(request).not.toBeNull()
   expect(request.body.json.metadata.clientRef).toEqual(world.referenceNumber.toLowerCase())
   expect(request.body.json.metadata.sbi).toEqual(sbi)
