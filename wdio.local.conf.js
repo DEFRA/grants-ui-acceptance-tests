@@ -46,7 +46,7 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: '@runme',
+    tags: '@runme',
     timeout: 180000,
     ignoreUndefinedDefinitions: false
   },

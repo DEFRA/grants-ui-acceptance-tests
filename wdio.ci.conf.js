@@ -58,9 +58,12 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: '@ci',
+    tags: '@ci',
     timeout: 180000,
     ignoreUndefinedDefinitions: false
+  },
+  before: function () {
+    process.setMaxListeners(0)
   },
   onComplete: async function (exitCode, config, capabilities, results) {
     // !Do Not Remove! Required to cause test suite to fail and return non-zero.

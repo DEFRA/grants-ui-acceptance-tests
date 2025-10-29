@@ -76,7 +76,7 @@ export const config = {
     snippets: true,
     source: true,
     strict: false,
-    tagExpression: '@cdp',
+    tags: '@cdp',
     timeout: 180000,
     ignoreUndefinedDefinitions: false
   },
