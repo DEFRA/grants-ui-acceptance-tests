@@ -18,7 +18,7 @@ export const config = {
   runner: 'local',
   specs: ['./test/features/**/*.feature'],
   exclude: [],
-  logLevel: 'info',
+  logLevel: 'warn',
   logLevels: {
     webdriver: 'error'
   },
