@@ -29,7 +29,7 @@ class Gas {
       httpResponse: {
         statusCode: httpStatusCode,
         body: {
-          type: "JSON",
+          type: 'JSON',
           json: {
             error: errorText
           }
@@ -54,7 +54,7 @@ class Gas {
       httpResponse: {
         statusCode: 200,
         body: {
-          type: "JSON",
+          type: 'JSON',
           json: {
             status: gasStatus
           }

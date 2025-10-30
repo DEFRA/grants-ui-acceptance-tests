@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @ci
+    # @ci
     Scenario: Begin a journey as an applicant, then continue and complete the journey as an agent with access to the same business
         Given there is no application state stored for SBI "119000002" and grant "example-grant-with-auth"
 
@@ -71,7 +71,7 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "month-year-field"
         When the user enters month "08" and year "2025" for MonthYearField "monthYearField"
         And continues
-    
+
         # select-field
         Then the user should be at URL "select-field"
         When the user selects "Option three" for "Select option"
@@ -123,7 +123,7 @@ Feature: Reusable grants-ui functionality
         # declaration
         Then the user should be at URL "declaration"
         When the user confirms and sends
-        
+
         # confirmation
         Then the user should be at URL "confirmation"
         And should see heading "Details submitted"

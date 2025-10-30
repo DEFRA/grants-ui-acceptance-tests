@@ -148,6 +148,7 @@ Use tags to control which tests run in which environments:
 ### Step Definitions
 
 Step definitions are located in `test/steps/`:
+
 - [given.js](test/steps/given.js) - Setup steps
 - [when.js](test/steps/when.js) - Action steps
 - [then.js](test/steps/then.js) - Assertion steps
