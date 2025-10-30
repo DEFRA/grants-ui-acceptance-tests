@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    # @cdp @ci
+    @cdp @ci
     Scenario: Sign out of Defra ID and sign in as another user
         Given there is no application state stored for SBI "115722586" and grant "example-grant-with-auth"
         And there is no application state stored for SBI "115680267" and grant "example-grant-with-auth"
@@ -52,16 +52,17 @@ Feature: Reusable grants-ui functionality
         And completes any login process as CRN "1101003693"
         Then the user should see SBI "115722586" as the logged in organisation
 
-        # start
-        Then the user should be at URL "start"
-        And should see heading "Example Grant"
-        When the user clicks on "Start now"
+        # radios-field, first unanswered question
+        Then the user should be at URL "radios-field"
+        When the user navigates backward
+        Then the user should be at URL "autocomplete-field"
+        When the user navigates backward
 
-        # yes-no-field
+        # yes-no-field, check previously entered answer
         Then the user should be at URL "yes-no-field"
         And should see "Yes" as the selected radio option
         When the user continues
 
-        # autocomplete-field
+        # autocomplete-field, check previously entered answer
         Then the user should be at URL "autocomplete-field"
         And should see "England" selected for AutocompleteField "Country"
