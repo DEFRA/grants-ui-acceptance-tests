@@ -2,8 +2,8 @@ import fs from 'node:fs'
 
 export const config = {
   isCI: true,
-  hostname: process.env.SELENIUM_HOST || 'selenium-chrome',
-  port: parseInt(process.env.SELENIUM_PORT) || 4444,
+  hostname: 'selenium-chrome',
+  port: 4444,
   baseUrl: process.env.BASE_URL,
   baseBackendUrl: process.env.BASE_BACKEND_URL,
   maxInstances: parseInt(process.env.MAX_INSTANCES) || 1,
