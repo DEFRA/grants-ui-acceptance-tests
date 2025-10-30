@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    # @cdp @ci
+    @cdp @ci
     Scenario: Use the Save and Continue feature
         # clear Mongo state storage
         Given there is no application state stored for SBI "115460751" and grant "example-grant-with-auth"
@@ -28,13 +28,18 @@ Feature: Reusable grants-ui functionality
         Given the user starts a new browser session
         And navigates to "/example-grant-with-auth/start"
         And completes any login process as CRN "1100960953"
-        When the user clicks on "Start now"
 
-        # yes-no-field
+        # radios-field, first unanswered question
+        Then the user should be at URL "radios-field"
+        When the user navigates backward
+        Then the user should be at URL "autocomplete-field"
+        When the user navigates backward
+
+        # yes-no-field, check previously entered answer
         Then the user should be at URL "yes-no-field"
         And should see "Yes" as the selected radio option
         When the user continues
 
-        # autocomplete-field
+        # autocomplete-field, check previously entered answer
         Then the user should be at URL "autocomplete-field"
         And should see "Wales" selected for AutocompleteField "Country"
