@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    # @ci
+    @ci
     Scenario: Begin a journey as an applicant, then continue and complete the journey as an agent with access to the same business
         Given there is no application state stored for SBI "119000002" and grant "example-grant-with-auth"
 
@@ -30,17 +30,18 @@ Feature: Reusable grants-ui functionality
         And selects SBI "119000002"
         And continues
 
-        # start
-        Then the user should be at URL "start"
-        And should see heading "Example Grant"
-        When the user clicks on "Start now"
+        # radios-field, first unanswered question
+        Then the user should be at URL "radios-field"
+        When the user navigates backward
+        Then the user should be at URL "autocomplete-field"
+        When the user navigates backward
 
-        # yes-no-field
+        # yes-no-field, check previously entered answer
         Then the user should be at URL "yes-no-field"
         And should see "Yes" as the selected radio option
         When the user continues
 
-        # autocomplete-field
+        # autocomplete-field, check previously entered answer
         Then the user should be at URL "autocomplete-field"
         And should see "England" selected for AutocompleteField "Country"
         When the user continues
