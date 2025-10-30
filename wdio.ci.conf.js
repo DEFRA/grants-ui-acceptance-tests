@@ -1,4 +1,3 @@
-import allure from 'allure-commandline'
 import fs from 'node:fs'
 
 export const config = {
@@ -38,14 +37,6 @@ export const config = {
         realtimeReporting: true,
         color: false
       }
-    ],
-    [
-      // allure is used to generate the final HTML report
-      'allure',
-      {
-        outputDir: 'allure-results',
-        useCucumberStepReporter: true
-      }
     ]
   ],
   cucumberOpts: {
@@ -62,33 +53,11 @@ export const config = {
     timeout: 180000,
     ignoreUndefinedDefinitions: false
   },
-  before: function () {
-    process.setMaxListeners(0)
-  },
   onComplete: async function (exitCode, config, capabilities, results) {
     // !Do Not Remove! Required to cause test suite to fail and return non-zero.
     if (results?.failed && results.failed > 0) {
       fs.writeFileSync('FAILED', JSON.stringify(results))
     }
-
-    const generation = allure(['generate', 'allure-results', '--clean'])
-
-    return new Promise((resolve, reject) => {
-      const generationTimeout = setTimeout(() => reject(new Error('Could not generate Allure report, timeout exceeded')), 30000)
-
-      generation.on('exit', function (exitCode) {
-        clearTimeout(generationTimeout)
-
-        if (exitCode !== 0) {
-          return reject(new Error(`Could not generate Allure report, exited with code: ${exitCode}`))
-        }
-
-        resolve()
-      })
-    })
-  },
-  afterStep: async function (step, scenario, { error, duration, passed }, context) {
-    await browser.takeScreenshot()
   },
   afterScenario: async function (world, result, context) {
     await browser.reloadSession()
