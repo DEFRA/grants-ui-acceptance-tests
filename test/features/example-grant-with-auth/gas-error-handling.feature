@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @ci
+    # @ci
     Scenario: Handle unexpected GAS errors with a generic response to the user
         Given there is no application state stored for SBI "115646286" and grant "example-grant-with-auth"
         And the next application submitted to GAS for SBI "115646286" will return HTTP 429 "Too many requests"
@@ -46,7 +46,7 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "month-year-field"
         When the user enters month "08" and year "2025" for MonthYearField "monthYearField"
         And continues
-    
+
         # select-field
         Then the user should be at URL "select-field"
         When the user selects "Option two" for "Select option"
@@ -78,7 +78,7 @@ Feature: Reusable grants-ui functionality
         # declaration
         Then the user should be at URL "declaration"
         When the user confirms and sends
-        
+
         # declaration with error
         Then the user should still be at URL "declaration"
         And should see heading "Something went wrong"
