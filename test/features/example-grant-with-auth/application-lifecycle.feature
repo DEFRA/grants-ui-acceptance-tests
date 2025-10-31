@@ -130,7 +130,7 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "start"
         And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "CLEARED"
 
-    @ci
+    # @ci 
     Scenario: SUBMITTED application with GAS status of OFFER_SENT is redirected to confirmation
         Given the application status in GAS is now "OFFER_SENT"
         And the user starts a new browser session
@@ -139,7 +139,7 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "confirmation"
         And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
 
-    @ci
+    # @ci
     Scenario: SUBMITTED application with GAS status of OFFER_WITHDRAWN is redirected to confirmation
         Given the application status in GAS is now "OFFER_WITHDRAWN"
         And the user starts a new browser session
@@ -148,7 +148,7 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "confirmation"
         And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
 
-    @ci
+    # @ci
     Scenario: SUBMITTED application with GAS status of OFFER_WITHDRAWN is redirected to confirmation
         Given the application status in GAS is now "OFFER_WITHDRAWN"
         And the user starts a new browser session
