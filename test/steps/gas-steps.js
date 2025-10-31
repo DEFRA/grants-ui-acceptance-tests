@@ -1,8 +1,8 @@
 import { Given, Then, world } from '@wdio/cucumber-framework'
 import Gas from '../services/gas'
 
-Given('the next application submitted to GAS for SBI {string} will return HTTP {int} {string}', async (sbi, httpStatusCode, errorText) => {
-  await Gas.setApplicationSubmissionResponse(sbi, httpStatusCode, errorText)
+Given('the next application submitted to GAS for SBI {string} will return HTTP {int} {string} for {int} requests', async (sbi, httpStatusCode, errorText, times) => {
+  await Gas.setApplicationSubmissionResponse(sbi, httpStatusCode, errorText, times)
 })
 
 Given('the application status in GAS is now {string}', async (gasStatus) => {
