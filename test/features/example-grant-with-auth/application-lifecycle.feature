@@ -130,29 +130,29 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "start"
         And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "CLEARED"
 
-    # @ci 
-    Scenario: SUBMITTED application with GAS status of OFFER_SENT is redirected to confirmation
+    @ci
+    Scenario: SUBMITTED application with GAS status of OFFER_SENT is redirected to agreement
         Given the application status in GAS is now "OFFER_SENT"
         And the user starts a new browser session
         And navigates to "/example-grant-with-auth/yes-no-field"
         And completes any login process as CRN "1100995048"
-        Then the user should be at URL "confirmation"
+        Then the user should be at URL "agreement"
         And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
 
-    # @ci
+    @ci
     Scenario: SUBMITTED application with GAS status of OFFER_WITHDRAWN is redirected to confirmation
         Given the application status in GAS is now "OFFER_WITHDRAWN"
         And the user starts a new browser session
         And navigates to "/example-grant-with-auth/yes-no-field"
         And completes any login process as CRN "1100995048"
-        Then the user should be at URL "confirmation"
+        Then the user should be at URL "agreement"
         And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
 
-    # @ci
-    Scenario: SUBMITTED application with GAS status of OFFER_WITHDRAWN is redirected to confirmation
-        Given the application status in GAS is now "OFFER_WITHDRAWN"
+    @ci
+    Scenario: SUBMITTED application with GAS status of OFFER_ACCEPTED is redirected to confirmation
+        Given the application status in GAS is now "OFFER_ACCEPTED"
         And the user starts a new browser session
         And navigates to "/example-grant-with-auth/yes-no-field"
         And completes any login process as CRN "1100995048"
-        Then the user should be at URL "confirmation"
+        Then the user should be at URL "agreement"
         And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
