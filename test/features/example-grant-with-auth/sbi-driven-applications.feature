@@ -23,6 +23,9 @@ Feature: Reusable grants-ui functionality
         When the user selects "England" for AutocompleteField "Country"
         And continues
 
+        # radios-field
+        Then the user should be at URL "radios-field"
+
         # reload the browser session and login again as the agent, selecting the same SBI
         Given the user starts a new browser session
         And navigates to "/example-grant-with-auth/start"

@@ -21,6 +21,9 @@ Feature: Reusable grants-ui functionality
         When the user selects "Wales" for AutocompleteField "Country"
         And continues
 
+        # radios-field
+        Then the user should be at URL "radios-field"
+
         # validate Mongo state storage
         Then there should be application state stored for SBI "115460751" and grant "example-grant-with-auth"
 

@@ -25,6 +25,9 @@ Feature: Reusable grants-ui functionality
         When the user selects "England" for AutocompleteField "Country"
         And continues
 
+        # radios-field
+        Then the user should be at URL "radios-field"
+
         # sign-out and sign in as user 2
         Given the user signs out of Defra ID
         And navigates to "/example-grant-with-auth/start"
@@ -45,6 +48,9 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "autocomplete-field"
         When the user selects "Wales" for AutocompleteField "Country"
         And continues
+
+        # radios-field
+        Then the user should be at URL "radios-field"
 
         # sign-out and sign in again as user 1
         Given the user signs out of Defra ID
