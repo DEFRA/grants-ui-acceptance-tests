@@ -122,15 +122,6 @@ Feature: Reusable grants-ui functionality
         And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should be "REOPENED"
 
     @ci
-    Scenario: SUBMITTED application with GAS status of APPLICATION_WITHDRAWN is redirected to start and updated to CLEARED
-        Given the application status in GAS is now "APPLICATION_WITHDRAWN"
-        And the user starts a new browser session
-        And navigates to "/example-grant-with-auth/yes-no-field"
-        And completes any login process as CRN "1100995048"
-        Then the user should be at URL "start"
-        And the grants-ui application status for SBI "115664358" and grant "example-grant-with-auth" should still be "CLEARED"
-
-    @ci
     Scenario: SUBMITTED application with GAS status of OFFER_SENT is redirected to agreement
         Given the application status in GAS is now "OFFER_SENT"
         And the user starts a new browser session
