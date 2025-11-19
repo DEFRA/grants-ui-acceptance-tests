@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @ci @runme
+    @ci
     Scenario: A withdrawn application can be re-submitted as a new application
         Given there is no application state stored for SBI "106527272" and grant "example-grant-with-auth"
 
