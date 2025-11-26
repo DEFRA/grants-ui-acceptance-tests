@@ -174,3 +174,9 @@ Then('(the user )should see SBI {string} as the logged in organisation', async (
   const actualSbi = await DefraAccountBar.sbi()
   await expect(actualSbi).toEqual(expectedSbi)
 })
+
+Then('the footer should contain a {string} link to URL {string}', async (linkText, url) => {
+  const link = $(`//footer//a[contains(text(),'${linkText}')]`)
+  await expect(link).toBeDisplayed()
+  await expect(link).toHaveAttribute('href', url)
+})
