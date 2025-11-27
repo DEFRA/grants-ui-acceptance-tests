@@ -9,5 +9,8 @@ Feature: Reusable grants-ui functionality
         And completes any login process as CRN "1100961682"
         Then the user should see heading "Example Grant"
 
-        # privacy link
-        Then the footer should contain a "Privacy (opens in new tab)" link to URL "https://www.gov.uk/government/organisations/rural-payments-agency/about/personal-information-charter"
+        # footer links
+        Then the footer should contain the following links
+            | TEXT                           | URL                                                                                                                   |
+            | Privacy (opens in new tab)     | https://www.gov.uk/government/organisations/rural-payments-agency/about/personal-information-charter                  |
+            | Cookies                        |                                                                                                                       |

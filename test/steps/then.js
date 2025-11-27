@@ -175,8 +175,14 @@ Then('(the user )should see SBI {string} as the logged in organisation', async (
   await expect(actualSbi).toEqual(expectedSbi)
 })
 
-Then('the footer should contain a {string} link to URL {string}', async (linkText, url) => {
-  const link = $(`//footer//a[contains(text(),'${linkText}')]`)
-  await expect(link).toBeDisplayed()
-  await expect(link).toHaveAttribute('href', url)
+Then('the footer should contain the following links', async (dataTable) => {
+  for (const row of dataTable.hashes()) {
+    const linkText = row.TEXT
+    const url = row.URL
+    const link = $(`//footer//a[contains(text(),'${linkText}')]`)
+    await expect(link).toBeDisplayed()
+    if (url) {
+      await expect(link).toHaveAttribute('href', url)
+    }
+  }
 })
