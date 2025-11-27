@@ -13,6 +13,10 @@ Given('the application status in GAS is now {string}', async (gasStatus) => {
   await Gas.setStatusQueryResponse(world.referenceNumber, gasStatus)
 })
 
+Given('the application status for {string} in GAS is now {string}', async (referenceNumber, gasStatus) => {
+  await Gas.setStatusQueryResponse(referenceNumber, gasStatus)
+})
+
 Then('the reference number along with SBI {string} and CRN {string} should be submitted to GAS', async (sbi, crn) => {
   if (!browser.options.isCI) {
     console.log('Skipping submitted Reference Number checks as not in CI')
