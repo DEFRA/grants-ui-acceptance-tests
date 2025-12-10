@@ -1,4 +1,5 @@
 import { Then, world } from '@wdio/cucumber-framework'
+import { analyzeAccessibility } from '../services/accessibility'
 import { pollForSuccess } from '../services/polling'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import AutocompleteField from '../page-objects/auto-complete.field'
@@ -12,6 +13,22 @@ import TaskListGroup from '../dto/task-list-group'
 import TaskListPage from '../page-objects/task-list.page'
 import TaskSummaryAnswer from '../dto/task-summary-answer'
 import TaskSummaryPage from '../page-objects/task-summary.page'
+
+Then('the footer should contain the following links', async (dataTable) => {
+  for (const row of dataTable.hashes()) {
+    const linkText = row.TEXT
+    const url = row.URL
+    const link = $(`//footer//a[contains(text(),'${linkText}')]`)
+    await expect(link).toBeDisplayed()
+    if (url) {
+      await expect(link).toHaveAttribute('href', url)
+    }
+  }
+})
+
+Then('the page is analyzed for accessibility', async () => {
+  await analyzeAccessibility()
+})
 
 Then('(the user )should see heading {string}', async (text) => {
   if (text.indexOf("'") > -1) {
@@ -173,16 +190,4 @@ Then('(the user )should see {string} selected for AutocompleteField {string}', a
 Then('(the user )should see SBI {string} as the logged in organisation', async (expectedSbi) => {
   const actualSbi = await DefraAccountBar.sbi()
   await expect(actualSbi).toEqual(expectedSbi)
-})
-
-Then('the footer should contain the following links', async (dataTable) => {
-  for (const row of dataTable.hashes()) {
-    const linkText = row.TEXT
-    const url = row.URL
-    const link = $(`//footer//a[contains(text(),'${linkText}')]`)
-    await expect(link).toBeDisplayed()
-    if (url) {
-      await expect(link).toHaveAttribute('href', url)
-    }
-  }
 })

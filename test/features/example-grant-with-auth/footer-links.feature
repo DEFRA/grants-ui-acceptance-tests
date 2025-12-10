@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @ci @cdp
+    @cdp @ci
     Scenario: Footer should contain expected links
         Given there is no application state stored for SBI "106281016" and grant "example-grant-with-auth"
 
