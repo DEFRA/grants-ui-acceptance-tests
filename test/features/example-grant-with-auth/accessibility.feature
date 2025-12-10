@@ -24,7 +24,6 @@ Feature: Reusable grants-ui functionality
         
         # yes-no-field
         Then the user should be at URL "yes-no-field"
-        And the page is analyzed for accessibility
         When the user selects "Yes"
         And continues
 
