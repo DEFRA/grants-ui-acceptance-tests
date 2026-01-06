@@ -1,6 +1,5 @@
 Feature: Reusable grants-ui functionality
 
-    @ci
     Scenario: Begin a journey as an applicant, then continue and complete the journey as an agent with access to the same business
         Given there is no application state stored for SBI "119000002" and grant "example-grant-with-auth"
 
