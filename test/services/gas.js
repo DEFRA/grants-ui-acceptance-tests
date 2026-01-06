@@ -21,7 +21,7 @@ class Gas {
           type: 'JSON',
           json: {
             metadata: {
-              sbi: sbi
+              sbi
             }
           }
         }
