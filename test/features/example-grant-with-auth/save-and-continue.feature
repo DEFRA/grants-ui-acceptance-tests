@@ -3,7 +3,7 @@ Feature: Reusable grants-ui functionality
     @cdp @ci
     Scenario: Use the Save and Continue feature, checking which pages are returned to when resuming a journey
         # clear Mongo state storage
-        Given there is no application state stored for SBI "115460751" and grant "example-grant-with-auth"
+        Given there is no application state stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"
 
         # start
         Given the user navigates to "/example-grant-with-auth/start"
@@ -25,7 +25,7 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "radios-field"
 
         # validate Mongo state storage
-        Then there should be application state stored for SBI "115460751" and grant "example-grant-with-auth"
+        Then there should be application state stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"
 
         # reload the browser session and go to /start
         Given the user starts a new browser session

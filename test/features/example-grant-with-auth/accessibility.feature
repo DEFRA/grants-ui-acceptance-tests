@@ -2,7 +2,7 @@ Feature: Reusable grants-ui functionality
 
     @cdp @ci
     Scenario: Analyze all components for accessibility
-        Given there is no application state stored for SBI "106557382" and grant "example-grant-with-auth"
+        Given there is no application state stored for CRN "1100962289" and SBI "106557382" and grant "example-grant-with-auth"
 
         # start
         Given the user navigates to "/example-grant-with-auth/start"

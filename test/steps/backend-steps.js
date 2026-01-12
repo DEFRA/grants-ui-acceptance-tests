@@ -2,29 +2,29 @@ import { Given, Then } from '@wdio/cucumber-framework'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import Backend from '../services/backend'
 
-Given('there is no application state stored for SBI {string} and grant {string}', async (sbi, grantCode) => {
-  await Backend.deleteState(sbi, grantCode)
+Given('there is no application state stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grantCode) => {
+  await Backend.deleteState(crn, sbi, grantCode)
 })
 
-Then('there should be application state stored for SBI {string} and grant {string}', async (sbi, grantCode) => {
-  await Backend.getState(sbi, grantCode)
+Then('there should be application state stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grantCode) => {
+  await Backend.getState(crn, sbi, grantCode)
 })
 
-Then('the following application state should be stored for SBI {string} and grant {string}', async (sbi, grantCode, dataTable) => {
-  const state = await Backend.getState(sbi, grantCode)
+Then('the following application state should be stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grantCode, dataTable) => {
+  const state = await Backend.getState(crn, sbi, grantCode)
   for (const row of dataTable.hashes()) {
     expect(state[row.FIELD]).toEqual(transformStepArgument(row.VALUE))
   }
 })
 
-Then('the following application submission should be stored for SBI {string} and grant {string}', async (sbi, grantCode, dataTable) => {
-  const submissions = await Backend.getSubmissions(sbi, grantCode)
+Then('the following application submission should be stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grantCode, dataTable) => {
+  const submissions = await Backend.getSubmissions(crn, sbi, grantCode)
   for (const row of dataTable.hashes()) {
     expect(submissions[0][row.FIELD]).toEqual(transformStepArgument(row.VALUE))
   }
 })
 
-Then('the grants-ui application status for SBI {string} and grant {string} should (still )be {string}', async (sbi, grantCode, status) => {
-  const application = await Backend.getState(sbi, grantCode)
+Then('the grants-ui application status for CRN {string} and SBI {string} and grant {string} should (still )be {string}', async (crn, sbi, grantCode, status) => {
+  const application = await Backend.getState(crn, sbi, grantCode)
   expect(application.applicationStatus).toEqual(status)
 })

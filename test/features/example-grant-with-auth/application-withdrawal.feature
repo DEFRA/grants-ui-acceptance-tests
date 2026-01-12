@@ -2,7 +2,7 @@ Feature: Reusable grants-ui functionality
 
     @ci
     Scenario: A withdrawn application can be re-submitted as a new application
-        Given there is no application state stored for SBI "106527272" and grant "example-grant-with-auth"
+        Given there is no application state stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
 
         # start
         Given the user navigates to "/example-grant-with-auth/start"
@@ -91,4 +91,4 @@ Feature: Reusable grants-ui functionality
         And navigates to "/example-grant-with-auth/yes-no-field"
         And completes any login process as CRN "1100954058"
         Then the user should be at URL "start"
-        And the grants-ui application status for SBI "106527272" and grant "example-grant-with-auth" should still be "CLEARED"
+        And the grants-ui application status for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth" should still be "CLEARED"

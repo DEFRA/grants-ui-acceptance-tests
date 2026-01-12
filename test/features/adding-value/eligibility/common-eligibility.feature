@@ -2,7 +2,7 @@ Feature: Adding Value Eligibility and Elimination
 
     @cdp @ci
     Scenario: Explore all common eligibility questions and elimination routes
-        Given there is no application state stored for SBI "107173507" and grant "adding-value"
+        Given there is no application state stored for CRN "1100943838" and SBI "107173507" and grant "adding-value"
 
         # start
         Given the user navigates to "/adding-value/start"
