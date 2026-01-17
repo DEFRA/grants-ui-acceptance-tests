@@ -2,6 +2,16 @@ import { getBackendAuthorizationToken } from './backend-auth-helper'
 import { mintLockToken } from './lock-token'
 
 class Backend {
+  async deleteLock(crn, sbi, grantCode) {
+    const response = await fetch(`${browser.options.baseBackendUrl}/admin/application-lock?ownerId=${crn}&sbi=${sbi}&grantCode=${grantCode}&grantVersion=1`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${getBackendAuthorizationToken()}`
+      }
+    })
+    await expect(response.status === 200 || response.status === 404).toBe(true)
+  }
+
   async deleteState(crn, sbi, grantCode) {
     const response = await fetch(`${browser.options.baseBackendUrl}/state?sbi=${sbi}&grantCode=${grantCode}`, {
       method: 'DELETE',
