@@ -2,8 +2,10 @@ Feature: Reusable grants-ui functionality
 
     #@ci
     Scenario: Begin a journey as an applicant, then continue and complete the journey as an agent with access to the same business
-        Given there is no application state stored for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
-
+        Given there is no application lock for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
+        And there is no application lock for CRN "1109990001" and SBI "119000002" and grant "example-grant-with-auth"
+        And there is no application state stored for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
+        
         # login as applicant farmer
         Given the user navigates to "/example-grant-with-auth/start"
         And completes any login process as CRN "1109990002"
@@ -27,7 +29,8 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "radios-field"
 
         # reload the browser session and login again as the agent, selecting the same SBI
-        Given the user starts a new browser session
+        Given there is no application lock for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
+        And the user starts a new browser session
         And navigates to "/example-grant-with-auth/start"
         And completes any login process as CRN "1109990001"
         And selects SBI "119000002"
