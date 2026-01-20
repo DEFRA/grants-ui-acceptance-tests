@@ -112,7 +112,7 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "confirmation"
         And the grants-ui application status for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
 
-    #@ci
+    @ci
     Scenario: SUBMITTED application with GAS status of AWAITING_AMENDMENTS is redirected to summary and updated to REOPENED
         Given the application status in GAS is now "AWAITING_AMENDMENTS"
         And the user starts a new browser session
