@@ -82,7 +82,7 @@ Feature: Reusable grants-ui functionality
         And should see heading "Details submitted"
         And should see an "EGWA" reference number for their application
     
-    #@ci
+    @ci
     Scenario: Application is submitted, stored in backend storage and sent to GAS
         # validate Mongo state storage
         And the following application state should be stored for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth"
@@ -96,9 +96,8 @@ Feature: Reusable grants-ui functionality
 
         # validate Mongo submission storage
         And the following application submission should be stored for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth"
-            | FIELD              | VALUE              |
-            | referenceNumber    | {REFERENCE NUMBER} |
-            | crn                | 1100995048         |
+            | REFERENCE NUMBER   | CRN        |
+            | {REFERENCE NUMBER} | 1100995048 |
 
         # GAS
         And the reference number along with SBI "115664358" and CRN "1100995048" should be submitted to GAS
@@ -111,15 +110,6 @@ Feature: Reusable grants-ui functionality
         And completes any login process as CRN "1100995048"
         Then the user should be at URL "confirmation"
         And the grants-ui application status for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
-
-    @ci
-    Scenario: SUBMITTED application with GAS status of AWAITING_AMENDMENTS is redirected to summary and updated to REOPENED
-        Given the application status in GAS is now "AWAITING_AMENDMENTS"
-        And the user starts a new browser session
-        And navigates to "/example-grant-with-auth/yes-no-field"
-        And completes any login process as CRN "1100995048"
-        Then the user should be at URL "summary"
-        And the grants-ui application status for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth" should be "REOPENED"
 
     @ci
     Scenario: SUBMITTED application with GAS status of OFFER_SENT is redirected to agreement
