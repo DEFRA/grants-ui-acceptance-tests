@@ -23,9 +23,10 @@ Then('the following application state should be stored for CRN {string} and SBI 
 
 Then('the following application submission should be stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grantCode, dataTable) => {
   const submissions = await Backend.getSubmissions(crn, sbi, grantCode)
-  for (const row of dataTable.hashes()) {
-    expect(submissions[0][row.FIELD]).toEqual(transformStepArgument(row.VALUE))
-  }
+  dataTable.hashes().forEach((row, i) => {
+    expect(submissions[i].referenceNumber).toEqual(transformStepArgument(row['REFERENCE NUMBER']))
+    expect(submissions[i].crn).toEqual(transformStepArgument(row.CRN))
+  })
 })
 
 Then('the grants-ui application status for CRN {string} and SBI {string} and grant {string} should (still )be {string}', async (crn, sbi, grantCode, status) => {
