@@ -1,16 +1,17 @@
-import { Given, Then, world } from '@wdio/cucumber-framework'
+import { Given, Then } from '@wdio/cucumber-framework'
 import Gas from '../services/gas'
+import referenceNumbers from '../services/reference-number-store'
 
 Given('the next application submitted to GAS for SBI {string} will return HTTP {int} {string} for {int} requests', async (sbi, httpStatusCode, errorText, times) => {
   await Gas.setApplicationSubmissionResponse(sbi, httpStatusCode, errorText, times)
 })
 
 Given('the application status in GAS is now {string}', async (gasStatus) => {
-  if (!world.referenceNumber) {
-    throw new Error('world.referenceNumber not set by earlier step')
+  if (!referenceNumbers.current) {
+    throw new Error('No reference number stored by earlier step')
   }
 
-  await Gas.setStatusQueryResponse(world.referenceNumber, gasStatus)
+  await Gas.setStatusQueryResponse(referenceNumbers.current, gasStatus)
 })
 
 Given('the application status for {string} in GAS is now {string}', async (referenceNumber, gasStatus) => {
@@ -23,16 +24,14 @@ Then('the reference number along with SBI {string} and CRN {string} should be su
     return
   }
 
-  console.log('Running submitted Reference Number checks')
-
-  if (!world.referenceNumber) {
-    throw new Error('world.referenceNumber not set by earlier step')
+  if (!referenceNumbers.current) {
+    throw new Error('No reference number stored by earlier step')
   }
 
-  const request = await Gas.getApplicationSubmission(world.referenceNumber)
+  const request = await Gas.getApplicationSubmission(referenceNumbers.current)
   expect(request).not.toBeNull()
-  expect(request.body.json.metadata.clientRef).toEqual(world.referenceNumber.toLowerCase())
+  expect(request.body.json.metadata.clientRef).toEqual(referenceNumbers.current.toLowerCase())
   expect(request.body.json.metadata.sbi).toEqual(sbi)
   expect(request.body.json.metadata.crn).toEqual(crn)
-  expect(request.body.json.answers.referenceNumber).toEqual(world.referenceNumber)
+  expect(request.body.json.answers.referenceNumber).toEqual(referenceNumbers.current)
 })

@@ -21,11 +21,11 @@ Then('the following application state should be stored for CRN {string} and SBI 
   }
 })
 
-Then('the following application submission should be stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grantCode, dataTable) => {
+Then('the following application submissions should be stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grantCode, dataTable) => {
   const submissions = await Backend.getSubmissions(crn, sbi, grantCode)
   dataTable.hashes().forEach((row, i) => {
     expect(submissions[i].referenceNumber).toEqual(transformStepArgument(row['REFERENCE NUMBER']))
-    expect(submissions[i].crn).toEqual(transformStepArgument(row.CRN))
+    expect(submissions[i].crn).toEqual(row.CRN)
   })
 })
 

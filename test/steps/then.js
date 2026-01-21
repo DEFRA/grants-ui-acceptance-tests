@@ -1,6 +1,7 @@
-import { Then, world } from '@wdio/cucumber-framework'
+import { Then } from '@wdio/cucumber-framework'
 import { analyzeAccessibility } from '../services/accessibility'
 import { pollForSuccess } from '../services/polling'
+import referenceNumbers from '../services/reference-number-store'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import AutocompleteField from '../page-objects/auto-complete.field'
 import DefraAccountBar from '../page-objects/defra-account-bar'
@@ -132,7 +133,7 @@ Then('(the user )should see a/an {string} reference number for their application
   const selector = $('//h1/following-sibling::div[1]/strong')
   await expect(selector).toHaveText(expect.stringContaining(prefix))
 
-  world.referenceNumber = await selector.getText()
+  referenceNumbers.push(await selector.getText())
 })
 
 Then('(the user )should see body {string}', async (text) => {

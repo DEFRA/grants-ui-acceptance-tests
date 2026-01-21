@@ -95,7 +95,7 @@ Feature: Reusable grants-ui functionality
             | applicantName       | James Test-Farmer  |
 
         # validate Mongo submission storage
-        And the following application submission should be stored for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth"
+        And the following application submissions should be stored for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth"
             | REFERENCE NUMBER   | CRN        |
             | {REFERENCE NUMBER} | 1100995048 |
 

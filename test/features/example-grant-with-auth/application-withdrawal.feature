@@ -94,7 +94,7 @@ Feature: Reusable grants-ui functionality
             | applicantName       | James Test-Farmer  |
 
         # validate Mongo submission storage
-        And the following application submission should be stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
+        And the following application submissions should be stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
             | REFERENCE NUMBER   | CRN        |
             | {REFERENCE NUMBER} | 1100954058 |
 
@@ -198,10 +198,11 @@ Feature: Reusable grants-ui functionality
             | multilineTextField  | Lorem ipsum dolor sit amet        |
             | applicantName       | James Test-Farmer                 |
 
-        # validate Mongo submission storage
-        And the following application submission should be stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
-            | REFERENCE NUMBER   | CRN        |
-            | {REFERENCE NUMBER} | 1100954058 |
+        # validate Mongo submission storage, both submissions should be present
+        And the following application submissions should be stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
+            | REFERENCE NUMBER            | CRN        |
+            | {CURRENT REFERENCE NUMBER}  | 1100954058 |
+            | {ORIGINAL REFERENCE NUMBER} | 1100954058 |
 
         # GAS
         And the reference number along with SBI "106527272" and CRN "1100954058" should be submitted to GAS
