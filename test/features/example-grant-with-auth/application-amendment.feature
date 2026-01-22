@@ -130,6 +130,8 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "summary"
         And the grants-ui application status for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth" should still be "REOPENED"
 
+        # cannot continue further, see TGC-1071
+
         # # summary
         # When the user chooses to change their summary answer to question "Country"
 
