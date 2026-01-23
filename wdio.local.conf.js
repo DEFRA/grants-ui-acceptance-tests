@@ -2,6 +2,7 @@ import allure from 'allure-commandline'
 import { browser } from '@wdio/globals'
 
 export const config = {
+  isCI: true,
   baseUrl: `http://localhost:3000`,
   baseBackendUrl: `http://localhost:3001`,
   maxInstances: 1,
