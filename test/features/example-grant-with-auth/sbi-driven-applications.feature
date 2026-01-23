@@ -1,7 +1,7 @@
 Feature: Reusable grants-ui functionality
 
     @ci
-    Scenario: Begin a journey as an applicant, then continue and complete the journey as an agent with access to the same business
+    Scenario: Begin a journey as an applicant, continue as an agent and complete the application as the applicant, checking application locking is enforced along the way
         Given there is no application lock for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
         And there is no application lock for CRN "1109990001" and SBI "119000002" and grant "example-grant-with-auth"
         And there is no application state stored for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
@@ -29,14 +29,20 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "radios-field"
 
         # reload the browser session and login again as the agent, selecting the same SBI
-        Given there is no application lock for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
-        And the user starts a new browser session
+        Given the user starts a new browser session
         And navigates to "/example-grant-with-auth/start"
         And completes any login process as CRN "1109990001"
         And selects SBI "119000002"
         And continues
 
-        # radios-field, first unanswered question
+        # application still locked by first user
+        Then the user should see heading "Another applicant is currently editing this application. You cannot access it until their session ends."
+
+        # unlock the application using the admin endpoint
+        Given there is no application lock for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
+        And the user navigates to "/example-grant-with-auth/start"
+
+        # radios-field, now the second user has access to the first unanswered question
         Then the user should be at URL "radios-field"
         When the user navigates backward
         Then the user should be at URL "autocomplete-field"
@@ -57,7 +63,15 @@ Feature: Reusable grants-ui functionality
         When the user selects "Option two"
         And continues
 
-        # checkboxes-field
+        # second user logs out, releasing the application lock
+        Given the user signs out of Defra ID
+
+        # first user logs back in
+        Given the user starts a new browser session
+        And navigates to "/example-grant-with-auth/start"
+        And completes any login process as CRN "1109990002"
+
+        # checkboxes-field, first user is at the first unanswered question
         Then the user should be at URL "checkboxes-field"
         When the user selects the following
             | Option two   |
