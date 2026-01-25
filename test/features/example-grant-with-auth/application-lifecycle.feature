@@ -1,6 +1,7 @@
 Feature: Reusable grants-ui functionality
 
-    Background:
+    @ci
+    Scenario: Application is successfully submitted and taken thru to agreement offer stages
         Given there is no application state stored for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth"
 
         # start
@@ -82,8 +83,6 @@ Feature: Reusable grants-ui functionality
         And should see heading "Details submitted"
         And should see an "EGWA" reference number for their application
     
-    @ci
-    Scenario: Application is submitted, stored in backend storage and sent to GAS
         # validate Mongo state storage
         And the following application state should be stored for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth"
             | FIELD               | VALUE              |
@@ -102,8 +101,7 @@ Feature: Reusable grants-ui functionality
         # GAS
         And the reference number along with SBI "115664358" and CRN "1100995048" should be submitted to GAS
 
-    @ci
-    Scenario: SUBMITTED application with GAS status of RECEIVED is redirected to confirmation
+        # SUBMITTED application with GAS status of RECEIVED is redirected to confirmation
         Given the application status in GAS is now "RECEIVED"
         And the user starts a new browser session
         And navigates to "/example-grant-with-auth/yes-no-field"
@@ -111,8 +109,7 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "confirmation"
         And the grants-ui application status for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
 
-    @ci
-    Scenario: SUBMITTED application with GAS status of OFFER_SENT is redirected to agreement
+        # SUBMITTED application with GAS status of OFFER_SENT is redirected to agreement
         Given the application status in GAS is now "OFFER_SENT"
         And the user starts a new browser session
         And navigates to "/example-grant-with-auth/yes-no-field"
@@ -120,18 +117,16 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "agreement"
         And the grants-ui application status for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
 
-    @ci
-    Scenario: SUBMITTED application with GAS status of OFFER_WITHDRAWN is redirected to confirmation
-        Given the application status in GAS is now "OFFER_WITHDRAWN"
+        # SUBMITTED application with GAS status of OFFER_ACCEPTED is redirected to confirmation
+        Given the application status in GAS is now "OFFER_ACCEPTED"
         And the user starts a new browser session
         And navigates to "/example-grant-with-auth/yes-no-field"
         And completes any login process as CRN "1100995048"
         Then the user should be at URL "agreement"
         And the grants-ui application status for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth" should still be "SUBMITTED"
 
-    @ci
-    Scenario: SUBMITTED application with GAS status of OFFER_ACCEPTED is redirected to confirmation
-        Given the application status in GAS is now "OFFER_ACCEPTED"
+        # SUBMITTED application with GAS status of OFFER_WITHDRAWN is redirected to confirmation
+        Given the application status in GAS is now "OFFER_WITHDRAWN"
         And the user starts a new browser session
         And navigates to "/example-grant-with-auth/yes-no-field"
         And completes any login process as CRN "1100995048"
