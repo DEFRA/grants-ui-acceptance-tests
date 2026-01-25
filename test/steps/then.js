@@ -38,6 +38,13 @@ Then('(the user )should see heading {string}', async (text) => {
   await expect($(`//h1[contains(text(),'${text}')]`)).toBeDisplayed()
 })
 
+Then('(the user )should see label heading {string}', async (text) => {
+  if (text.indexOf("'") > -1) {
+    text = text.substring(0, text.indexOf("'"))
+  }
+  await expect($(`//h1/label[contains(text(),'${text}')]`)).toBeDisplayed()
+})
+
 Then('(the user )should see banner {string}', async (text) => {
   if (text.indexOf("'") > -1) {
     text = text.substring(0, text.indexOf("'"))
