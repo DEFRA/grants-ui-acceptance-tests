@@ -190,13 +190,13 @@ Feature: Reusable grants-ui functionality
 
         # validate Mongo state storage
         And the following application state should be stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
-            | FIELD               | VALUE                             |
-            | $$__referenceNumber | {REFERENCE NUMBER}                |
-            | applicationStatus   | SUBMITTED                         |
-            | submittedBy         | 1100954058                        |
-            | autocompleteField   | WLS                               |
-            | multilineTextField  | Lorem ipsum dolor sit amet        |
-            | applicantName       | James Test-Farmer                 |
+            | FIELD               | VALUE                      |
+            | $$__referenceNumber | {CURRENT REFERENCE NUMBER} |
+            | applicationStatus   | SUBMITTED                  |
+            | submittedBy         | 1100954058                 |
+            | autocompleteField   | WLS                        |
+            | multilineTextField  | Lorem ipsum dolor sit amet |
+            | applicantName       | James Test-Farmer          |
 
         # validate Mongo submission storage, both submissions should be present
         And the following application submissions should be stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"

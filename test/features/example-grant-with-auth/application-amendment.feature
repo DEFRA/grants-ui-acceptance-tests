@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @ci
+    @ci @runme
     Scenario: A submitted application can be amended and re-submitted as a new application
         Given there is no application state stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
 
@@ -130,62 +130,60 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "summary"
         And the grants-ui application status for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth" should still be "REOPENED"
 
-        # cannot continue further, see TGC-1071
+        # summary = user amends the application
+        When the user chooses to change their summary answer to question "Country"
 
-        # # summary
-        # When the user chooses to change their summary answer to question "Country"
+        # autocomplete-field
+        Then the user should be at URL "autocomplete-field"
+        When the user selects "Wales" for AutocompleteField "Country"
+        And continues
 
-        # # autocomplete-field
-        # Then the user should be at URL "autocomplete-field"
-        # When the user selects "Wales" for AutocompleteField "Country"
-        # And continues
+        # summary
+        Then the user should be at URL "summary"
+        And should see the following answers
+            | QUESTION         | ANSWER                                             |
+            | Yes or No        | Yes                                                |
+            | Country          | Wales                                              |
+            | Radio option     | Option two                                         |
+            | Checkbox options | Option two                                         |
+            | Enter amount     | 100000                                             |
+            | Date             | {DATE IN A WEEK}                                   |
+            | Month and year   | August 2025                                        |
+            | Select option    | Option two                                         |
+            | Description      | Lorem ipsum                                        |
+            | Name             | James Test-Farmer                                  |
+            | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
+            | Mobile number    | 07777 123456	                                    |
+            | Address          | Test Farm                                          |
+            |                  | Cogenhoe                                           |
+            |                  | Northampton                                        |
+            |                  | Northamptonshire                                   |
+            |                  | NN7 1NN                                            |
+        When the user continues
 
-        # # summary
-        # Then the user should be at URL "summary"
-        # And should see the following answers
-        #     | QUESTION         | ANSWER                                             |
-        #     | Yes or No        | Yes                                                |
-        #     | Country          | Wales                                              |
-        #     | Radio option     | Option two                                         |
-        #     | Checkbox options | Option two                                         |
-        #     | Enter amount     | 100000                                             |
-        #     | Date             | {DATE IN A WEEK}                                   |
-        #     | Month and year   | August 2025                                        |
-        #     | Select option    | Option two                                         |
-        #     | Description      | Lorem ipsum                                        |
-        #     | Name             | James Test-Farmer                                  |
-        #     | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
-        #     | Mobile number    | 07777 123456	                                    |
-        #     | Address          | Test Farm                                          |
-        #     |                  | Cogenhoe                                           |
-        #     |                  | Northampton                                        |
-        #     |                  | Northamptonshire                                   |
-        #     |                  | NN7 1NN                                            |
-        # When the user continues
-
-        # # declaration
-        # Then the user should be at URL "declaration"
-        # When the user confirms and sends
+        # declaration
+        Then the user should be at URL "declaration"
+        When the user confirms and sends
         
-        # # confirmation
-        # Then the user should be at URL "confirmation"
-        # And should see heading "Details submitted"
-        # And should see an "EGWA" reference number for their application
+        # confirmation
+        Then the user should be at URL "confirmation"
+        And should see heading "Details submitted"
+        And should see an "EGWA" reference number for their application
 
-        # # validate Mongo state storage
-        # And the following application state should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
-        #     | FIELD               | VALUE                             |
-        #     | $$__referenceNumber | {REFERENCE NUMBER}                |
-        #     | applicationStatus   | SUBMITTED                         |
-        #     | submittedBy         | 1100964517                        |
-        #     | autocompleteField   | WLS                               |
-        #     | multilineTextField  | Lorem ipsum dolor sit amet        |
-        #     | applicantName       | James Test-Farmer                 |
+        # validate Mongo state storage, original reference number should be retained
+        And the following application state should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
+            | FIELD               | VALUE                       |
+            | $$__referenceNumber | {ORIGINAL REFERENCE NUMBER} |
+            | applicationStatus   | SUBMITTED                   |
+            | submittedBy         | 1100964517                  |
+            | autocompleteField   | WLS                         |
+            | multilineTextField  | Lorem ipsum                 |
+            | applicantName       | James Test-Farmer           |
 
-        # # validate Mongo submission storage
-        # And the following application submissions should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
-        #     | REFERENCE NUMBER   | CRN        |
-        #     | {REFERENCE NUMBER} | 11001100964517954058 |
+        # validate Mongo submission storage, original reference number should be retained but we should we have 2 entries now?
+        And the following application submissions should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
+            | REFERENCE NUMBER            | CRN        |
+            | {ORIGINAL REFERENCE NUMBER} | 1100964517 |
 
-        # # GAS
-        # And the reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
+        # GAS
+        And the reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
