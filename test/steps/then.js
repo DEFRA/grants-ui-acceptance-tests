@@ -5,8 +5,6 @@ import referenceNumbers from '../services/reference-number-store'
 import { transformStepArgument } from '../services/step-argument-transformation'
 import AutocompleteField from '../page-objects/auto-complete.field'
 import DefraAccountBar from '../page-objects/defra-account-bar'
-import ScoreResult from '../dto/score-result'
-import ScoreResultsPage from '../page-objects/score-results.page'
 import SummaryAnswer from '../dto/summary-answer'
 import SummaryPage from '../page-objects/summary.page'
 import Task from '../dto/task'
@@ -100,40 +98,6 @@ Then('(the user )should see the following errors', async (dataTable) => {
   })
 
   await expect(actualErrors).toEqual(expectedErrors)
-})
-
-Then('(the user )should see {string} for their project score', async (expectedScore) => {
-  const actualScore = await ScoreResultsPage.score()
-  await expect(actualScore).toEqual(expectedScore)
-})
-
-Then('(the user )should see the following score results', async (dataTable) => {
-  const expectedScoreResults = []
-  let scoreResult = {}
-
-  for (const row of dataTable.hashes()) {
-    const topic = row.TOPIC
-    const answer = row.ANSWERS
-    const score = row.SCORE
-    const fundingPriority = row['FUNDING PRIORITIES']
-
-    if (topic || score) {
-      // allow for lack of topic, to be fixed in TGC-659
-      scoreResult = new ScoreResult(topic, [], score, [])
-      expectedScoreResults.push(scoreResult)
-    }
-
-    if (answer) {
-      scoreResult.answers.push(answer)
-    }
-
-    if (fundingPriority) {
-      scoreResult.fundingPriorities.push(fundingPriority)
-    }
-  }
-
-  const actualScoreResults = await ScoreResultsPage.results()
-  await expect(actualScoreResults).toEqual(expectedScoreResults)
 })
 
 Then('(the user )should see a/an {string} reference number for their application', async (prefix) => {

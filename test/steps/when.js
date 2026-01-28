@@ -1,5 +1,4 @@
 import { When } from '@wdio/cucumber-framework'
-import ScoreResultsPage from '../page-objects/score-results.page'
 import SummaryPage from '../page-objects/summary.page'
 import TaskListPage from '../page-objects/task-list.page'
 import TaskSummaryPage from '../page-objects/task-summary.page'
@@ -75,10 +74,6 @@ When('(the user )confirms and sends', async () => {
 
 When('(the user )selects task {string}', async (taskName) => {
   await TaskListPage.selectTask(taskName)
-})
-
-When('(the user )chooses to change their {string} scoring answer', async (topic) => {
-  await ScoreResultsPage.changeAnswerFor(topic)
 })
 
 When('(the user )chooses to change their sub-task answer to question {string}', async (question) => {

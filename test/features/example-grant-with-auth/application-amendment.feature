@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @ci @runme
+    @ci
     Scenario: A submitted application can be amended and re-submitted as a new application
         Given there is no application state stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
 
