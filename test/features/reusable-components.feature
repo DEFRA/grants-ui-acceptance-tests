@@ -177,6 +177,3 @@ Feature: Reusable grants-ui functionality
         And should see heading "Details submitted"
         And the page is analyzed for accessibility
         And should see an "EGWA" reference number for their application
-
-        # GAS
-        And the reference number along with SBI "107593059" and CRN "1100957269" should be submitted to GAS

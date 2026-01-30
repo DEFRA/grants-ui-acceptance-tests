@@ -19,11 +19,6 @@ Given('the application status for {string} in GAS is now {string}', async (refer
 })
 
 Then('the reference number along with SBI {string} and CRN {string} should be submitted to GAS', async (sbi, crn) => {
-  if (!browser.options.isCI) {
-    console.log('Skipping submitted Reference Number checks as not in CI')
-    return
-  }
-
   if (!referenceNumbers.current) {
     throw new Error('No reference number stored by earlier step')
   }
