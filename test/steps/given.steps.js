@@ -1,5 +1,5 @@
 import { Given } from '@wdio/cucumber-framework'
-import { pollForSuccess } from '../services/polling'
+import { pollForSuccess } from '../utils/polling'
 import DefraAccountBar from '../page-objects/defra-account-bar'
 
 Given('(the user )navigates to {string}', async (page) => {

@@ -111,13 +111,8 @@ grants-ui-acceptance-tests/
 │   │   ├── example-tasklist/
 │   │   └── example-whitelist/
 │   ├── steps/                          # Step definitions
-│   │   ├── given.js
-│   │   ├── when.js
-│   │   ├── then.js
-│   │   ├── backend-steps.js
-│   │   └── gas-steps.js
 │   ├── page-objects/                   # Page objects
-│   ├── services/                       # Helper services
+│   ├── utils/                          # Helper utilities
 │   └── dto/                            # Data transfer objects
 ├── wdio.*.conf.js                      # WebdriverIO config files
 └── .env                                # Local environment configuration
@@ -149,11 +144,7 @@ Use tags to control which tests run in which environments:
 
 Step definitions are located in `test/steps/`:
 
-- [given.js](test/steps/given.js) - Setup steps
-- [when.js](test/steps/when.js) - Action steps
-- [then.js](test/steps/then.js) - Assertion steps
-- [backend-steps.js](test/steps/backend-steps.js) - Backend interaction steps
-- [gas-steps.js](test/steps/gas-steps.js) - Grant Application Service steps
+Step definitions are organised as `*.steps.js` files within `test/steps/`.
 
 ## Test Reports
 

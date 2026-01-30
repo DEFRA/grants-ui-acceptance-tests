@@ -1,6 +1,6 @@
 import { Given, Then } from '@wdio/cucumber-framework'
-import Gas from '../services/gas'
-import referenceNumbers from '../services/reference-number-store'
+import Gas from '../utils/gas'
+import referenceNumbers from '../utils/reference-number-store'
 
 Given('the next application submitted to GAS for SBI {string} will return HTTP {int} {string} for {int} requests', async (sbi, httpStatusCode, errorText, times) => {
   await Gas.setApplicationSubmissionResponse(sbi, httpStatusCode, errorText, times)
