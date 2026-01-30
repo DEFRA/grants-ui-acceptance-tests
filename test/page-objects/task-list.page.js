@@ -4,8 +4,8 @@ import TaskListGroup from '../dto/task-list-group'
 
 class TaskListPage {
   async applicationStatus() {
-    const statusText = await $("//h2[contains(text(),'Application status')]/following-sibling::p[1]").getText();
-    const [completed, total] = statusText.match(/\d+/g).map(Number);
+    const statusText = await $("//h2[contains(text(),'Application status')]/following-sibling::p[1]").getText()
+    const [completed, total] = statusText.match(/\d+/g).map(Number)
     return new TaskListApplicationStatus(completed, total)
   }
 
