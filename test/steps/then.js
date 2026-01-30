@@ -57,7 +57,7 @@ Then('(the user )should see section title {string}', async (text) => {
   await expect($(`//h2[@id='section-title']`)).toHaveText(text)
 })
 
-Then('(the user )should (still )be at URL {string}', async (expectedPath) => {
+Then('(the user )should (still )be (back )at URL {string}', async (expectedPath) => {
   await expect(browser).toHaveUrl(expect.stringContaining(expectedPath))
 })
 

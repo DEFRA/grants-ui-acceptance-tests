@@ -52,6 +52,10 @@ When('(the user )enters {string} for {string}', async (text, label) => {
   await $(`//label[contains(text(),'${label}')]/following::input[@type='text']`).setValue(text)
 })
 
+When('(the user )enters {string} for label heading {string}', async (text, label) => {
+  await $(`//label[contains(text(),'${label}')]/ancestor::div[1]//input`).setValue(text)
+})
+
 When('(the user )enters {string} for MultilineTextField {string}', async (text, label) => {
   await $(`//label[contains(text(),'${label}')]/following::textarea`).setValue(text)
 })
