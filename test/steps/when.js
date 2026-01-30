@@ -1,7 +1,6 @@
 import { When } from '@wdio/cucumber-framework'
 import SummaryPage from '../page-objects/summary.page'
 import TaskListPage from '../page-objects/task-list.page'
-import TaskSummaryPage from '../page-objects/task-summary.page'
 import AutocompleteField from '../page-objects/auto-complete.field'
 import DatePartsField from '../page-objects/date-parts.field'
 import MonthYearField from '../page-objects/month-year.field'
@@ -78,10 +77,6 @@ When('(the user )confirms and sends', async () => {
 
 When('(the user )selects task {string}', async (taskName) => {
   await TaskListPage.selectTask(taskName)
-})
-
-When('(the user )chooses to change their sub-task answer to question {string}', async (question) => {
-  await TaskSummaryPage.changeAnswerFor(question)
 })
 
 When('(the user )chooses to change their summary answer to question {string}', async (question) => {

@@ -1,6 +1,6 @@
 Feature: Reusable grants-ui functionality
 
-    @ci @runme
+    @ci
     Scenario: Complete a task list based grant application
         Given there is no application state stored for CRN "1100957579" and SBI "106604915" and grant "example-grant-with-task-list"
 
@@ -30,8 +30,8 @@ Feature: Reusable grants-ui functionality
         # tasks
         Then the user should be at URL "tasks"
         And should see heading "Example Task List"
-
-        And should see the following task list
+        And the page is analyzed for accessibility
+        And should see the following task list with 0 of 5 tasks completed
             | Example section one              |                  |
             | Example multiple components task | Not started      |
             | Example single component task    | Cannot start yet |
@@ -62,7 +62,7 @@ Feature: Reusable grants-ui functionality
 
         # tasks
         Then the user should be back at URL "tasks"
-        And should see the following task list
+        And should see the following task list with 2 of 5 tasks completed
             | Example section one              |                  |
             | Example multiple components task | Completed        |
             | Example single component task    | Completed        |
@@ -95,7 +95,27 @@ Feature: Reusable grants-ui functionality
 
         # tasks
         Then the user should be back at URL "tasks"
-        And should see the following task list
+        And should see the following task list with 4 of 5 tasks completed
+            | Example section one              |             |
+            | Example multiple components task | Completed   |
+            | Example single component task    | Completed   |
+            | Example section two              |             |
+            | Example compound component task  | Completed   |
+            | Example task with guidance       | Completed   |
+            | Example submit section           |             |
+            | Confirm and send                 | Not started |
+
+        # revisit a task
+        When the user selects task "Example task with guidance"
+
+        # example-task-with-guidance
+        Then the user should be at URL "example-task-with-guidance"
+        When the user enters "200000" for "Example number field"
+        And continues
+
+        # tasks
+        Then the user should be back at URL "tasks"
+        And should see the following task list with 4 of 5 tasks completed
             | Example section one              |             |
             | Example multiple components task | Completed   |
             | Example single component task    | Completed   |

@@ -10,8 +10,6 @@ import SummaryPage from '../page-objects/summary.page'
 import Task from '../dto/task'
 import TaskListGroup from '../dto/task-list-group'
 import TaskListPage from '../page-objects/task-list.page'
-import TaskSummaryAnswer from '../dto/task-summary-answer'
-import TaskSummaryPage from '../page-objects/task-summary.page'
 
 Then('the footer should contain the following links', async (dataTable) => {
   for (const row of dataTable.hashes()) {
@@ -119,7 +117,7 @@ Then('(the user )should see warning {string}', async (text) => {
   await expect($(`//div[@class='govuk-warning-text']//strong[text()[contains(.,'${text}')]]`)).toBeDisplayed()
 })
 
-Then('(the user )should see the following task list', async (dataTable) => {
+Then('(the user )should see the following task list with {int} of {int} tasks completed', async (completedTasks, totalTasks, dataTable) => {
   const expectedGroups = []
   let group = null
 
@@ -136,17 +134,12 @@ Then('(the user )should see the following task list', async (dataTable) => {
     }
   }
 
+  const applicationStatus = TaskListPage.applicationStatus()
+  await expect((await applicationStatus).completedTasks).toEqual(completedTasks)
+  await expect((await applicationStatus).totalTasks).toEqual(totalTasks)
+
   const actualGroups = await TaskListPage.groups()
   await expect(actualGroups).toEqual(expectedGroups)
-})
-
-Then('(the user )should see the following task summary', async (dataTable) => {
-  const expectedAnswers = await Promise.all(
-    dataTable.raw().map(async (row) => {
-      return new TaskSummaryAnswer(row[0], row[1])
-    })
-  )
-  await expect(expectedAnswers).toEqual(await TaskSummaryPage.answers())
 })
 
 Then('(the user )should see {string} as the selected radio option', async (option) => {
