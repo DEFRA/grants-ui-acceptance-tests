@@ -1,6 +1,11 @@
 import { mockServerClient } from 'mockserver-client'
 
 class Gas {
+  async clearExpectation(expectationId) {
+    const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
+    await client.clearById(expectationId)
+  }
+
   async getApplicationSubmission(referenceNumber) {
     const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
     const requests = await client.retrieveRecordedRequests({
@@ -10,9 +15,10 @@ class Gas {
   }
 
   async setApplicationSubmissionResponse(sbi, httpStatusCode, errorText, times) {
+    const expectationId = `applications-sbi-${sbi}-${httpStatusCode}`
     const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
     await client.mockAnyResponse({
-      id: `applications-sbi-${sbi}-${httpStatusCode}`,
+      id: expectationId,
       priority: 999,
       httpRequest: {
         method: 'POST',
@@ -40,12 +46,14 @@ class Gas {
         unlimited: false
       }
     })
+    return expectationId
   }
 
   async setStatusQueryResponse(referenceNumber, gasStatus) {
+    const expectationId = `applications-${referenceNumber}-status`
     const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
     await client.mockAnyResponse({
-      id: `applications-${referenceNumber}-status`,
+      id: expectationId,
       priority: 999,
       httpRequest: {
         method: 'GET',
@@ -61,10 +69,10 @@ class Gas {
         }
       },
       times: {
-        remainingTimes: 1,
-        unlimited: false
+        unlimited: true
       }
     })
+    return expectationId
   }
 }
 
