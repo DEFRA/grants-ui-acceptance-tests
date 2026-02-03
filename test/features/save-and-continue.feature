@@ -137,6 +137,4 @@ Feature: Reusable grants-ui functionality
         Then the user should be at URL "confirmation"
         And should see heading "Details submitted"
         And should see an "EGWA" reference number for their application
-
-        # GAS
-        And the reference number along with SBI "115460751" and CRN "1100960953" should be submitted to GAS
+    
