@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Footer Links
 
     @cdp @ci
     Scenario: Footer should contain expected links

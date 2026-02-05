@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Defra ID Signout
 
     @cdp @ci
     Scenario: Sign out of Defra ID and sign in as another user

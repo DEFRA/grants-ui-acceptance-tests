@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Application Withdrawal
 
     @ci
     Scenario: A withdrawn application can be re-submitted as a new application

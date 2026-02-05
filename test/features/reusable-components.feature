@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Reusable Components
 
     @cdp @ci
     Scenario: Use all available components in example journey and analyze accessibility

@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Application Amendment
 
     @ci
     Scenario: A submitted application can be amended and re-submitted as a new application

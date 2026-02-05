@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Save and Continue
 
     @cdp @ci
     Scenario: Use the Save and Continue feature, checking which pages are returned to when resuming a journey

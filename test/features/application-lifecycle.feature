@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Application Lifecycle
 
     @ci
     Scenario: Application is successfully submitted and taken thru to agreement offer stages

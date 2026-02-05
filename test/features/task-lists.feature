@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Task Lists
 
     @ci
     Scenario: Complete a task list based grant application

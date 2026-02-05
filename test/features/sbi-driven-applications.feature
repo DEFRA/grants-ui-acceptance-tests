@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: SBI-Driven Applications
 
     @ci
     Scenario: Begin a journey as an applicant, continue as an agent and complete the application as the applicant, checking application locking is enforced along the way

@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: Whitelisting
 
     @cdp @ci
     Scenario: Attempt to access a whitelist-enabled journey with whitelisted and non-whitelisted CRNs and SBIs 

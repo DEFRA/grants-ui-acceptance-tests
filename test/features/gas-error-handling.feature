@@ -1,4 +1,4 @@
-Feature: Reusable grants-ui functionality
+Feature: GAS Error-Handling
 
     @ci
     Scenario: Handle unexpected GAS errors with a generic response to the user
