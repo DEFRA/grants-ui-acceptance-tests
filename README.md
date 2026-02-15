@@ -50,6 +50,7 @@ Edit `.env` with your configuration. For local testing against a local `grants-u
 DEFRA_ID_USER_PASSWORD=x
 GRANTS_UI_BACKEND_AUTH_TOKEN=auth_token
 GRANTS_UI_BACKEND_ENCRYPTION_KEY=encryption_key
+APPLICATION_LOCK_TOKEN_SECRET=dev-lock-secret
 MOCKSERVER_HOST=localhost
 MOCKSERVER_PORT=1080
 ```
@@ -105,17 +106,13 @@ npm run test:ci
 ```
 grants-ui-acceptance-tests/
 ├── test/
-│   ├── features/                       # Gherkin feature files
-│   │   ├── adding-value/
-│   │   ├── example-grant-with-auth/    # Contains example use of reusable grants-ui components
-│   │   ├── example-tasklist/
-│   │   └── example-whitelist/
-│   ├── steps/                          # Step definitions
-│   ├── page-objects/                   # Page objects
-│   ├── utils/                          # Helper utilities
-│   └── dto/                            # Data transfer objects
-├── wdio.*.conf.js                      # WebdriverIO config files
-└── .env                                # Local environment configuration
+│   ├── features/           # Gherkin feature files (.feature)
+│   ├── steps/              # Step definitions (*.steps.js)
+│   ├── page-objects/       # Page objects for UI components
+│   ├── utils/              # Helper utilities
+│   └── dto/                # Data transfer objects
+├── wdio.*.conf.js          # WebdriverIO config files
+└── .env                    # Local environment configuration
 ```
 
 ## Writing Tests
