@@ -177,3 +177,8 @@ Feature: Reusable Components
         And should see heading "Details submitted"
         And the page is analyzed for accessibility
         And should see an "EGWA" reference number for their application
+        When the user clicks on "View / Print submitted application (opens in new tab)"
+
+        # print-submitted-application
+        Then a new tab should be opened at URL "print-submitted-application"
+        And the user should see heading "Example grant with auth application"

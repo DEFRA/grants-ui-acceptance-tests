@@ -11,6 +11,13 @@ import Task from '../dto/task'
 import TaskListGroup from '../dto/task-list-group'
 import TaskListPage from '../page-objects/task-list.page'
 
+Then('a new tab should be opened at URL {string}', async (expectedPath) => {
+  await browser.waitUntil(async () => (await browser.getWindowHandles()).length > 1)
+  const handles = await browser.getWindowHandles()
+  await browser.switchToWindow(handles[handles.length - 1])
+  await expect(browser).toHaveUrl(expect.stringContaining(expectedPath))
+})
+
 Then('the footer should contain the following links', async (dataTable) => {
   for (const row of dataTable.hashes()) {
     const linkText = row.TEXT
