@@ -201,3 +201,4 @@ Feature: Reusable Components
             | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com          |
             | Mobile number       | 07777 123456                                                |
             | Address             | Test Farm, Cogenhoe, Northampton, Northamptonshire, NN7 1NN |
+        And should see button "Print this page"

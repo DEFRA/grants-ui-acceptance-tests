@@ -191,6 +191,10 @@ Then('(the user )should see {string} selected for AutocompleteField {string}', a
   await expect(actualOption).toEqual(expectedOption)
 })
 
+Then('(the user )should see button {string}', async (text) => {
+  await expect($(`//button[contains(text(),'${text}')]`)).toBeDisplayed()
+})
+
 Then('(the user )should see SBI {string} as the logged in organisation', async (expectedSbi) => {
   const actualSbi = await DefraAccountBar.sbi()
   await expect(actualSbi).toEqual(expectedSbi)
