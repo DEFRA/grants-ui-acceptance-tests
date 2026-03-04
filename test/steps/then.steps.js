@@ -7,6 +7,7 @@ import AutocompleteField from '../page-objects/auto-complete.field'
 import DefraAccountBar from '../page-objects/defra-account-bar'
 import SummaryAnswer from '../dto/summary-answer'
 import SummaryPage from '../page-objects/summary.page'
+import PrintSubmittedApplicationPage from '../page-objects/print-submitted-application.page'
 import Task from '../dto/task'
 import TaskListGroup from '../dto/task-list-group'
 import TaskListPage from '../page-objects/task-list.page'
@@ -86,6 +87,37 @@ Then('(the user )should see the following answers', async (dataTable) => {
 
   const actualAnswers = await SummaryPage.answers()
   await expect(actualAnswers).toEqual(expectedAnswers)
+})
+
+Then('(the user )should see the following submitted application details', async (dataTable) => {
+  let processingAnswers = false
+
+  for (const row of dataTable.raw()) {
+    const [key, value] = row
+
+    if (key === 'Application Number') {
+      const actualReferenceNumber = await PrintSubmittedApplicationPage.referenceNumber()
+      await expect(actualReferenceNumber).toEqual(transformStepArgument(value))
+      continue
+    }
+
+    if (key === 'SBI number') {
+      const actualSbiNumber = await PrintSubmittedApplicationPage.sbiNumber()
+      await expect(actualSbiNumber).toEqual(transformStepArgument(value))
+      continue
+    }
+
+    if (key === 'Submitted answers') {
+      processingAnswers = true
+      continue
+    }
+
+    if (processingAnswers) {
+      const answers = await PrintSubmittedApplicationPage.submittedAnswers()
+      const match = answers.find((a) => a.question === key)
+      await expect(match?.answer).toEqual(transformStepArgument(value))
+    }
+  }
 })
 
 Then('(the user )should see error {string}', async (text) => {

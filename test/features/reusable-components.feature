@@ -113,7 +113,7 @@ Feature: Reusable Components
         Then the user should be at URL "summary"
         And should see heading "Check your answers"
         And the page is analyzed for accessibility
-        And should see the following answers
+        Then the user should see the following answers
             | QUESTION         | ANSWER                                             |
             | Yes or No        | Yes                                                |
             | Country          | England                                            |
@@ -144,7 +144,7 @@ Feature: Reusable Components
         # summary
         Then the user should be at URL "summary"
         And the page is analyzed for accessibility
-        And should see the following answers
+        Then the user should see the following answers
             | QUESTION         | ANSWER                                             |
             | Yes or No        | Yes                                                |
             | Country          | Wales                                              |
@@ -182,3 +182,22 @@ Feature: Reusable Components
         # print-submitted-application
         Then a new tab should be opened at URL "print-submitted-application"
         And the user should see heading "Example grant with auth application"
+        And the page is analyzed for accessibility
+        Then the user should see the following submitted application details
+            | Application Number  | {REFERENCE NUMBER}                                          |
+            | Application Details |                                                             |
+            | SBI number          | 107593059                                                   |
+            | Submitted answers   |                                                             |
+            | Yes or No           | Yes                                                         |
+            | Country             | Wales                                                       |
+            | Radio option        | Option one                                                  |
+            | Checkbox options    | Option two, Option three                                    |
+            | Enter amount        | 100000                                                      |
+            | Date                | {DATE IN A WEEK}                                            |
+            | Month and year      | August 2025                                                 |
+            | Select option       | Option three                                                |
+            | Description         | Lorem ipsum                                                 |
+            | Name                | James Test-Farmer                                           |
+            | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com          |
+            | Mobile number       | 07777 123456                                                |
+            | Address             | Test Farm, Cogenhoe, Northampton, Northamptonshire, NN7 1NN |
