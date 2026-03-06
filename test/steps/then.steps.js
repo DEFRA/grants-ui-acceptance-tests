@@ -17,6 +17,7 @@ Then('a new tab should be opened at URL {string}', async (expectedPath) => {
   const handles = await browser.getWindowHandles()
   await browser.switchToWindow(handles[handles.length - 1])
   await expect(browser).toHaveUrl(expect.stringContaining(expectedPath))
+  await $('body').waitForDisplayed()
 })
 
 Then('the footer should contain the following links', async (dataTable) => {
