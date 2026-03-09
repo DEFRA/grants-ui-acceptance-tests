@@ -2,7 +2,9 @@ import SubmittedAnswer from '../dto/submitted-answer'
 
 class PrintSubmittedApplicationPage {
   async referenceNumber() {
-    return (await $(`//p[contains(text(),'Application number:')]/strong`).getText()).trim()
+    const selector = `//p[contains(text(),'Application number:')]/strong`
+    await $(selector).waitForDisplayed({ timeout: 5000, timeoutMsg: 'Application number element never displayed' })
+    return (await $(selector).getText()).trim()
   }
 
   async sbiNumber() {

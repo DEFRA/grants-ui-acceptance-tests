@@ -17,7 +17,6 @@ Then('a new tab should be opened at URL {string}', async (expectedPath) => {
   const handles = await browser.getWindowHandles()
   await browser.switchToWindow(handles[handles.length - 1])
   await expect(browser).toHaveUrl(expect.stringContaining(expectedPath))
-  await $('body').waitForDisplayed()
 })
 
 Then('the footer should contain the following links', async (dataTable) => {
@@ -96,7 +95,7 @@ Then('(the user )should see the following submitted application details', async 
   for (const row of dataTable.raw()) {
     const [key, value] = row
 
-    if (key === 'Application Number') {
+    if (key === 'Application number') {
       const actualReferenceNumber = await PrintSubmittedApplicationPage.referenceNumber()
       await expect(actualReferenceNumber).toEqual(transformStepArgument(value))
       continue
