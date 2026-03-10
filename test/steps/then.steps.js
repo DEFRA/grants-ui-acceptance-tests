@@ -12,11 +12,13 @@ import Task from '../dto/task'
 import TaskListGroup from '../dto/task-list-group'
 import TaskListPage from '../page-objects/task-list.page'
 
-Then('a new tab should be opened at URL {string}', async (expectedPath) => {
+Then('a new tab should be opened at URL {string} and closed by the user', async (expectedPath) => {
   await browser.waitUntil(async () => (await browser.getWindowHandles()).length > 1)
   const handles = await browser.getWindowHandles()
   await browser.switchToWindow(handles[handles.length - 1])
   await expect(browser).toHaveUrl(expect.stringContaining(expectedPath))
+  await browser.closeWindow()
+  await browser.switchToWindow(handles[0])
 })
 
 Then('the footer should contain the following links', async (dataTable) => {

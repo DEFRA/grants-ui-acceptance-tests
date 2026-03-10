@@ -178,27 +178,28 @@ Feature: Reusable Components
         And the page is analyzed for accessibility
         And should see an "EGWA" reference number for their application
         When the user clicks on "View / Print submitted application (opens in new tab)"
+        Then a new tab should be opened at URL "print-submitted-application" and closed by the user
 
         # print-submitted-application
-        Then a new tab should be opened at URL "print-submitted-application"
-        And the user should see heading "Example grant with auth application"
+        Given the user navigates to "/example-grant-with-auth/print-submitted-application"
+        Then the user should see heading "Example grant with auth application"
         And the page is analyzed for accessibility
-        # Then the user should see the following submitted application details
-        #     | Application number  | {REFERENCE NUMBER}                                          |
-        #     | Application Details |                                                             |
-        #     | SBI number          | 107593059                                                   |
-        #     | Submitted answers   |                                                             |
-        #     | Yes or No           | Yes                                                         |
-        #     | Country             | Wales                                                       |
-        #     | Radio option        | Option one                                                  |
-        #     | Checkbox options    | Option two, Option three                                    |
-        #     | Enter amount        | 100000                                                      |
-        #     | Date                | {DATE IN A WEEK}                                            |
-        #     | Month and year      | August 2025                                                 |
-        #     | Select option       | Option three                                                |
-        #     | Description         | Lorem ipsum                                                 |
-        #     | Name                | James Test-Farmer                                           |
-        #     | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com          |
-        #     | Mobile number       | 07777 123456                                                |
-        #     | Address             | Test Farm, Cogenhoe, Northampton, Northamptonshire, NN7 1NN |
-        # And should see button "Print this page"
+        Then the user should see the following submitted application details
+            | Application number  | {REFERENCE NUMBER}                                          |
+            | Application Details |                                                             |
+            | SBI number          | 107593059                                                   |
+            | Submitted answers   |                                                             |
+            | Yes or No           | Yes                                                         |
+            | Country             | Wales                                                       |
+            | Radio option        | Option one                                                  |
+            | Checkbox options    | Option two, Option three                                    |
+            | Enter amount        | 100000                                                      |
+            | Date                | {DATE IN A WEEK}                                            |
+            | Month and year      | August 2025                                                 |
+            | Select option       | Option three                                                |
+            | Description         | Lorem ipsum                                                 |
+            | Name                | James Test-Farmer                                           |
+            | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com          |
+            | Mobile number       | 07777 123456                                                |
+            | Address             | Test Farm, Cogenhoe, Northampton, Northamptonshire, NN7 1NN |
+        And should see button "Print this page"
