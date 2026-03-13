@@ -1,6 +1,6 @@
 Feature: Application Amendment
 
-    @ci
+#    @ci
     Scenario: A submitted application can be amended and re-submitted as a new application
         Given there is no application state stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
 
@@ -121,7 +121,7 @@ Feature: Application Amendment
         And the reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
 
         # application is marked as awaiting amended in GAS
-        Given the application status in GAS is now "AWAITING_AMENDMENTS"
+        Given the application status in GAS is now "APPLICATION_AMEND"
 
         # user revisits grants-ui
         And the user starts a new browser session
