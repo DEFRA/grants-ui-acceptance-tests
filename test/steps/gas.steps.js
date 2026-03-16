@@ -3,16 +3,18 @@ import Gas from '../utils/gas'
 import referenceNumbers from '../utils/reference-number-store'
 import expectationIds from '../utils/expectation-id-store'
 
-Before({ tags: '@ci' }, async () => {
-  const expectationId = await Gas.setDefaultStatusQuery404Response()
-  expectationIds.push(expectationId)
-})
+if (process.env.MOCKSERVER_HOST) {
+  Before(async () => {
+    const expectationId = await Gas.setDefaultStatusQuery404Response()
+    expectationIds.push(expectationId)
+  })
 
-After({ tags: '@ci' }, async () => {
-  for (const expectationId of expectationIds.all) {
-    await Gas.clearExpectation(expectationId)
-  }
-})
+  After(async () => {
+    for (const expectationId of expectationIds.all) {
+      await Gas.clearExpectation(expectationId)
+    }
+  })
+}
 
 Given('the next application submitted to GAS for SBI {string} will return HTTP {int} {string} for {int} requests', async (sbi, httpStatusCode, errorText, times) => {
   const expectationId = await Gas.setApplicationSubmissionResponse(sbi, httpStatusCode, errorText, times)
