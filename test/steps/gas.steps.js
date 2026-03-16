@@ -1,9 +1,14 @@
-import { Given, Then, After } from '@wdio/cucumber-framework'
+import { Given, Then, Before, After } from '@wdio/cucumber-framework'
 import Gas from '../utils/gas'
 import referenceNumbers from '../utils/reference-number-store'
 import expectationIds from '../utils/expectation-id-store'
 
-After(async () => {
+Before({ tags: '@ci' }, async () => {
+  const expectationId = await Gas.setDefaultStatusQuery404Response()
+  expectationIds.push(expectationId)
+})
+
+After({ tags: '@ci' }, async () => {
   for (const expectationId of expectationIds.all) {
     await Gas.clearExpectation(expectationId)
   }

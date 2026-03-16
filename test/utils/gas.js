@@ -49,8 +49,25 @@ class Gas {
     return expectationId
   }
 
+  async setDefaultStatusQuery404Response() {
+    const expectationId = 'applications-status-404-override'
+    const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
+    await client.mockAnyResponse({
+      id: expectationId,
+      priority: 998,
+      httpRequest: {
+        method: 'GET',
+        path: '/grants/.*/applications/.*/status'
+      },
+      httpResponse: {
+        statusCode: 404
+      }
+    })
+    return expectationId
+  }
+
   async setStatusQueryResponse(referenceNumber, gasStatus) {
-    const expectationId = `applications-${referenceNumber}-status`
+    const expectationId = `applications-${referenceNumber}-status-200`
     const client = mockServerClient(process.env.MOCKSERVER_HOST, process.env.MOCKSERVER_PORT)
     await client.mockAnyResponse({
       id: expectationId,
@@ -67,9 +84,6 @@ class Gas {
             status: gasStatus
           }
         }
-      },
-      times: {
-        unlimited: true
       }
     })
     return expectationId
