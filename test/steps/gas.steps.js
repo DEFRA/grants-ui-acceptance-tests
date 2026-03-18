@@ -46,3 +46,21 @@ Then('the reference number along with SBI {string} and CRN {string} should be su
   expect(request.body.json.metadata.crn).toEqual(crn)
   expect(request.body.json.answers.referenceNumber).toEqual(referenceNumbers.current)
 })
+
+Then('the reference number and previous reference number along with SBI {string} and CRN {string} should be submitted to GAS', async (sbi, crn) => {
+  if (!referenceNumbers.current) {
+    throw new Error('No reference number stored by earlier step')
+  }
+
+  if (!referenceNumbers.previous) {
+    throw new Error('No previous reference number stored by earlier step')
+  }
+
+  const request = await Gas.getApplicationSubmission(referenceNumbers.current)
+  expect(request).not.toBeNull()
+  expect(request.body.json.metadata.clientRef).toEqual(referenceNumbers.current.toLowerCase())
+  expect(request.body.json.metadata.previousClientRef).toEqual(referenceNumbers.previous.toLowerCase())
+  expect(request.body.json.metadata.sbi).toEqual(sbi)
+  expect(request.body.json.metadata.crn).toEqual(crn)
+  expect(request.body.json.answers.referenceNumber).toEqual(referenceNumbers.current)
+})

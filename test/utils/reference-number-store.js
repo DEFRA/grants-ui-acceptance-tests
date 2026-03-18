@@ -6,6 +6,11 @@ class ReferenceNumberStore {
     return refs[refs.length - 1]
   }
 
+  get previous() {
+    const refs = world.referenceNumbers || []
+    return refs[refs.length - 2]
+  }
+
   get first() {
     return world.referenceNumbers?.[0]
   }

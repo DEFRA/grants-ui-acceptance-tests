@@ -194,7 +194,7 @@ Feature: Application Amendment
             | {FIRST REFERENCE NUMBER}  |                           | 1100964517 |
 
         # GAS
-        And the reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
+        And the reference number and previous reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
 
         # application is marked as awaiting amendment for the second time in GAS
         Given the application status in GAS is now "APPLICATION_AMEND"
@@ -271,4 +271,4 @@ Feature: Application Amendment
             | {FIRST REFERENCE NUMBER}  |                           | 1100964517 |
 
         # GAS
-        And the reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
+        And the reference number and previous reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
