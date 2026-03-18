@@ -14,11 +14,26 @@ export function transformStepArgument(value) {
     return referenceNumbers.current
   }
 
-  if (value === '{ORIGINAL REFERENCE NUMBER}') {
+  if (value === '{ORIGINAL REFERENCE NUMBER}' || value === '{FIRST REFERENCE NUMBER}') {
     if (!referenceNumbers.first) {
-      throw new Error('No reference number stored by earlier step')
+      throw new Error('No reference numbers stored by earlier step')
     }
     return referenceNumbers.first
   }
+
+  if (value === '{SECOND REFERENCE NUMBER}') {
+    if (!referenceNumbers.second) {
+      throw new Error('No reference numbers stored by earlier step')
+    }
+    return referenceNumbers.second
+  }
+
+  if (value === '{THIRD REFERENCE NUMBER}') {
+    if (!referenceNumbers.third) {
+      throw new Error('No reference numbers stored by earlier step')
+    }
+    return referenceNumbers.third
+  }
+
   return value
 }

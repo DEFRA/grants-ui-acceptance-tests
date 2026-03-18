@@ -1,7 +1,7 @@
 Feature: Application Amendment
 
     @ci
-    Scenario: A submitted application can be amended and re-submitted as a new application
+    Scenario: A submitted application can be amended and re-submitted as a new application multiple times
         Given there is no application state stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
 
         # start
@@ -104,23 +104,23 @@ Feature: Application Amendment
 
         # validate Mongo state storage
         And the following application state should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
-            | FIELD               | VALUE              |
-            | $$__referenceNumber | {REFERENCE NUMBER} |
-            | applicationStatus   | SUBMITTED          |
-            | submittedBy         | 1100964517         |
-            | autocompleteField   | ENG                |
-            | multilineTextField  | Lorem ipsum        |
-            | applicantName       | James Test-Farmer  |
+            | FIELD               | VALUE                    |
+            | $$__referenceNumber | {FIRST REFERENCE NUMBER} |
+            | applicationStatus   | SUBMITTED                |
+            | submittedBy         | 1100964517               |
+            | autocompleteField   | ENG                      |
+            | multilineTextField  | Lorem ipsum              |
+            | applicantName       | James Test-Farmer        |
 
         # validate Mongo submission storage
         And the following application submissions should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
-            | REFERENCE NUMBER   | CRN        |
-            | {REFERENCE NUMBER} | 1100964517 |
+            | REFERENCE NUMBER         | CRN        |
+            | {FIRST REFERENCE NUMBER} | 1100964517 |
 
         # GAS
         And the reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
 
-        # application is marked as awaiting amended in GAS
+        # application is marked as awaiting amendment in GAS
         Given the application status in GAS is now "APPLICATION_AMEND"
 
         # user revisits grants-ui
@@ -132,9 +132,9 @@ Feature: Application Amendment
 
         # validate Mongo state storage
         And the following application state should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
-            | FIELD                   | VALUE                       |
-            | previousReferenceNumber | {ORIGINAL REFERENCE NUMBER} |
-            | applicationStatus       | REOPENED                    |
+            | FIELD                   | VALUE                    |
+            | previousReferenceNumber | {FIRST REFERENCE NUMBER} |
+            | applicationStatus       | REOPENED                 |
 
         # summary - user amends the application
         When the user chooses to change their summary answer to question "Country"
@@ -176,22 +176,99 @@ Feature: Application Amendment
         And should see heading "Details submitted"
         And should see an "EGWA" reference number for their application
 
-        # validate Mongo state storage, original reference number should be retained
+        # validate Mongo state storage
         And the following application state should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
-            | FIELD                   | VALUE                       |
-            | $$__referenceNumber     | {CURRENT REFERENCE NUMBER}  |
-            | previousReferenceNumber | {ORIGINAL REFERENCE NUMBER} |
-            | applicationStatus       | SUBMITTED                   |
-            | submittedBy             | 1100964517                  |
-            | autocompleteField       | WLS                         |
-            | multilineTextField      | Lorem ipsum                 |
-            | applicantName           | James Test-Farmer           |
+            | FIELD                   | VALUE                     |
+            | $$__referenceNumber     | {SECOND REFERENCE NUMBER} |
+            | previousReferenceNumber | {FIRST REFERENCE NUMBER}  |
+            | applicationStatus       | SUBMITTED                 |
+            | submittedBy             | 1100964517                |
+            | autocompleteField       | WLS                       |
+            | multilineTextField      | Lorem ipsum               |
+            | applicantName           | James Test-Farmer         |
 
-        # validate Mongo submission storage, original reference number should be retained but we should we have 2 entries now
+        # validate Mongo submission storage, we should we have 2 entries now
         And the following application submissions should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
-            | REFERENCE NUMBER            | PREVIOUS REFERENCE NUMBER   | CRN        |
-            | {CURRENT REFERENCE NUMBER}  | {ORIGINAL REFERENCE NUMBER} | 1100964517 |
-            | {ORIGINAL REFERENCE NUMBER} |                             | 1100964517 |
+            | REFERENCE NUMBER          | PREVIOUS REFERENCE NUMBER | CRN        |
+            | {SECOND REFERENCE NUMBER} | {FIRST REFERENCE NUMBER}  | 1100964517 |
+            | {FIRST REFERENCE NUMBER}  |                           | 1100964517 |
+
+        # GAS
+        And the reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS
+
+        # application is marked as awaiting amendment for the second time in GAS
+        Given the application status in GAS is now "APPLICATION_AMEND"
+
+        # user revisits grants-ui
+        And the user starts a new browser session
+        And navigates to "/example-grant-with-auth/yes-no-field"
+        And completes any login process as CRN "1100964517"
+        Then the user should be at URL "summary"
+        And the grants-ui application status for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth" should be "REOPENED"
+
+        # validate Mongo state storage
+        And the following application state should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
+            | FIELD                   | VALUE                     |
+            | previousReferenceNumber | {SECOND REFERENCE NUMBER} |
+            | applicationStatus       | REOPENED                  |
+
+        # summary - user amends the application
+        When the user chooses to change their summary answer to question "Country"
+
+        # autocomplete-field
+        Then the user should be at URL "autocomplete-field"
+        When the user selects "France" for AutocompleteField "Country"
+        And continues
+
+        # summary
+        Then the user should be at URL "summary"
+        And should see the following answers
+            | QUESTION         | ANSWER                                             |
+            | Yes or No        | Yes                                                |
+            | Country          | France                                             |
+            | Radio option     | Option two                                         |
+            | Checkbox options | Option two                                         |
+            | Enter amount     | 100000                                             |
+            | Date             | {DATE IN A WEEK}                                   |
+            | Month and year   | August 2025                                        |
+            | Select option    | Option two                                         |
+            | Description      | Lorem ipsum                                        |
+            | Name             | James Test-Farmer                                  |
+            | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
+            | Mobile number    | 07777 123456	                                    |
+            | Address          | Test Farm                                          |
+            |                  | Cogenhoe                                           |
+            |                  | Northampton                                        |
+            |                  | Northamptonshire                                   |
+            |                  | NN7 1NN                                            |
+        When the user continues
+
+        # declaration
+        Then the user should be at URL "declaration"
+        When the user confirms and sends
+        
+        # confirmation
+        Then the user should be at URL "confirmation"
+        And should see heading "Details submitted"
+        And should see an "EGWA" reference number for their application
+
+        # validate Mongo state storage
+        And the following application state should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
+            | FIELD                   | VALUE                     |
+            | $$__referenceNumber     | {THIRD REFERENCE NUMBER}  |
+            | previousReferenceNumber | {SECOND REFERENCE NUMBER} |
+            | applicationStatus       | SUBMITTED                 |
+            | submittedBy             | 1100964517                |
+            | autocompleteField       | FRA                       |
+            | multilineTextField      | Lorem ipsum               |
+            | applicantName           | James Test-Farmer         |
+
+        # validate Mongo submission storage, we should we have 3 entries now
+        And the following application submissions should be stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
+            | REFERENCE NUMBER          | PREVIOUS REFERENCE NUMBER | CRN        |
+            | {THIRD REFERENCE NUMBER}  | {SECOND REFERENCE NUMBER} | 1100964517 |
+            | {SECOND REFERENCE NUMBER} | {FIRST REFERENCE NUMBER}  | 1100964517 |
+            | {FIRST REFERENCE NUMBER}  |                           | 1100964517 |
 
         # GAS
         And the reference number along with SBI "115482347" and CRN "1100964517" should be submitted to GAS

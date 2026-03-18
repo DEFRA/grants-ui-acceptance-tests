@@ -30,6 +30,10 @@ Given('the application status in GAS is now {string}', async (gasStatus) => {
   expectationIds.push(expectationId)
 })
 
+Given('the application status in GAS for reference number {string} is now {string}', async (referenceNumber, gasStatus) => {
+  await Gas.setStatusQueryResponse(referenceNumber, gasStatus)
+})
+
 Then('the reference number along with SBI {string} and CRN {string} should be submitted to GAS', async (sbi, crn) => {
   if (!referenceNumbers.current) {
     throw new Error('No reference number stored by earlier step')

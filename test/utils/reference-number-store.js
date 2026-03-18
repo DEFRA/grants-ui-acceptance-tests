@@ -10,6 +10,14 @@ class ReferenceNumberStore {
     return world.referenceNumbers?.[0]
   }
 
+  get second() {
+    return world.referenceNumbers?.[1]
+  }
+
+  get third() {
+    return world.referenceNumbers?.[2]
+  }
+
   push(referenceNumber) {
     world.referenceNumbers = world.referenceNumbers || []
     world.referenceNumbers.push(referenceNumber)
