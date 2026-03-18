@@ -25,6 +25,9 @@ Then('the following application submissions should be stored for CRN {string} an
   const submissions = await Backend.getSubmissions(crn, sbi, grantCode)
   dataTable.hashes().forEach((row, i) => {
     expect(submissions[i].referenceNumber).toEqual(transformStepArgument(row['REFERENCE NUMBER']))
+    if (row['PREVIOUS REFERENCE NUMBER']) {
+      expect(submissions[i].previousReferenceNumber).toEqual(transformStepArgument(row['PREVIOUS REFERENCE NUMBER']))
+    }
     expect(submissions[i].crn).toEqual(row.CRN)
   })
 })
