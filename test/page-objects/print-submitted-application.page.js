@@ -24,6 +24,10 @@ class PrintSubmittedApplicationPage {
 
     return submittedAnswers
   }
+
+  async hasConfigurableContent(text) {
+    return $(`//*[contains(.,'${text}')]`).isExisting()
+  }
 }
 
 export default new PrintSubmittedApplicationPage()

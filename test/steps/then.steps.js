@@ -122,6 +122,13 @@ Then('(the user )should see the following submitted application details', async 
   }
 })
 
+Then('(the user )should see the following configurable content', async (dataTable) => {
+  for (const [text] of dataTable.rows()) {
+    const hasContent = await PrintSubmittedApplicationPage.hasConfigurableContent(text)
+    await expect(hasContent).toBe(true)
+  }
+})
+
 Then('(the user )should see error {string}', async (text) => {
   await expect($(`//div[@class="govuk-error-summary"]//a[contains(text(),'${text}')]`)).toBeDisplayed()
 })
