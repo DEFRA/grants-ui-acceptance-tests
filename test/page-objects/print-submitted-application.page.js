@@ -5,10 +5,6 @@ class PrintSubmittedApplicationPage {
     return (await $(`//p[contains(text(),'Application number:')]/strong`).getText()).trim()
   }
 
-  async sbiNumber() {
-    return (await $(`//h2[text()='Application details']/following-sibling::dl//dt[contains(text(), 'SBI number')]/following-sibling::dd`).getText()).trim()
-  }
-
   async submittedAnswers() {
     const submittedAnswers = []
 

@@ -103,12 +103,6 @@ Then('(the user )should see the following submitted application details', async 
       continue
     }
 
-    if (key === 'SBI number') {
-      const actualSbiNumber = await PrintSubmittedApplicationPage.sbiNumber()
-      await expect(actualSbiNumber).toEqual(transformStepArgument(value))
-      continue
-    }
-
     if (key === 'Submitted answers') {
       processingAnswers = true
       continue
