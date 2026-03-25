@@ -92,25 +92,39 @@ Then('(the user )should see the following answers', async (dataTable) => {
 })
 
 Then('(the user )should see the following submitted application details', async (dataTable) => {
-  let processingAnswers = false
+  const [referenceNumber, applicantDetails, submittedAnswers] = await Promise.all([PrintSubmittedApplicationPage.referenceNumber(), PrintSubmittedApplicationPage.applicantDetails(), PrintSubmittedApplicationPage.submittedAnswers()])
+
+  let processingApplicantDetails = false
+  let processingSubmittedAnswers = false
 
   for (const row of dataTable.raw()) {
     const [key, value] = row
 
     if (key === 'Application number') {
-      const actualReferenceNumber = await PrintSubmittedApplicationPage.referenceNumber()
-      await expect(actualReferenceNumber).toEqual(transformStepArgument(value))
+      await expect(referenceNumber).toEqual(transformStepArgument(value))
+      continue
+    }
+
+    if (key === 'Applicant details') {
+      processingApplicantDetails = true
+      processingSubmittedAnswers = false
       continue
     }
 
     if (key === 'Submitted answers') {
-      processingAnswers = true
+      processingApplicantDetails = false
+      processingSubmittedAnswers = true
       continue
     }
 
-    if (processingAnswers) {
-      const answers = await PrintSubmittedApplicationPage.submittedAnswers()
-      const match = answers.find((a) => a.question === key)
+    if (processingApplicantDetails) {
+      const match = applicantDetails.find((a) => a.title === key)
+      await expect(match?.value).toBeTruthy()
+      continue
+    }
+
+    if (processingSubmittedAnswers) {
+      const match = submittedAnswers.find((a) => a.question === key)
       await expect(match?.answer).toEqual(transformStepArgument(value))
     }
   }

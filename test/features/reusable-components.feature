@@ -186,6 +186,18 @@ Feature: Reusable Components
         And the page is analyzed for accessibility
         Then the user should see the following submitted application details
             | Application number  | {REFERENCE NUMBER}                                          |
+            | Applicant details   |                                                             |
+            | Title               | {ANY}                                                       |
+            | First name          | {ANY}                                                       |
+            | Middle name         | {ANY}                                                       |
+            | Last name           | {ANY}                                                       |
+            | Business name       | {ANY}                                                       |
+            | Address 1           | {ANY}                                                       |
+            | City                | {ANY}                                                       |
+            | Postcode            | {ANY}                                                       |
+            | SBI number          | {ANY}                                                       |
+            | Mobile number       | {ANY}                                                       |
+            | Email address       | {ANY}                                                       |
             | Submitted answers   |                                                             |
             | Yes or No           | Yes                                                         |
             | Country             | Wales                                                       |
