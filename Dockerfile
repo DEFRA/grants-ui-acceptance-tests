@@ -15,7 +15,7 @@ WORKDIR /home/node/app
 
 COPY --chown=node:node . .
 
-RUN npm install
+RUN npm ci
 
 ENTRYPOINT [ "./entrypoint.sh" ]
 
