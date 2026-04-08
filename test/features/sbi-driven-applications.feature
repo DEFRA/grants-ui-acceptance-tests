@@ -1,6 +1,6 @@
 Feature: SBI-Driven Applications
 
-    # @ci
+    @ci
     Scenario: Begin a journey as an applicant, continue as an agent and complete the application as the applicant, checking application locking is enforced along the way
         Given there is no application lock for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
         And there is no application lock for CRN "1109990001" and SBI "119000002" and grant "example-grant-with-auth"
@@ -120,6 +120,11 @@ Feature: SBI-Driven Applications
             | Town                      | Northampton                                    |
             | County (optional)         | Northamptonshire                               |
             | Postcode                  | NN7 1NN                                        |
+        And continues
+
+        # check-details
+        Then the user should be at URL "check-details"
+        When the user selects "Yes"
         And continues
 
         # summary

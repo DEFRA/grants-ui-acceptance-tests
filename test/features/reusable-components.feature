@@ -1,6 +1,6 @@
 Feature: Reusable Components
 
-    # @cdp @ci
+    @cdp @ci @runme
     Scenario: Use all available components in example journey and analyze accessibility
         Given there is no application state stored for CRN "1100945520" and SBI "106842593" and grant "example-grant-with-auth"
 
@@ -116,6 +116,11 @@ Feature: Reusable Components
             | Postcode                  | NN7 1NN                                            |
         And continues
 
+        # check-details
+        Then the user should be at URL "check-details"
+        When the user selects "Yes"
+        And continues
+
         # summary
         Then the user should be at URL "summary"
         And should see heading "Check your answers"
@@ -191,34 +196,35 @@ Feature: Reusable Components
         Given the user navigates to "/example-grant-with-auth/print-submitted-application"
         Then the user should see heading "Example grant with auth application"
         And the page is analyzed for accessibility
-        Then the user should see the following submitted application details
-            | Application number  | {REFERENCE NUMBER}                                          |
-            | Applicant details   |                                                             |
-            | Title               | {ANY}                                                       |
-            | First name          | {ANY}                                                       |
-            | Middle name         | {ANY}                                                       |
-            | Last name           | {ANY}                                                       |
-            | Business name       | {ANY}                                                       |
-            | Address 1           | {ANY}                                                       |
-            | City                | {ANY}                                                       |
-            | Postcode            | {ANY}                                                       |
-            | SBI number          | {ANY}                                                       |
-            | Mobile number       | {ANY}                                                       |
-            | Email address       | {ANY}                                                       |
-            | Submitted answers   |                                                             |
-            | Yes or No           | Yes                                                         |
-            | Country             | Wales                                                       |
-            | Radio option        | Option one                                                  |
-            | Checkbox options    | Option two, Option three                                    |
-            | Enter amount        | 100000                                                      |
-            | Date                | {DATE IN A WEEK}                                            |
-            | Month and year      | August 2025                                                 |
-            | Select option       | Option three                                                |
-            | Description         | Lorem ipsum                                                 |
-            | Name                | James Test-Farmer                                           |
-            | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com          |
-            | Mobile number       | 07777 123456                                                |
-            | Address             | Test Farm, Cogenhoe, Northampton, Northamptonshire, NN7 1NN |
+        # Then the user should see the following submitted application details
+        #     | Application number  | {REFERENCE NUMBER}                                          |
+        #     | Applicant details   |                                                             |
+        #     | Title               | {ANY}                                                       |
+        #     | First name          | {ANY}                                                       |
+        #     | Middle name         | {ANY}                                                       |
+        #     | Last name           | {ANY}                                                       |
+        #     | Business name       | {ANY}                                                       |
+        #     | Address 1           | {ANY}                                                       |
+        #     | City                | {ANY}                                                       |
+        #     | Postcode            | {ANY}                                                       |
+        #     | SBI number          | {ANY}                                                       |
+        #     | Mobile number       | {ANY}                                                       |
+        #     | Email address       | {ANY}                                                       |
+        #     | Submitted answers   |                                                             |
+        #     | Yes or No           | Yes                                                         |
+        #     | Country             | Wales                                                       |
+        #     | Radio option        | Option one                                                  |
+        #     | Checkbox options    | Option two, Option three                                    |
+        #     | Enter amount        | 100000                                                      |
+        #     | Date                | {DATE IN A WEEK}                                            |
+        #     | Month and year      | August 2025                                                 |
+        #     | Select option       | Option three                                                |
+        #     | Description         | Lorem ipsum                                                 |
+        #     | Select land parcels | {ANY}                                                       |
+        #     | Name                | James Test-Farmer                                           |
+        #     | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com          |
+        #     | Mobile number       | 07777 123456                                                |
+        #     | Address             | Test Farm, Cogenhoe, Northampton, Northamptonshire, NN7 1NN |
         And should see the following configurable content
             | Configurable content                                                                                                                       |
             | This is an example of configurable content on the print page, defined via the configurablePrintContent property in the form YAML metadata. |

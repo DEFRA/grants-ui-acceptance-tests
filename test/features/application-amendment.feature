@@ -1,6 +1,6 @@
 Feature: Application Amendment
 
-    # @ci
+    @ci
     Scenario: A submitted application can be amended and re-submitted as a new application multiple times
         Given there is no application state stored for CRN "1100964517" and SBI "115482347" and grant "example-grant-with-auth"
 
@@ -73,6 +73,11 @@ Feature: Application Amendment
             | Town                      | Northampton                                        |
             | County (optional)         | Northamptonshire                                   |
             | Postcode                  | NN7 1NN                                            |
+        And continues
+
+        # check-details
+        Then the user should be at URL "check-details"
+        When the user selects "Yes"
         And continues
 
         # summary

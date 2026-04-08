@@ -1,6 +1,6 @@
 Feature: Application Withdrawal
 
-    # @ci
+    @ci
     Scenario: A withdrawn application can be re-submitted as a new application
         Given there is no application state stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
 
@@ -73,6 +73,11 @@ Feature: Application Withdrawal
             | Town                      | Northampton                                        |
             | County (optional)         | Northamptonshire                                   |
             | Postcode                  | NN7 1NN                                            |
+        And continues
+
+        # check-details
+        Then the user should be at URL "check-details"
+        When the user selects "Yes"
         And continues
 
         # summary
@@ -183,6 +188,11 @@ Feature: Application Withdrawal
             | Town                      | Northampton                                        |
             | County (optional)         | Northamptonshire                                   |
             | Postcode                  | NN7 1NN                                            |
+        And continues
+
+        # check-details
+        Then the user should be at URL "check-details"
+        When the user selects "Yes"
         And continues
 
         # summary
