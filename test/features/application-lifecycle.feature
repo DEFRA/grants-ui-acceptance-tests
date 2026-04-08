@@ -1,6 +1,6 @@
 Feature: Application Lifecycle
 
-    # @ci
+    @ci
     Scenario: Application is successfully submitted and taken thru to agreement offer stages
         Given there is no application state stored for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth"
 
@@ -54,6 +54,11 @@ Feature: Application Lifecycle
         # multiline-text-field
         Then the user should be at URL "multiline-text-field"
         When the user enters "Lorem ipsum" for MultilineTextField "MultilineTextField Example"
+        And continues
+
+        # select-land-parcel
+        Then the user should be at URL "select-land-parcel"
+        When the user selects "SD6351 8781"
         And continues
 
         # multi-field-form

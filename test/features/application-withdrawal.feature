@@ -1,6 +1,6 @@
 Feature: Application Withdrawal
 
-    # @ci
+    @ci
     Scenario: A withdrawn application can be re-submitted as a new application
         Given there is no application state stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
 
@@ -54,6 +54,11 @@ Feature: Application Withdrawal
         # multiline-text-field
         Then the user should be at URL "multiline-text-field"
         When the user enters "Lorem ipsum" for MultilineTextField "MultilineTextField Example"
+        And continues
+
+        # select-land-parcel
+        Then the user should be at URL "select-land-parcel"
+        When the user selects "SD6351 8781"
         And continues
 
         # multi-field-form
@@ -159,6 +164,11 @@ Feature: Application Withdrawal
         # multiline-text-field
         Then the user should be at URL "multiline-text-field"
         When the user enters "Lorem ipsum dolor sit amet" for MultilineTextField "MultilineTextField Example"
+        And continues
+
+        # select-land-parcel
+        Then the user should be at URL "select-land-parcel"
+        When the user selects "SD6351 8781"
         And continues
 
         # multi-field-form

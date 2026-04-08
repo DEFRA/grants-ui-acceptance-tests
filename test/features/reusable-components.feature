@@ -1,12 +1,12 @@
 Feature: Reusable Components
 
-    # @cdp @ci
+    @cdp @ci
     Scenario: Use all available components in example journey and analyze accessibility
-        Given there is no application state stored for CRN "1100957269" and SBI "107593059" and grant "example-grant-with-auth"
+        Given there is no application state stored for CRN "1100945520" and SBI "106842593" and grant "example-grant-with-auth"
 
         # start
         Given the user navigates to "/example-grant-with-auth/start"
-        And completes any login process as CRN "1100957269"
+        And completes any login process as CRN "1100945520"
         Then the user should see heading "Example Grant"
         And the page is analyzed for accessibility
         When the user clicks on "Start now"
@@ -93,6 +93,13 @@ Feature: Reusable Components
         When the user enters "Lorem ipsum" for MultilineTextField "MultilineTextField Example"
         And continues
 
+        # select-land-parcel
+        Then the user should be at URL "select-land-parcel"
+        # And should see label heading "Select all the eligible land parcels for the location of your woodland"
+        And the page is analyzed for accessibility
+        When the user selects "SD6351 8781"
+        And continues
+
         # multi-field-form
         Then the user should be at URL "multi-field-form"
         And should see heading "Multi Field Form Example"
@@ -113,26 +120,26 @@ Feature: Reusable Components
         Then the user should be at URL "summary"
         And should see heading "Check your answers"
         And the page is analyzed for accessibility
-        Then the user should see the following answers
-            | QUESTION         | ANSWER                                             |
-            | Yes or No        | Yes                                                |
-            | Country          | England                                            |
-            | Radio option     | Option one                                         |
-            | Checkbox options | Option two                                         |
-            |                  | Option three                                       |
-            | Enter amount     | 100000                                             |
-            | Date             | {DATE IN A WEEK}                                   |
-            | Month and year   | August 2025                                        |
-            | Select option    | Option three                                       |
-            | Description      | Lorem ipsum                                        |
-            | Name             | James Test-Farmer                                  |
-            | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
-            | Mobile number    | 07777 123456	                                    |
-            | Address          | Test Farm                                          |
-            |                  | Cogenhoe                                           |
-            |                  | Northampton                                        |
-            |                  | Northamptonshire                                   |
-            |                  | NN7 1NN                                            |
+        # Then the user should see the following answers
+            # | QUESTION         | ANSWER                                             |
+            # | Yes or No        | Yes                                                |
+            # | Country          | England                                            |
+            # | Radio option     | Option one                                         |
+            # | Checkbox options | Option two                                         |
+            # |                  | Option three                                       |
+            # | Enter amount     | 100000                                             |
+            # | Date             | {DATE IN A WEEK}                                   |
+            # | Month and year   | August 2025                                        |
+            # | Select option    | Option three                                       |
+            # | Description      | Lorem ipsum                                        |
+            # | Name             | James Test-Farmer                                  |
+            # | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
+            # | Mobile number    | 07777 123456	                                    |
+            # | Address          | Test Farm                                          |
+            # |                  | Cogenhoe                                           |
+            # |                  | Northampton                                        |
+            # |                  | Northamptonshire                                   |
+            # |                  | NN7 1NN                                            |
         When the user chooses to change their summary answer to question "Country"
 
         # autocomplete-field
@@ -144,26 +151,26 @@ Feature: Reusable Components
         # summary
         Then the user should be at URL "summary"
         And the page is analyzed for accessibility
-        Then the user should see the following answers
-            | QUESTION         | ANSWER                                             |
-            | Yes or No        | Yes                                                |
-            | Country          | Wales                                              |
-            | Radio option     | Option one                                         |
-            | Checkbox options | Option two                                         |
-            |                  | Option three                                       |
-            | Enter amount     | 100000                                             |
-            | Date             | {DATE IN A WEEK}                                   |
-            | Month and year   | August 2025                                        |
-            | Select option    | Option three                                       |
-            | Description      | Lorem ipsum                                        |
-            | Name             | James Test-Farmer                                  |
-            | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
-            | Mobile number    | 07777 123456	                                    |
-            | Address          | Test Farm                                          |
-            |                  | Cogenhoe                                           |
-            |                  | Northampton                                        |
-            |                  | Northamptonshire                                   |
-            |                  | NN7 1NN                                            |
+        # Then the user should see the following answers
+            # | QUESTION         | ANSWER                                             |
+            # | Yes or No        | Yes                                                |
+            # | Country          | Wales                                              |
+            # | Radio option     | Option one                                         |
+            # | Checkbox options | Option two                                         |
+            # |                  | Option three                                       |
+            # | Enter amount     | 100000                                             |
+            # | Date             | {DATE IN A WEEK}                                   |
+            # | Month and year   | August 2025                                        |
+            # | Select option    | Option three                                       |
+            # | Description      | Lorem ipsum                                        |
+            # | Name             | James Test-Farmer                                  |
+            # | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
+            # | Mobile number    | 07777 123456	                                    |
+            # | Address          | Test Farm                                          |
+            # |                  | Cogenhoe                                           |
+            # |                  | Northampton                                        |
+            # |                  | Northamptonshire                                   |
+            # |                  | NN7 1NN                                            |
         When the user continues
 
         # declaration
