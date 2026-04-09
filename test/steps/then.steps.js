@@ -118,6 +118,7 @@ Then('(the user )should see the following submitted application details', async 
     }
 
     if (processingApplicantDetails) {
+      if (!value) continue // sub-section header row (e.g. "Your details", "Business details", "Contact Details") — skip
       const match = applicantDetails.find((a) => a.title === key)
       await expect(match?.value).toBeTruthy()
       continue
