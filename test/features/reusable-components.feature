@@ -1,6 +1,6 @@
 Feature: Reusable Components
 
-    @cdp @ci @runme
+    @cdp @ci
     Scenario: Use all available components in example journey and analyze accessibility
         Given there is no application state stored for CRN "1100945520" and SBI "106842593" and grant "example-grant-with-auth"
 
