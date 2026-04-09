@@ -129,26 +129,28 @@ Feature: SBI-Driven Applications
 
         # summary
         Then the user should be at URL "summary"
-        # And should see the following answers
-            # | QUESTION         | ANSWER                                         |
-            # | Yes or No        | Yes                                            |
-            # | Country          | England                                        |
-            # | Radio option     | Option two                                     |
-            # | Checkbox options | Option two                                     |
-            # |                  | Option three                                   |
-            # | Enter amount     | 150000                                         |
-            # | Date             | {DATE IN A WEEK}                               |
-            # | Month and year   | August 2025                                    |
-            # | Select option    | Option three                                   |
-            # | Description      | Lorem ipsum                                    |
-            # | Name             | John Test-Agent                                |
-            # | Email address    | cl-defra-gae-test-agent-email@equalexperts.com |
-            # | Mobile number    | 07777 123456	                                |
-            # | Address          | Test Farm                                      |
-            # |                  | Cogenhoe                                       |
-            # |                  | Northampton                                    |
-            # |                  | Northamptonshire                               |
-            # |                  | NN7 1NN                                        |
+        And should see the following answers
+            | QUESTION                   | ANSWER                                         |
+            | Yes or No                  | Yes                                            |
+            | Country                    | England                                        |
+            | Radio option               | Option two                                     |
+            | Checkbox options           | Option two                                     |
+            |                            | Option three                                   |
+            | Enter amount               | 150000                                         |
+            | Date                       | {DATE IN A WEEK}                               |
+            | Month and year             | August 2025                                    |
+            | Select option              | Option three                                   |
+            | Description                | Lorem ipsum                                    |
+            | Select land parcels        | Not provided                                   |
+            | Name                       | John Test-Agent                                |
+            | Email address              | cl-defra-gae-test-agent-email@equalexperts.com |
+            | Mobile number              | 07777 123456                                   |
+            | Address                    | Test Farm                                      |
+            |                            | Cogenhoe                                       |
+            |                            | Northampton                                    |
+            |                            | Northamptonshire                               |
+            |                            | NN7 1NN                                        |
+            | Are these details correct? | Yes                                            |
         And continues
 
         # declaration
