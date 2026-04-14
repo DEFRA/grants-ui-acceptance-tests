@@ -9,7 +9,7 @@ When('(the user )clicks on {string}', async (text) => {
   await $(`//*[contains(text(),'${text}')]`).click()
 })
 
-When('the user selects {string}', async (text) => {
+When('(the user )selects {string}', async (text) => {
   const element = await $(`aria/${text}`)
   if (!(await element.isSelected())) {
     await element.click()

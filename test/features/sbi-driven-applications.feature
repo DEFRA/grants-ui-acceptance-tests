@@ -1,6 +1,6 @@
 Feature: SBI-Driven Applications
 
-    @ci @runme
+    @ci
     Scenario: Begin a journey as an applicant, continue as an agent and complete the application as the applicant, checking application locking is enforced along the way
         Given there is no application lock for CRN "1109990002" and SBI "119000002" and grant "example-grant-with-auth"
         And there is no application lock for CRN "1109990001" and SBI "119000002" and grant "example-grant-with-auth"
@@ -129,28 +129,28 @@ Feature: SBI-Driven Applications
 
         # summary
         Then the user should be at URL "summary"
-        #And should see the following answers
-        #    | QUESTION                   | ANSWER                                         |
-        #    | Yes or No                  | Yes                                            |
-        #    | Country                    | England                                        |
-        #    | Radio option               | Option two                                     |
-        #    | Checkbox options           | Option two                                     |
-        #    |                            | Option three                                   |
-        #    | Enter amount               | 150000                                         |
-        #    | Date                       | {DATE IN A WEEK}                               |
-        #    | Month and year             | August 2025                                    |
-        #    | Select option              | Option three                                   |
-        #    | Description                | Lorem ipsum                                    |
-        #    | Select land parcels        | Not provided                                   |
-        #    | Name                       | John Test-Agent                                |
-        #    | Email address              | cl-defra-gae-test-agent-email@equalexperts.com |
-        #    | Mobile number              | 07777 123456                                   |
-        #    | Address                    | Test Farm                                      |
-        #    |                            | Cogenhoe                                       |
-        #    |                            | Northampton                                    |
-        #    |                            | Northamptonshire                               |
-        #    |                            | NN7 1NN                                        |
-        #    | Are these details correct? | Yes                                            |
+        And should see the following answers
+           | QUESTION                   | ANSWER                                         |
+           | Yes or No                  | Yes                                            |
+           | Country                    | England                                        |
+           | Radio option               | Option two                                     |
+           | Checkbox options           | Option two                                     |
+           |                            | Option three                                   |
+           | Enter amount               | 150000                                         |
+           | Date                       | {DATE IN A WEEK}                               |
+           | Month and year             | August 2025                                    |
+           | Select option              | Option three                                   |
+           | Description                | Lorem ipsum                                    |
+           | Select land parcels        | SD6351-8781                                    |
+           | Name                       | John Test-Agent                                |
+           | Email address              | cl-defra-gae-test-agent-email@equalexperts.com |
+           | Mobile number              | 07777 123456                                   |
+           | Address                    | Test Farm                                      |
+           |                            | Cogenhoe                                       |
+           |                            | Northampton                                    |
+           |                            | Northamptonshire                               |
+           |                            | NN7 1NN                                        |
+           | Are these details correct? | Yes                                            |
         And continues
 
         # declaration

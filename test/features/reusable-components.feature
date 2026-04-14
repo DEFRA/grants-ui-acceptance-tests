@@ -95,9 +95,10 @@ Feature: Reusable Components
 
         # select-land-parcel
         Then the user should be at URL "select-land-parcel"
-        # And should see label heading "Select all the eligible land parcels for the location of your woodland"
+        And should see heading "Select all the eligible land parcels for the location of your woodland"
         And the page is analyzed for accessibility
         When the user selects "SD6351 8781"
+        And selects "SD6352 8774"
         And continues
 
         # multi-field-form
@@ -125,28 +126,28 @@ Feature: Reusable Components
         Then the user should be at URL "summary"
         And should see heading "Check your answers"
         And the page is analyzed for accessibility
-        #Then the user should see the following answers
-        #    | QUESTION                   | ANSWER                                             |
-        #    | Yes or No                  | Yes                                                |
-        #    | Country                    | England                                            |
-        #    | Radio option               | Option one                                         |
-        #    | Checkbox options           | Option two                                         |
-        #    |                            | Option three                                       |
-        #    | Enter amount               | 100000                                             |
-        #    | Date                       | {DATE IN A WEEK}                                   |
-        #    | Month and year             | August 2025                                        |
-        #    | Select option              | Option three                                       |
-        #    | Description                | Lorem ipsum                                        |
-        #    | Select land parcels        | Not provided                                       |
-        #    | Name                       | James Test-Farmer                                  |
-        #    | Email address              | cl-defra-gae-test-applicant-email@equalexperts.com |
-        #    | Mobile number              | 07777 123456                                       |
-        #    | Address                    | Test Farm                                          |
-        #    |                            | Cogenhoe                                           |
-        #    |                            | Northampton                                        |
-        #    |                            | Northamptonshire                                   |
-        #    |                            | NN7 1NN                                            |
-        #    | Are these details correct? | Yes                                                |
+        Then the user should see the following answers
+           | QUESTION                   | ANSWER                                             |
+           | Yes or No                  | Yes                                                |
+           | Country                    | England                                            |
+           | Radio option               | Option one                                         |
+           | Checkbox options           | Option two                                         |
+           |                            | Option three                                       |
+           | Enter amount               | 100000                                             |
+           | Date                       | {DATE IN A WEEK}                                   |
+           | Month and year             | August 2025                                        |
+           | Select option              | Option three                                       |
+           | Description                | Lorem ipsum                                        |
+           | Select land parcels        | SD6351-8781, SD6352-8774                           |
+           | Name                       | James Test-Farmer                                  |
+           | Email address              | cl-defra-gae-test-applicant-email@equalexperts.com |
+           | Mobile number              | 07777 123456                                       |
+           | Address                    | Test Farm                                          |
+           |                            | Cogenhoe                                           |
+           |                            | Northampton                                        |
+           |                            | Northamptonshire                                   |
+           |                            | NN7 1NN                                            |
+           | Are these details correct? | Yes                                                |
         When the user chooses to change their summary answer to question "Country"
 
         # autocomplete-field
@@ -157,28 +158,28 @@ Feature: Reusable Components
 
         # summary
         Then the user should be at URL "summary"
-        #Then the user should see the following answers
-        #    | QUESTION                   | ANSWER                                             |
-        #    | Yes or No                  | Yes                                                |
-        #    | Country                    | Wales                                              |
-        #    | Radio option               | Option one                                         |
-        #    | Checkbox options           | Option two                                         |
-        #    |                            | Option three                                       |
-        #    | Enter amount               | 100000                                             |
-        #    | Date                       | {DATE IN A WEEK}                                   |
-        #    | Month and year             | August 2025                                        |
-        #    | Select option              | Option three                                       |
-        #    | Description                | Lorem ipsum                                        |
-        #    | Select land parcels        | Not provided                                       |
-        #    | Name                       | James Test-Farmer                                  |
-        #    | Email address              | cl-defra-gae-test-applicant-email@equalexperts.com |
-        #    | Mobile number              | 07777 123456                                       |
-        #    | Address                    | Test Farm                                          |
-        #    |                            | Cogenhoe                                           |
-        #    |                            | Northampton                                        |
-        #    |                            | Northamptonshire                                   |
-        #    |                            | NN7 1NN                                            |
-        #    | Are these details correct? | Yes                                                |
+        Then the user should see the following answers
+           | QUESTION                   | ANSWER                                             |
+           | Yes or No                  | Yes                                                |
+           | Country                    | Wales                                              |
+           | Radio option               | Option one                                         |
+           | Checkbox options           | Option two                                         |
+           |                            | Option three                                       |
+           | Enter amount               | 100000                                             |
+           | Date                       | {DATE IN A WEEK}                                   |
+           | Month and year             | August 2025                                        |
+           | Select option              | Option three                                       |
+           | Description                | Lorem ipsum                                        |
+           | Select land parcels        | SD6351-8781, SD6352-8774                           |
+           | Name                       | James Test-Farmer                                  |
+           | Email address              | cl-defra-gae-test-applicant-email@equalexperts.com |
+           | Mobile number              | 07777 123456                                       |
+           | Address                    | Test Farm                                          |
+           |                            | Cogenhoe                                           |
+           |                            | Northampton                                        |
+           |                            | Northamptonshire                                   |
+           |                            | NN7 1NN                                            |
+           | Are these details correct? | Yes                                                |
         When the user continues
 
         # declaration
@@ -199,38 +200,38 @@ Feature: Reusable Components
         Given the user navigates to "/example-grant-with-auth/print-submitted-application"
         Then the user should see heading "Example grant with auth application"
         And the page is analyzed for accessibility
-        #Then the user should see the following submitted application details
-        #    | Application number  | {REFERENCE NUMBER}                                          |
-        #    | Applicant details   |                                                             |
-        #    | Your details        |                                                             |
-        #    | Title               | {ANY}                                                       |
-        #    | First name          | {ANY}                                                       |
-        #    | Middle name         | {ANY}                                                       |
-        #    | Last name           | {ANY}                                                       |
-        #    | Business details    |                                                             |
-        #    | Business name       | {ANY}                                                       |
-        #    | Address 1           | {ANY}                                                       |
-        #    | Address 2           | {ANY}                                                       |
-        #    | City                | {ANY}                                                       |
-        #    | Postcode            | {ANY}                                                       |
-        #    | SBI number          | {ANY}                                                       |
-        #    | Contact Details     |                                                             |
-        #    | Email address       | {ANY}                                                       |
-        #    | Submitted answers   |                                                             |
-        #    | Yes or No           | Yes                                                         |
-        #    | Country             | Wales                                                       |
-        #    | Radio option        | Option one                                                  |
-        #    | Checkbox options    | Option two, Option three                                    |
-        #    | Enter amount        | 100000                                                      |
-        #    | Date                | {DATE IN A WEEK}                                            |
-        #    | Month and year      | August 2025                                                 |
-        #    | Select option       | Option three                                                |
-        #    | Description         | Lorem ipsum                                                 |
-        #    | Select land parcels | SD6351-8781                                                 |
-        #    | Name                | James Test-Farmer                                           |
-        #    | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com          |
-        #    | Mobile number       | 07777 123456                                                |
-        #    | Address             | Test Farm, Cogenhoe, Northampton, Northamptonshire, NN7 1NN |
+        Then the user should see the following submitted application details
+           | Application number  | {REFERENCE NUMBER}                                          |
+           | Applicant details   |                                                             |
+           | Your details        |                                                             |
+           | Title               | {ANY}                                                       |
+           | First name          | {ANY}                                                       |
+           | Middle name         | {ANY}                                                       |
+           | Last name           | {ANY}                                                       |
+           | Business details    |                                                             |
+           | Business name       | {ANY}                                                       |
+           | Address 1           | {ANY}                                                       |
+           | Address 2           | {ANY}                                                       |
+           | City                | {ANY}                                                       |
+           | Postcode            | {ANY}                                                       |
+           | SBI number          | {ANY}                                                       |
+           | Contact Details     |                                                             |
+           | Email address       | {ANY}                                                       |
+           | Submitted answers   |                                                             |
+           | Yes or No           | Yes                                                         |
+           | Country             | Wales                                                       |
+           | Radio option        | Option one                                                  |
+           | Checkbox options    | Option two, Option three                                    |
+           | Enter amount        | 100000                                                      |
+           | Date                | {DATE IN A WEEK}                                            |
+           | Month and year      | August 2025                                                 |
+           | Select option       | Option three                                                |
+           | Description         | Lorem ipsum                                                 |
+           | Select land parcels | SD6351-8781, SD6352-8774                                    |
+           | Name                | James Test-Farmer                                           |
+           | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com          |
+           | Mobile number       | 07777 123456                                                |
+           | Address             | Test Farm, Cogenhoe, Northampton, Northamptonshire, NN7 1NN |
         And should see the following configurable content
             | Configurable content                                                                                                                       |
             | This is an example of configurable content on the print page, defined via the configurablePrintContent property in the form YAML metadata. |
