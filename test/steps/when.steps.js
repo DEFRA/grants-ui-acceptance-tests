@@ -72,7 +72,7 @@ When('the user enters the following', async (dataTable) => {
 })
 
 When('(the user )confirms and sends', async () => {
-  await $(`//button[contains(text(),'Confirm and submit')]`).click()
+  await $(`//button[contains(text(),'Confirm and send')]`).click()
 })
 
 When('(the user )selects task {string}', async (taskName) => {
