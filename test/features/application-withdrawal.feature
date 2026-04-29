@@ -1,6 +1,6 @@
 Feature: Application Withdrawal
 
-    # @ci temporarily disabled - "Are these details correct?" row removed from summary
+    @ci
     Scenario: A withdrawn application can be re-submitted as a new application
         Given there is no application state stored for CRN "1100954058" and SBI "106527272" and grant "example-grant-with-auth"
 
@@ -56,6 +56,12 @@ Feature: Application Withdrawal
         When the user enters "Lorem ipsum" for MultilineTextField "MultilineTextField Example"
         And continues
 
+        # select-land-parcel
+        Then the user should be at URL "select-land-parcel"
+        When the user selects the following
+            | SD6351 8781 |
+        And continues
+
         # multi-field-form
         Then the user should be at URL "multi-field-form"
         When the user enters the following
@@ -68,6 +74,12 @@ Feature: Application Withdrawal
             | Town                      | Northampton                                        |
             | County (optional)         | Northamptonshire                                   |
             | Postcode                  | NN7 1NN                                            |
+        And continues
+
+        # check-details
+        Then the user should be at URL "check-details"
+        And should see heading "Check your details"
+        When the user selects "Yes"
         And continues
 
         # summary
@@ -161,6 +173,12 @@ Feature: Application Withdrawal
         When the user enters "Lorem ipsum dolor sit amet" for MultilineTextField "MultilineTextField Example"
         And continues
 
+        # select-land-parcel
+        Then the user should be at URL "select-land-parcel"
+        When the user selects the following
+            | SD6351 8781 |
+        And continues
+
         # multi-field-form
         Then the user should be at URL "multi-field-form"
         When the user enters the following
@@ -173,6 +191,12 @@ Feature: Application Withdrawal
             | Town                      | Northampton                                        |
             | County (optional)         | Northamptonshire                                   |
             | Postcode                  | NN7 1NN                                            |
+        And continues
+
+        # check-details
+        Then the user should be at URL "check-details"
+        And should see heading "Check your details"
+        When the user selects "Yes"
         And continues
 
         # summary

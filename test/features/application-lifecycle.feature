@@ -1,6 +1,6 @@
 Feature: Application Lifecycle
 
-    # @ci temporarily disabled - "Are these details correct?" row removed from summary
+    @ci
     Scenario: Application is successfully submitted and taken thru to agreement offer stages
         Given there is no application state stored for CRN "1100995048" and SBI "115664358" and grant "example-grant-with-auth"
 
@@ -56,6 +56,12 @@ Feature: Application Lifecycle
         When the user enters "Lorem ipsum" for MultilineTextField "MultilineTextField Example"
         And continues
 
+        # select-land-parcel
+        Then the user should be at URL "select-land-parcel"
+        When the user selects the following
+            | SD6351 8781 |
+        And continues
+
         # multi-field-form
         Then the user should be at URL "multi-field-form"
         When the user enters the following
@@ -68,6 +74,12 @@ Feature: Application Lifecycle
             | Town                      | Northampton                                        |
             | County (optional)         | Northamptonshire                                   |
             | Postcode                  | NN7 1NN                                            |
+        And continues
+
+        # check-details
+        Then the user should be at URL "check-details"
+        And should see heading "Check your details"
+        When the user selects "Yes"
         And continues
 
         # summary

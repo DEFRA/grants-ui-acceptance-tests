@@ -1,6 +1,6 @@
 Feature: Save and Continue
 
-    # @cdp @ci temporarily disabled - "Are these details correct?" row removed from summary
+    @cdp @ci
     Scenario: Use the Save and Continue feature, checking which pages are returned to when resuming a journey
         # clear Mongo state storage
         Given there is no application state stored for CRN "1100960953" and SBI "115460751" and grant "example-grant-with-auth"
@@ -84,6 +84,12 @@ Feature: Save and Continue
         When the user enters "Lorem ipsum" for MultilineTextField "MultilineTextField Example"
         And continues
 
+        # select-land-parcel
+        Then the user should be at URL "select-land-parcel"
+        When the user selects the following
+            | SD6351 8781 |
+        And continues
+
         # multi-field-form
         Then the user should be at URL "multi-field-form"
         When the user enters the following
@@ -98,6 +104,12 @@ Feature: Save and Continue
             | Postcode                  | NN7 1NN                                            |
         And continues
 
+        # check-details
+        Then the user should be at URL "check-details"
+        And should see heading "Check your details"
+        When the user selects "Yes"
+        And continues
+
         # summary
         Then the user should be at URL "summary"
 
@@ -109,24 +121,25 @@ Feature: Save and Continue
         # summary, should return to summary with all previous answers on resumption of completed but unsubmitted journey
         Then the user should be at URL "summary"
         And should see the following answers
-            | QUESTION         | ANSWER                                             |
-            | Yes or No        | Yes                                                |
-            | Country          | Wales                                              |
-            | Radio option     | Option two                                         |
-            | Checkbox options | Option two                                         |
-            | Enter amount     | 100000                                             |
-            | Date             | {DATE IN A WEEK}                                   |
-            | Month and year   | August 2025                                        |
-            | Select option    | Option three                                       |
-            | Description      | Lorem ipsum                                        |
-            | Name             | James Test-Farmer                                  |
-            | Email address    | cl-defra-gae-test-applicant-email@equalexperts.com |
-            | Mobile number    | 07777 123456	                                    |
-            | Address          | Test Farm                                          |
-            |                  | Cogenhoe                                           |
-            |                  | Northampton                                        |
-            |                  | Northamptonshire                                   |
-            |                  | NN7 1NN                                            |
+            | QUESTION            | ANSWER                                             |
+            | Yes or No           | Yes                                                |
+            | Country             | Wales                                              |
+            | Radio option        | Option two                                         |
+            | Checkbox options    | Option two                                         |
+            | Enter amount        | 100000                                             |
+            | Date                | {DATE IN A WEEK}                                   |
+            | Month and year      | August 2025                                        |
+            | Select option       | Option three                                       |
+            | Description         | Lorem ipsum                                        |
+            | Select land parcels | SD6351-8781                                        |
+            | Name                | James Test-Farmer                                  |
+            | Email address       | cl-defra-gae-test-applicant-email@equalexperts.com |
+            | Mobile number       | 07777 123456                                       |
+            | Address             | Test Farm                                          |
+            |                     | Cogenhoe                                           |
+            |                     | Northampton                                        |
+            |                     | Northamptonshire                                   |
+            |                     | NN7 1NN                                            |
         When the user continues
 
         # declaration
