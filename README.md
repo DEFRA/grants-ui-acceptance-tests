@@ -2,6 +2,8 @@
 
 Automated acceptance test suite for Defra's grants application platform, maintained by the Grants Application Enablement (GAE) team.
 
+> **Note:** This acceptance test suite has been moved into the [grants-ui](https://github.com/DEFRA/grants-ui) repository for synchronicity with the application code. This repo is now used solely for CDP smoke testing. As a result, all scenario tags have been removed except for the single `@cdp` tag on the `reusable-components` scenario, which serves as the smoke test run via the CDP portal.
+
 ## What This Tests
 
 This test suite provides end-to-end testing coverage for:
