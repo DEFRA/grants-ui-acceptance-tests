@@ -1,23 +1,17 @@
 # grants-ui-acceptance-tests
 
-Automated acceptance test suite for Defra's grants application platform, maintained by the Grants Application Enablement (GAE) team.
+CDP smoke test for [grants-ui](https://github.com/DEFRA/grants-ui), maintained by the Grants UI team.
 
-> **Note:** This acceptance test suite has been moved into the [grants-ui](https://github.com/DEFRA/grants-ui) repository for synchronicity with the application code. This repo is now used solely for CDP smoke testing. As a result, all scenario tags have been removed except for the single `@cdp` tag on the `reusable-components` scenario, which serves as the smoke test run via the CDP portal.
+> **Note:** The main acceptance test suite has been moved into the [grants-ui](https://github.com/DEFRA/grants-ui) repository for synchronicity with the application code. This repo now contains a single end-to-end smoke test that runs against CDP to verify a full `example-grant-with-auth` journey through to submission.
 
 ## What This Tests
 
-This test suite provides end-to-end testing coverage for:
-
-- Non-land based grant application journeys served by [grants-ui](https://github.com/DEFRA/grants-ui)
-- Reusable `grants-ui` components maintained by GAE
-- User authentication flows via Defra ID
-- Application lifecycle management
-- Stubbed integration with other backend services (e.g. [GAS - Grant Application Service](https://github.com/DEFRA/fg-gas-backend))
+A single scenario in `test/features/smoke-test.feature` that walks the full `example-grant-with-auth` journey from start page through to submission.
 
 ## Technology Stack
 
 - **WebdriverIO** - Browser automation framework
-- **Cucumber** - BDD test scenarios written in Gherkin
+- **Cucumber** - BDD test scenario written in Gherkin
 - **Allure** - Test reporting
 - **Node.js 20+** - Runtime environment
 
@@ -26,62 +20,28 @@ This test suite provides end-to-end testing coverage for:
 - Node.js `>=20.11.1` (check with `node --version`)
 - npm (comes with Node.js)
 - Chrome browser (for local testing)
-- Access to a running instance of `grants-ui` (local or CDP)
+- Access to a running instance of `grants-ui`
 
 ## Quick Start
-
-### 1. Clone and Install
 
 ```bash
 git clone https://github.com/DEFRA/grants-ui-acceptance-tests.git
 cd grants-ui-acceptance-tests
 npm install
+npm run test:local
 ```
 
-### 2. Configure Environment
+Local environment variables for the stack stood up by the [grants-ui compose file](https://github.com/DEFRA/grants-ui/blob/main/compose.yml) are set in `wdio.local.conf.js`.
 
-Copy the example environment file and configure it for your setup:
+## Running Tests
 
-```bash
-cp .env.example .env
-```
-
-Edit `.env` with your configuration. For local testing against a local `grants-ui` instance:
-
-```bash
-DEFRA_ID_USER_PASSWORD=x
-GRANTS_UI_BACKEND_AUTH_TOKEN=auth_token
-GRANTS_UI_BACKEND_ENCRYPTION_KEY=encryption_key
-APPLICATION_LOCK_TOKEN_SECRET=dev-lock-secret
-MOCKSERVER_HOST=localhost
-MOCKSERVER_PORT=1080
-```
-
-See [.env.example](.env.example) for a full example that works with the [grants-ui compose file](https://github.com/DEFRA/grants-ui/blob/main/compose.yml).
-
-### 3. Run Tests
-
-Tag a scenario with `@runme` in a feature file, then:
+### Local - wdio.local.conf.js
 
 ```bash
 npm run test:local
 ```
 
-## Running the Test Suite
-
-There are 3 WebdriverIO configuration files for different environments:
-
-### Local Development - wdio.local.conf.js
-
-```bash
-npm run test:local
-```
-
-- Runs tests tagged with `@runme`
-- Uses your local Chrome browser
-- Pre-configured to run against [http://localhost:3000](http://localhost:3000) as stood up by the [grants-ui compose file](https://github.com/DEFRA/grants-ui/blob/main/compose.yml) file
-- Used for local development of individual scenarios
-- Requires environment variables configured in `.env`
+Runs against `http://localhost:3000` / `http://localhost:3001`. Uses a visible Chrome browser and generates an Allure report on completion.
 
 ### CDP Portal - wdio.conf.js
 
@@ -89,103 +49,40 @@ npm run test:local
 npm run test
 ```
 
-- Runs tests tagged with `@cdp`
-- Used for testing in CDP via the portal
-
-### CI Pipeline - wdio.ci.conf.js
-
-```bash
-npm run test:ci
-```
-
-- Runs tests tagged with `@ci`
-- Used in the `grants-ui` GitHub Actions CI pipeline
-- Automated execution on creating and updating a `grants-ui` PR
-- Can also be run from the `grants-ui' repository using the [CI script](https://github.com/DEFRA/grants-ui/blob/main/tools/run-acceptance-tests.sh) locally
+Runs via the CDP portal against the configured CDP environment.
 
 ## Project Structure
 
 ```
 grants-ui-acceptance-tests/
 ├── test/
-│   ├── features/           # Gherkin feature files (.feature)
-│   ├── steps/              # Step definitions (*.steps.js)
-│   ├── page-objects/       # Page objects for UI components
-│   ├── utils/              # Helper utilities
-│   └── dto/                # Data transfer objects
-├── wdio.*.conf.js          # WebdriverIO config files
-└── .env                    # Local environment configuration
+│   ├── features/       # Gherkin scenario
+│   ├── steps/          # Step definitions
+│   ├── page-objects/   # Field/page interaction helpers
+│   └── utils/          # Backend auth and polling utilities
+├── wdio.conf.js        # CDP configuration
+└── wdio.local.conf.js  # Local configuration (env vars included)
 ```
-
-## Writing Tests
-
-### Feature Files
-
-Tests are written in Gherkin syntax in `.feature` files under `test/features/`. Example:
-
-```gherkin
-@runme
-Scenario: Apply for a grant
-  Given I am on the start page
-  When I click "Start now"
-  Then I should see "Check if you can apply"
-```
-
-### Tagging Strategy
-
-Use tags to control which tests run in which environments:
-
-- `@runme` - Run this scenario locally during development
-- `@ci` - Run in CI pipeline
-- `@cdp` - Run in CDP portal
-
-### Step Definitions
-
-Step definitions are located in `test/steps/`:
-
-Step definitions are organised as `*.steps.js` files within `test/steps/`.
 
 ## Test Reports
 
-### Generating Reports
-
-After running tests, the report will be generated in the `allure-report/` directory. Reports are automatically published to the CDP portal when running tests via the portal.
-
-## Development Commands
-
-### Code Quality
+After running tests, the report is generated in `allure-report/`. Reports are automatically published to the CDP portal when running via the portal.
 
 ```bash
-# Lint code
-npm run lint
-
-# Auto-fix linting issues
-npm run lint:fix
-
-# Format code
-npm run format
-
-# Check formatting
-npm run format:check
-```
-
-### Cleanup
-
-```bash
-npm run clean  # Remove allure-results and allure-report directories
+npm run clean   # Remove allure-results and allure-report directories
+npm run report  # Regenerate the Allure report manually
 ```
 
 ## Troubleshooting
 
 ### Tests Won't Run
 
-- Ensure you have the correct Node.js version: `node --version` should be >=20.11.1
-- Check your `.env` file is configured correctly
+- Ensure you have the correct Node.js version: `node --version` should be `>=20.11.1`
 - Verify `grants-ui` is running and accessible
 
 ### Authentication Failures
 
-- Check `DEFRA_ID_USER_PASSWORD` in your `.env` file
+- Check `DEFRA_ID_USER_PASSWORD` in `wdio.local.conf.js`
 - Ensure backend auth token and encryption key match your `grants-ui-backend` instance
 
 ### Chromedriver Issues
@@ -193,27 +90,14 @@ npm run clean  # Remove allure-results and allure-report directories
 - WebdriverIO will automatically download the correct ChromeDriver
 - Ensure Chrome browser is installed and up to date
 
-## Contributing
-
-When adding new tests:
-
-1. Write feature files using clear, business-readable language
-2. Reuse existing step definitions where possible
-3. Add new page objects for new pages
-4. Tag appropriately for the target environments
-5. Ensure tests pass locally before committing
-6. Follow the existing code style (enforced by ESLint/Prettier)
-7. Submit a PR to the Grants Application Enablement (GAE) team
-
 ## Related Repositories
 
-- [grants-ui](https://github.com/DEFRA/grants-ui) - The main grants application UI service
+- [grants-ui](https://github.com/DEFRA/grants-ui) - The main grants application UI service (also contains the full acceptance test suite)
 - [grants-ui-backend](https://github.com/DEFRA/grants-ui-backend) - The grants-ui backend service accessing MongoDB storage
-- [ffc-grants-scoring](https://github.com/DEFRA/ffc-grants-scoring) - The grants scoring service
 
 ## Support
 
-For questions or issues with this test suite, please contact the Grants Application Enablement (GAE) team.
+For questions or issues, please contact the Grants Application Enablement (GAE) team.
 
 ## Licence
 
@@ -224,11 +108,3 @@ THIS INFORMATION IS LICENSED UNDER THE CONDITIONS OF THE OPEN GOVERNMENT LICENCE
 The following attribution statement MUST be cited in your products and applications when using this information.
 
 > Contains public sector information licensed under the Open Government licence v3
-
-#### About the licence
-
-The Open Government Licence (OGL) was developed by the Controller of Her Majesty's Stationery Office (HMSO) to enable
-information providers in the public sector to license the use and re-use of their information under a common open
-licence.
-
-It is designed to encourage use and re-use of information freely and flexibly, with only a few conditions.

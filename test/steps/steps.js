@@ -1,9 +1,29 @@
-import { When } from '@wdio/cucumber-framework'
-import SummaryPage from '../page-objects/summary.page'
-import TaskListPage from '../page-objects/task-list.page'
+import { Given, When, Then } from '@wdio/cucumber-framework'
+import { pollForSuccess } from '../utils/polling'
+import Backend from '../utils/backend'
 import AutocompleteField from '../page-objects/auto-complete.field'
 import DatePartsField from '../page-objects/date-parts.field'
 import MonthYearField from '../page-objects/month-year.field'
+
+Given('there is no application state stored for CRN {string} and SBI {string} and grant {string}', async (crn, sbi, grantCode) => {
+  await Backend.deleteState(crn, sbi, grantCode)
+})
+
+Given('(the user )navigates to {string}', async (page) => {
+  await browser.url(page)
+})
+
+Given('(the user )completes any login process as CRN {string}', async (crn) => {
+  const isLoginRequired = await pollForSuccess(async () => await $(`//*[contains(text(), 'Sign in to')]`).isExisting(), 5)
+
+  if (isLoginRequired) {
+    await $(`//input[@id='crn']`).setValue(crn)
+    await $(`//input[@id='password']`).setValue(process.env.DEFRA_ID_USER_PASSWORD)
+    await $(`//button[@type='submit']`).click()
+    // allow extra time for Defra ID sign in to succeed
+    await expect(browser).not.toHaveUrl(expect.stringContaining('b2clogin.com'), { wait: 20000 })
+  }
+})
 
 When('(the user )clicks on {string}', async (text) => {
   await $(`//*[contains(text(),'${text}')]`).click()
@@ -31,28 +51,8 @@ When('(the user )continues', async () => {
   await $(`aria/Continue`).click()
 })
 
-When('(the user )confirms and continues', async () => {
-  await $(`aria/Confirm and continue`).click()
-})
-
-When('(the user )submits their form', async () => {
-  await $(`aria/Send`).click()
-})
-
-When('(the user )decides to save and return to their application later', async () => {
-  await $(`aria/Save and return`).click()
-})
-
-When('(the user )navigates backward', async () => {
-  await $(`//a[@class='govuk-back-link']`).click()
-})
-
 When('(the user )enters {string} for {string}', async (text, label) => {
   await $(`//label[contains(text(),'${label}')]/following::input[@type='text']`).setValue(text)
-})
-
-When('(the user )enters {string} for label heading {string}', async (text, label) => {
-  await $(`//label[contains(text(),'${label}')]/ancestor::div[1]//input`).setValue(text)
 })
 
 When('(the user )enters {string} for MultilineTextField {string}', async (text, label) => {
@@ -75,14 +75,6 @@ When('(the user )confirms and sends', async () => {
   await $(`//button[contains(text(),'Confirm and send')]`).click()
 })
 
-When('(the user )selects task {string}', async (taskName) => {
-  await TaskListPage.selectTask(taskName)
-})
-
-When('(the user )chooses to change their summary answer to question {string}', async (question) => {
-  await SummaryPage.changeAnswerFor(question)
-})
-
 When('(the user )selects {string} for AutocompleteField {string}', async (value, label) => {
   const autocompleteField = new AutocompleteField(label)
   await autocompleteField.clear()
@@ -101,6 +93,25 @@ When('(the user )enters month {string} and year {string} for MonthYearField {str
   await monthYearField.set(month, year)
 })
 
-When('(the user )waits for {int} seconds', async (waitSeconds) => {
-  await new Promise((resolve) => setTimeout(resolve, waitSeconds * 1000))
+Then('(the user )should see heading {string}', async (text) => {
+  if (text.indexOf("'") > -1) {
+    text = text.substring(0, text.indexOf("'"))
+  }
+  await expect($(`//h1[contains(text(),'${text}')]`)).toBeDisplayed()
+})
+
+Then('(the user )should see label heading {string}', async (text) => {
+  if (text.indexOf("'") > -1) {
+    text = text.substring(0, text.indexOf("'"))
+  }
+  await expect($(`//h1/label[contains(text(),'${text}')]`)).toBeDisplayed()
+})
+
+Then('(the user )should (still )be (back )at URL {string}', async (expectedPath) => {
+  await expect(browser).toHaveUrl(expect.stringContaining(expectedPath))
+})
+
+Then('(the user )should see a/an {string} reference number for their application', async (prefix) => {
+  const selector = $('//h1/following-sibling::div[1]/strong')
+  await expect(selector).toHaveText(expect.stringContaining(prefix))
 })
